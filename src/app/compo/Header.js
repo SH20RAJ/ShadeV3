@@ -1,4 +1,4 @@
-
+import Link from "next/link"
 let Header = async () => {
 
   return(
@@ -6,7 +6,7 @@ let Header = async () => {
 <div className="app-header">
   <div className="app-header-left">
     <span className="app-icon" />
-    <p className="app-name">Portfolio</p>
+    <p className="app-name">Shades</p>
     <div className="search-wrapper">
       <input className="search-input" type="text" placeholder="Search" />
       <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} className="feather feather-search" viewBox="0 0 24 24">
@@ -35,7 +35,7 @@ let Header = async () => {
     </button>
     <button className="profile-btn">
       <img src="https://assets.codepen.io/3306515/IMG_2025.jpg" />
-      <span>Aybüke C.</span>
+      <Link href={"/login"}><span>SH20RAJ</span></Link>
     </button>
   </div>
   <button className="messages-btn">

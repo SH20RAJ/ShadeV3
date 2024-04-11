@@ -266,7 +266,8 @@ button, a {
   background-color: var(--projects-section);
   border-radius: 32px;
   padding: 32px 32px 0 32px;
-  overflow: hidden;
+  /* overflow: hidden; */
+  overflow: auto;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -473,14 +474,17 @@ button, a {
 
 .project-boxes {
   margin: 0 -8px;
-  overflow-y: auto;
+  /* overflow-y: auto; */
+  overflow-y: visible;
+  height: 100%;
 }
 .project-boxes.jsGridView {
   display: flex;
   flex-wrap: wrap;
+  height: 500px;
 }
 .project-boxes.jsGridView .project-box-wrapper {
-  width: 33.3%;
+  width: 50%;
 }
 .project-boxes.jsListView .project-box {
   display: flex;
@@ -536,6 +540,7 @@ button, a {
   border-radius: 30px;
   padding: 16px;
   background-color: var(--main-color-card);
+  height: 100%;
 }
 .project-box-header {
   display: flex;
@@ -776,7 +781,7 @@ button, a {
   }
 
   .status-number, .status-type {
-    font-size: 10px;
+    /* font-size: 10px; */
   }
 
   .view-btn {
@@ -811,7 +816,7 @@ button, a {
 
   .projects-section-header p,
 .projects-section-header .time {
-    font-size: 18px;
+    /* font-size: 18px; */
   }
 
   .status-type {
@@ -822,7 +827,7 @@ button, a {
   }
 
   .search-input {
-    font-size: 14px;
+    /* font-size: 14px; */
   }
 
   .messages-btn {
@@ -830,29 +835,29 @@ button, a {
   }
 
   .box-content-header {
-    font-size: 12px;
+    /* font-size: 12px; */
     line-height: 16px;
   }
 
   .box-content-subheader {
-    font-size: 12px;
+    /* font-size: 12px; */
     line-height: 16px;
   }
 
   .project-boxes.jsListView .project-box-header > span {
-    font-size: 10px;
+    /* font-size: 10px; */
   }
 
   .box-progress-header {
-    font-size: 12px;
+    /* font-size: 12px; */
   }
 
   .box-progress-percentage {
-    font-size: 10px;
+    /* font-size: 10px; */
   }
 
   .days-left {
-    font-size: 8px;
+    /* font-size: 8px; */
     padding: 6px 6px;
     text-align: center;
   }
