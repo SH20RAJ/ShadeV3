@@ -1,5 +1,7 @@
-import prisma from "../../../../../prisma/index";
+import prisma from "../../../prisma";
 
+
+console.log("fergfg");
 export async function GET(req, res, slug) {
   const users = await prisma.user.findMany({
     where: {

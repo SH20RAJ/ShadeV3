@@ -1,5 +1,5 @@
 import Encriptor from "encriptorjs";
-import prisma from "../../../../prisma/index";
+import prisma from "../../prisma/index";
 import {NextResponse} from "next/server"
 export async function POST(req, res, next) {
 
