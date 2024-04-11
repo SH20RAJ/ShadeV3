@@ -9,13 +9,11 @@ export default async function ProjectSec() {
     <>
       <div className="projects-section">
         <div className="projects-section-header">
-          <p>
             <CreatePost/>
-          </p>
         </div>
         <div className="projects-section-line">
           <div className="projects-status">
-            <div className="item-status">
+            {/* <div className="item-status">
               <span className="status-number">45</span>
               <span className="status-type">In Progress</span>
             </div>
@@ -26,7 +24,7 @@ export default async function ProjectSec() {
             <div className="item-status">
               <span className="status-number">62</span>
               <span className="status-type">Total Projects</span>
-            </div>
+            </div> */}
           </div>
           <div className="view-actions">
             <button className="view-btn list-view" title="List View">

@@ -7,7 +7,7 @@ export default function Card({post}) {
     }
   return (
     <>
-   <div className="max-w-md mx-auto my-8">
+   <div className="sm:max-w-md sm:w-auto w-full mx-auto my-8">
   <div className="bg-grey rounded-lg shadow-md w-full  h-full">
     {/* Post Header */}
     <div className="flex items-center px-4 py-3 border-b">
