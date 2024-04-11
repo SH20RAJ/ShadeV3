@@ -1,5 +1,6 @@
 import Card from "./Card";
 import posts from "../get/posts";
+import CreatePost from "./CreatePost";
 export default async function ProjectSec() {
 
   let p = await posts();
@@ -8,8 +9,9 @@ export default async function ProjectSec() {
     <>
       <div className="projects-section">
         <div className="projects-section-header">
-          <p>Projects</p>
-          <p className="time">December, 12</p>
+          <p>
+            <CreatePost/>
+          </p>
         </div>
         <div className="projects-section-line">
           <div className="projects-status">

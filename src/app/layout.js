@@ -3,6 +3,12 @@ import Header from "./compo/Header";
 import  Sidebar from "./compo/Sidebar";
 
 
+export let metadata = {
+  title: "Home",
+  description: "Home Page",
+}
+
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="dark">
