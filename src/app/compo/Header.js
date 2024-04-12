@@ -1,4 +1,6 @@
 import Link from "next/link"
+import { user } from "../../../prisma/user";
+
 let Header = async () => {
 
   return(
@@ -34,8 +36,8 @@ let Header = async () => {
         <path d="M13.73 21a2 2 0 0 1-3.46 0" /></svg>
     </button>
     <button className="profile-btn">
-      <img src="https://assets.codepen.io/3306515/IMG_2025.jpg" />
-      <Link href={"/login"}><span>SH20RAJ</span></Link>
+      <img src={user.image} />
+      <Link href={"/api/auth/signin"}><span>{user.name}</span></Link>
     </button>
   </div>
   <button className="messages-btn">

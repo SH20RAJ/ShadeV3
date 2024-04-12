@@ -755,12 +755,12 @@ button, a {
     height: 20px;
   }
   .add-btn svg, .notification-btn svg, .mode-switch svg {
-    width: 16px;
-    height: 16px;
+    width: 26px;
+    height: 26px;
   }
 
   .app-header-right button {
-    margin-left: 4px;
+    /* margin-left: 4px; */
   }
 }
 @media screen and (max-width: 520px) {

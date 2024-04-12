@@ -1,5 +1,11 @@
 
+'use client'
 import Link from 'next/link'
+import { signOut } from 'next-auth/react'; // If not using React
+const handleSignOut = async () => {
+  await signOut({ redirect: false, callbackUrl: "/" });
+};
+
 export default function Sidebar() {
   return (
     <>
@@ -22,7 +28,7 @@ export default function Sidebar() {
       <line x1={8} y1={2} x2={8} y2={6} />
       <line x1={3} y1={10} x2={21} y2={10} /></svg>
   </Link>
-  <Link href={''} className="app-sidebar-link">
+  <Link href={''} onClick={handleSignOut} className="app-sidebar-link">
     <svg className="link-icon" xmlns="http://www.w3.org/2000/svg" width={24} height={24} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
       <defs />
       <circle cx={12} cy={12} r={3} />
