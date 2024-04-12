@@ -1,6 +1,6 @@
 import Link from "next/link"
-import { user } from "../../../prisma/user";
-
+import { getUserSession } from "../sessions";
+let user = await getUserSession()
 let Header = async () => {
 
   return(

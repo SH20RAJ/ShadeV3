@@ -33,7 +33,6 @@ let create = async (e) => {
    
    let bodyContent = JSON.stringify({
      "content":content,
-     "authorId":11
    });
    
    let response = await fetch("/api/post", { 
@@ -45,7 +44,7 @@ let create = async (e) => {
    let data = await response.text();
    console.log(data);
    setContent("")
-   alert("Image uploaded successfully")
+   alert("Post uploaded successfully");
   console.log("Created post");
 }
   return (

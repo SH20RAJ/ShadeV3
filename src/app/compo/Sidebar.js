@@ -1,10 +1,7 @@
 
 'use client'
 import Link from 'next/link'
-import { signOut } from 'next-auth/react'; // If not using React
-const handleSignOut = async () => {
-  await signOut({ redirect: false, callbackUrl: "/" });
-};
+import handleSignOut from '../api/compo/signout'
 
 export default function Sidebar() {
   return (
