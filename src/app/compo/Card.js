@@ -1,3 +1,4 @@
+import { relativeDate } from "@/lib/utils";
 import Link from "next/link";
 export default function Card({ post }) {
   // console.log(post);
@@ -23,21 +24,21 @@ export default function Card({ post }) {
             />
             <div>
               <Link href={"/" + post.author.username}>
-                <h3 className="text-lg font-semibold">
+                <h3 className="text-lg font-semibold textd">
                   {post.author.name}{" "}
-                  <span className="text-sm text-gray-600">
+                  <span className="text-sm text-gray-600 textd">
                     @{post.author.username}
                   </span>
                 </h3>{" "}
               </Link>
               <Link href={"/release/" + post.id}>
-                <p className="text-sm text-gray-600">Released on {post.id}</p>
+                <p className="text-sm text-gray-600">Released on {relativeDate(post.createdAt)}</p>
               </Link>
             </div>
           </div>
           {/* Post Content */}
           <div className="px-4 py-2">
-            <p className="text-lg">{post.content} </p>
+            <p className="text-lg  textd">{post.content} </p>
             {media}
           </div>
           {/* Post Actions */}

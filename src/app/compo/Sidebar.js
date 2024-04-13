@@ -1,7 +1,5 @@
 
-'use client'
 import Link from 'next/link'
-import handleSignOut from '../api/compo/signout'
 
 export default function Sidebar() {
   return (
@@ -24,7 +22,7 @@ export default function Sidebar() {
             <polyline points="9 22 9 12 15 12 15 22" />
           </svg>
         </Link>
-        <Link href={"/log"} className="app-sidebar-link">
+        <Link href={"/invite"} className="app-sidebar-link">
           <svg
             className="link-icon"
             xmlns="http://www.w3.org/2000/svg"
@@ -60,7 +58,7 @@ export default function Sidebar() {
             <line x1={3} y1={10} x2={21} y2={10} />
           </svg>
         </Link>
-        <Link href={""} onClick={handleSignOut} className="app-sidebar-link">
+        <Link href={""} className="app-sidebar-link">
           <svg
             className="link-icon"
             xmlns="http://www.w3.org/2000/svg"

@@ -1,5 +1,5 @@
+import Articles from "./compo/Articles";
 import MessageSec from "./compo/MessageSec";
-import Messages from "./compo/Messages";
 import ProjectSec from "./compo/ProjectSec";
 export default function Home() {
   return (
@@ -7,7 +7,7 @@ export default function Home() {
 
       <ProjectSec/>
       <MessageSec>
-        <Messages/>
+        <Articles/>
       </MessageSec>
 
     

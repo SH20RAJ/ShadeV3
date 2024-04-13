@@ -26,9 +26,9 @@ let Articles = async () => {
         <p>Top Articles</p>
       </div>
       <div className="messages">
-        {articles.map((article) => (
-          <div className="message-box">
-            <div className="message-content" key={article.id}>
+        {articles.map((article,i) => (
+          <div className="message-box" key={article.id || i}>
+            <div className="message-content">
               <div className="message-header">
                 <Link href={"/release/"+article.id}><div className="name cursor-pointer">{article.title}</div></Link>
                 <div className="star-checkbox">

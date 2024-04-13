@@ -15,7 +15,6 @@ formData.append('image', image);
 formData.append('content', content);
 
 
-
 let create = async (e) => {
   console.log("Creating post");
 
@@ -41,10 +40,6 @@ let create = async (e) => {
   console.log("Created post");
 }
 
-// const { data: session, status } = useSession()
-
-// console.log(status);
-
   return (
     <div className="w-full rounded-lg p-6 shadow-md">
       <form onSubmit={create} className="w-full">
@@ -52,7 +47,7 @@ let create = async (e) => {
           <span className="overflow-hidden relative w-12 h-12 rounded-full border-2 border-blue-500 dark:border-blue-500 bg-cover">
             <img
               className="w-12 h-12 object-cover"
-              src={window?.user.image  || "https://assets.codepen.io/3306515/IMG_2025.jpg"}
+              src={window?.user.image}
               alt="Avatar"
             />
           </span>

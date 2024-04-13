@@ -1,6 +1,6 @@
 import prisma from "../../../prisma";
 
-export default async function posts() {
+export default async function posts(random) {
   
     let posts = await prisma.post.findMany(
         {
@@ -23,6 +23,5 @@ export default async function posts() {
         }
     )
 
-
-    return posts;
+return (random)? randomPosts : posts;
 }
