@@ -1,5 +1,5 @@
 import prisma from "../../../prisma";
-import { getUserSession } from "../sessions";
+import { getUserSession } from "../../lib/sessions";
 
 
 

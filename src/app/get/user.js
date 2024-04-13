@@ -32,6 +32,8 @@ export default async function user(username, id) {
             }
         }
     );
-    user.avatar = (user.avatar ? user.avatar: "https://api.dicebear.com/8.x/adventurer/svg?seed="+user.username)
+    if(!user) return false
+    user.bio = (user?.bio ? user?.bio: "No bio available")
+    user.avatar = (user?.avatar ? user?.avatar: "https://api.dicebear.com/8.x/adventurer/svg?seed="+user?.username)
     return user;
 }

@@ -28,6 +28,7 @@
     "react-spring": "^9.7.3",
     "react-toastify": "^10.0.5",
     "recharts": "^2.12.4",
+    "resend": "^3.2.0",
     "rich-text-converter": "^1.0.1"
   },
   "devDependencies": {

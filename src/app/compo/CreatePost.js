@@ -1,5 +1,12 @@
 'use client'
 import React, { useRef, useState } from 'react';
+
+
+
+
+
+
+
 function CreatePost() {
   const [content, setContent] = useState('');
   const [authorId, setAuthorId] = useState('');
@@ -54,7 +61,7 @@ let create = async (e) => {
           <span className="overflow-hidden relative w-12 h-12 rounded-full border-2 border-blue-500 dark:border-blue-500 bg-cover">
             <img
               className="w-12 h-12 object-cover"
-              src="https://assets.codepen.io/3306515/IMG_2025.jpg"
+              src={"https://assets.codepen.io/3306515/IMG_2025.jpg"}
               alt="Avatar"
             />
           </span>
