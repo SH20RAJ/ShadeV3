@@ -52,7 +52,7 @@ let create = async (e) => {
           <span className="overflow-hidden relative w-12 h-12 rounded-full border-2 border-blue-500 dark:border-blue-500 bg-cover">
             <img
               className="w-12 h-12 object-cover"
-              src={window?.user.image  || "https://assets.codepen.io/3306515/IMG_2025.jpg"}
+              src={"https://assets.codepen.io/3306515/IMG_2025.jpg"}
               alt="Avatar"
             />
           </span>
