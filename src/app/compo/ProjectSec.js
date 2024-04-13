@@ -3,18 +3,16 @@ import posts from "../get/posts";
 import CreatePost from "./CreatePost";
 import { shuffleArray } from "@/lib/utils";
 
-
 export default async function ProjectSec() {
-  
   let p = await posts();
 
-  p = (1)?shuffleArray(p):p;
+  p = 1 ? shuffleArray(p) : p;
   // console.log(p);
   return (
     <>
       <div className="projects-section">
         <div className="projects-section-header">
-            <CreatePost/>
+          <CreatePost />
         </div>
         <div className="projects-section-line">
           <div className="projects-status">
@@ -75,18 +73,16 @@ export default async function ProjectSec() {
           </div>
         </div>
         <div className="project-boxes jsGridView ">
-        
-        <div className="postcontainer flex flex-wrap justify-around">
-           {p.map((post, i) => (
-          <div className=" w-full box-border md:w-[40%]  m-2">
-          <Card key={post.id || i} post={post}>
-          </Card>
+          <div className="postcontainer flex flex-wrap justify-around">
+            {p.map((post, i) => (
+              <div
+                key={post.id || i}
+                className=" w-full box-border md:w-[40%]  m-2"
+              >
+                <Card post={post}></Card>
+              </div>
+            ))}
           </div>
-        ))}
-        </div>
-       
-
-          
         </div>
       </div>
     </>
