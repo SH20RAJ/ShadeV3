@@ -1,23 +1,17 @@
-import { readFile } from 'fs/promises';
 import axios from 'axios';
 
 
 
-async function handler(req, res, next) {
+export default async function fileurl(data,name) {
+    console.log("op",name);
   try {
-    let data = await req.formData();
-    console.log(data);
-    data = data.get('file');
-    let fileName = data.name || "file";
-    let bytedata = await data.arrayBuffer();
-    let buffer = Buffer.from(bytedata);
-    
+    let fileName = name || "file";
     // Convert buffer to base64
-    let base64data = buffer.toString('base64');
+    let base64data = data;
     // console.log("b",base64data);
 
     // Here, you can use the base64data for your GitHub upload or any other processing
-    // console.log('Base64 Data:', base64data);
+    // console.log('Base64 Data:');  
 
     const githubUrl = `https://api.github.com/repos/${process.env.ORG_NAME}/${process.env.REPO_NAME}/contents/${fileName}`;
 
@@ -62,4 +56,3 @@ async function handler(req, res, next) {
   }
 }
 
-export { handler as POST };

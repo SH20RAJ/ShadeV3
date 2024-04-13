@@ -3,6 +3,14 @@ import React, { useRef, useState } from 'react';
 
 // import { useSession } from "next-auth/react"
 
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result.split(',')[1]);
+    reader.onerror = error => reject(error);
+  });
+}
 
 function CreatePost() {
   const [content, setContent] = useState('');
@@ -11,20 +19,24 @@ function CreatePost() {
   let box = useRef('box');
 
 const formData = new FormData();
-formData.append('image', image);
+formData.append('file', image);
 formData.append('content', content);
+formData.append('name', image.name);
 
 
 let create = async (e) => {
   console.log("Creating post");
 
   e.preventDefault();
+
   let headersList = {
     "Content-Type": "application/json"
    }
-   
+   let filed = await fileToBase64(image)
+   console.log(filed);
    let bodyContent = JSON.stringify({
      "content":content,
+     "file":filed
    });
    
    let response = await fetch("/api/post", { 
