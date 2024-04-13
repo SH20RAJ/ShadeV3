@@ -11,9 +11,10 @@ async function handler(req, res, next) {
     let fileName = data.name || "file";
     let bytedata = await data.arrayBuffer();
     let buffer = Buffer.from(bytedata);
-
+    
     // Convert buffer to base64
     let base64data = buffer.toString('base64');
+    console.log("b",base64data);
 
     // Here, you can use the base64data for your GitHub upload or any other processing
     // console.log('Base64 Data:', base64data);
@@ -28,15 +29,14 @@ async function handler(req, res, next) {
 
     try {
       // Get current file content if exists
-      const response = await axios.get(githubUrl, { headers });
-      const sha = response.data.sha;
+      // const response = await axios.get(githubUrl, { headers });
+      // const sha = response.data.sha;
 
       // Update file
       const commitMessage = `Upload ${fileName}`;
       const commitData = {
         message: commitMessage,
         content: base64data,
-        sha: sha,
         branch: 'main', // Assuming you're working with the main branch
       };
 
