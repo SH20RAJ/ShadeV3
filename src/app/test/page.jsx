@@ -19,6 +19,7 @@ return(
   
   <form onSubmit={onSubmit}>
     <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+    <br />
     <button type="submit">Upload</button>
   </form>
   </>
