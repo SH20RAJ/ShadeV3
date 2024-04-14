@@ -27,8 +27,8 @@ export default function Card({ post }) {
   }
   return (
     <>
-      <div className="postcard sm:max-w-md sm:w-auto w-full mx-auto my-8 overflow-hidden">
-        <div className="bg-grey rounded-lg shadow-md w-full  h-full">
+      <div className="postcard flex  sm:max-w-md sm:w-auto w-full mx-auto  my-8 overflow-hidden">
+        <div className="innerpostcard bg-grey rounded-lg shadow-md w-full  h-full ">
           {/* Post Header */}
           <div className="flex items-center px-4 py-3 border-b">
             <img
@@ -56,7 +56,7 @@ export default function Card({ post }) {
             </div>
           </div>
           {/* Post Content */}
-          <div className="px-4 py-2">
+          <div className="px-4 py-2 postcon">
             <div className="text-lg  textd" dangerouslySetInnerHTML={{ __html : converter.makeHtml(post.content)}}>
               {/* { converter.makeHtml(post.content) }  */}
               

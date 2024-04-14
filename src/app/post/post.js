@@ -17,10 +17,14 @@ let PostPost = async ({content,file,name}) => {
         console.log("New name: " , url);
         // url = await url.fileurl;
         var type = 'image'
+        
     } else {
 
         var url = null;
         var type = "text"
+        if(content.length > 1000){
+            type = 'article'
+        }
     }
     
     

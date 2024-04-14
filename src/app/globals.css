@@ -887,53 +887,53 @@ button, a {
 
 
 
-.postcard {
+.postcon {
 
 }
 
-.postcard h1 {
+.postcon h1 {
   font-weight: bold;
   font-size: larger;
 }
-.postcard {
+.postcon {
   font-family: Arial, sans-serif;
-  margin: 20px;
+  /* margin: 20px; */
   color: #333;
   line-height: 1.6;
 }
 
-.postcard h1, .postcard h2, .postcard h3 {
+.postcon h1, .postcon h2, .postcon h3 {
   font-weight: bold;
 }
 
-.postcard h1 {
+.postcon h1 {
   font-size: 32px;
   margin-bottom: 20px;
 }
 
-.postcard h2 {
+.postcon h2 {
   font-size: 28px;
   margin-bottom: 15px;
 }
 
-.postcard h3 {
+.postcon h3 {
   font-size: 24px;
   margin-bottom: 10px;
 }
 
-.postcard p {
+.postcon p {
   margin-bottom: 15px;
 }
 
-.postcard ul, .postcard ol {
+.postcon ul, .postcon ol {
   margin-bottom: 15px;
 }
 
-.postcard li {
+.postcon li {
   margin-bottom: 5px;
 }
 
-.postcard blockquote {
+.postcon blockquote {
   margin: 0 0 20px 20px;
   padding: 10px;
   border-left: 4px solid #999;
@@ -941,18 +941,18 @@ button, a {
   background: #f9f9f9;
 }
 
-.postcard blockquote blockquote {
+.postcon blockquote blockquote {
   margin-left: 0;
 }
 
-.postcard code {
+.postcon code {
   font-family: 'Courier New', Courier, monospace;
   background-color: #f7f7f7;
   padding: 2px 5px;
   border-radius: 3px;
 }
 
-.postcard pre {
+.postcon pre {
   background-color: #f7f7f7;
   padding: 15px;
   border-radius: 5px;
@@ -960,38 +960,38 @@ button, a {
   line-height: 1.4;
 }
 
-.postcard pre code {
+.postcon pre code {
   font-family: 'Courier New', Courier, monospace;
 }
 
-.postcard hr {
+.postcon hr {
   border: none;
   border-top: 1px solid #ccc;
   margin: 20px 0;
 }
 
-.postcard table {
+.postcon table {
   border-collapse: collapse;
   width: 100%;
   margin-bottom: 15px;
 }
 
-.postcard th, .postcard td {
+.postcon th, .postcon td {
   border: 1px solid #ccc;
   padding: 8px;
   text-align: left;
 }
 
-.postcard th {
+.postcon th {
   background-color: #f2f2f2;
 }
 
-.postcard a {
+.postcon a {
   color: #007bff;
   text-decoration: none;
 }
 
-.postcard a:hover {
+.postcon a:hover {
   text-decoration: underline;
 }
 

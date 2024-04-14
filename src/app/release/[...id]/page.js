@@ -12,7 +12,7 @@ if (!postx) return (<center className="text-center w-full">Post Not Found 🤔</
           
           <div className="projects-section">
           <div className=" container flex w-full flex-col md:flex-row">
-            <div className="w-full">
+            <div className="w-full flex justify-center">
 
            <Card post={postx} /> 
             </div>

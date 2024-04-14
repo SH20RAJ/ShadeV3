@@ -33,6 +33,9 @@ function CreateNew() {
  }
 
 
+
+
+
 let create = async (e) => {
   console.log("Creating post");
   (()=> toast("Creating Post ✨"))()
@@ -72,6 +75,50 @@ let create = async (e) => {
 
 }
 
+let addImage = async (image) => {
+
+  let filed = await fileToBase64(image);
+  // console.log(filed);
+
+  var bodyContent = JSON.stringify({
+    "file":filed,
+  });
+  let headersList = {
+    "Content-Type": "application/json"
+   }
+
+  let response = await fetch("/cdn", { 
+    method: "POST",
+    body: bodyContent,
+    headers: headersList
+  });
+    let imageUrl = await response.text();
+    imageUrl = imageUrl.replace(/['"]+/g, '');
+    var textarea = document.getElementById("content");
+    textarea.value += "![Image](" + imageUrl + ")";
+
+}
+
+
+
+ // Function to adjust textarea height based on content
+ function adjustTextareaHeight(textarea,d) {
+  console.log(textarea);
+     textarea.style.height = "auto";
+     textarea.style.height = textarea.scrollHeight + "px";
+     if(d){
+      console.log(d);
+       textarea.style.height = "200px";
+     }
+ }
+ 
+ // Add event listeners
+//  textarea.addEventListener("input", adjustTextareaHeight);
+//  textarea.addEventListener("focus", adjustTextareaHeight);
+//  textarea.addEventListener("blur", adjustTextareaHeight);
+ 
+ 
+
   return (
     <div className="w-full rounded-lg p-6 shadow-md">
       <form onSubmit={create} className="w-full">
@@ -89,7 +136,9 @@ let create = async (e) => {
               name="content"
               rows="3"
               value={content}
-              onChange={(e) => setContent(e.target.value)}
+              onFocus={(e)=>adjustTextareaHeight(e.target)}
+              onBlur={(e)=>adjustTextareaHeight(e.target)}
+              onChange={(e) => setContent(e.target.value,"blur")}
               className="w-full resize-verticle bg-transparent dark:text-emerald-400 text-pink-800 dark:bg-transparent focus:outline-none border-b-2 border-gray-300 dark:border-gray-600 placeholder-gray-400"
               placeholder="What's happening?"
             ></textarea>
@@ -143,6 +192,23 @@ let create = async (e) => {
                   />
                 </svg>
               </label>
+
+              <label htmlFor="addimg" className="mr-2">
+                <input
+                  type="file"
+                  id="addimg"
+                  name="addimg"
+                  onChange={(e) => addImage(e.target.files[0])}
+                  className="hidden"
+                />
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                      <path fillRule="evenodd" d="M1.5 6a2.25 2.25 0 0 1 2.25-2.25h16.5A2.25 2.25 0 0 1 22.5 6v12a2.25 2.25 0 0 1-2.25 2.25H3.75A2.25 2.25 0 0 1 1.5 18V6ZM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0 0 21 18v-1.94l-2.69-2.689a1.5 1.5 0 0 0-2.12 0l-.88.879.97.97a.75.75 0 1 1-1.06 1.06l-5.16-5.159a1.5 1.5 0 0 0-2.12 0L3 16.061Zm10.125-7.81a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Z" clipRule="evenodd" />
+                    </svg>
+              </label>
+
+
+            
+
             </div>
           </div>
         </div>
