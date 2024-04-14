@@ -1,5 +1,5 @@
 import "./globals.css";
-import Header from "./compo/Header";
+import Header from "./compo/Head";
 import Sidebar from "./compo/Sidebar";
 import Head from "./compo/Head";
 
