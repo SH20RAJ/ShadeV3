@@ -3,7 +3,7 @@
 
 
 - Authentication ( with AuthJS)
-- edit post
+<!-- - edit post -->
 - email sign in option
 
 

@@ -1,5 +1,5 @@
-import MessageSec from "../compo/MessageSec";
-import ProjectSec from "../compo/ProjectSec";
+import MessageSec from "../../compo/MessageSec";
+import ProjectSec from "../../compo/ProjectSec";
 
 let Page = async () => {
   return (

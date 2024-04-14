@@ -1,6 +1,6 @@
 // import { getUserSession } from "../../../prisma/sessions";
-import Card from "../compo/Card";
-import user from "../get/user";
+import Card from "../../compo/Card";
+import user from "../../get/user";
 // let user = await getUserSession();
 
 let Page = async ({params}) => {
