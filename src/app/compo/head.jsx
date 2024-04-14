@@ -1,6 +1,6 @@
 
 export default function Head() {
-  return (
+  return ( 
     <>
   {/* Web App Manifest */}
   <link rel="manifest" href="/manifest.json" />
