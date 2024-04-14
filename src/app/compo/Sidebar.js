@@ -58,7 +58,7 @@ export default function Sidebar() {
             <line x1={3} y1={10} x2={21} y2={10} />
           </svg>
         </Link>
-        <Link href={""} className="app-sidebar-link">
+        <Link href={"/test"} className="app-sidebar-link">
           <svg
             className="link-icon"
             xmlns="http://www.w3.org/2000/svg"
@@ -77,7 +77,7 @@ export default function Sidebar() {
           </svg>
         </Link>
 
-        <Link href={"/logout"}>
+        <Link href={"/logout"} className='app-sidebar-link'>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width={24}
@@ -90,7 +90,6 @@ export default function Sidebar() {
             strokeLinejoin="round"
             className="feather feather-log-out link-icon"
           >
-            <circle cx={12} cy={12} r={3} />
             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
             <polyline points="16 17 21 12 16 7" />
             <line x1={21} y1={12} x2={9} y2={12} />

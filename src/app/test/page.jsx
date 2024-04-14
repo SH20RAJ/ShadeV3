@@ -11,7 +11,7 @@ const onSubmit = async (e) => {
     method: "POST",
     body: data,
   })
-  let response = await res.json()
+  let response = await res.text()
   console.log(response);
 }
 return(

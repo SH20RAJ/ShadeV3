@@ -7,7 +7,7 @@ const onSubmit = async (e) => {
   console.log(file);
   let data = new FormData();
   data.set("file", file)
-  let res = await fetch("/cdn/mediagur", {
+  let res = await fetch("/api/upload", {
     method: "POST",
     body: data,
   })

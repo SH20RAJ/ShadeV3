@@ -1,7 +1,4 @@
-import { readFile } from 'fs/promises';
 import axios from 'axios';
-
-
 
 async function handler(req, res, next) {
   try {
@@ -14,7 +11,7 @@ async function handler(req, res, next) {
     
     // Convert buffer to base64
     let base64data = buffer.toString('base64');
-    // console.log("b",base64data);
+    console.log("b",base64data);
 
     // Here, you can use the base64data for your GitHub upload or any other processing
     // console.log('Base64 Data:', base64data);
@@ -28,31 +25,54 @@ async function handler(req, res, next) {
     };
 
     try {
-      // Get current file content if exists
-      // const response = await axios.get(githubUrl, { headers });
-      // const sha = response.data.sha;
+      // Check if file exists
+      const response = await axios.get(githubUrl, { headers });
+      const sha = response.data.sha;
 
       // Update file
-      const commitMessage = `Upload ${fileName}`;
+      const commitMessage = `Update ${fileName}`;
       const commitData = {
         message: commitMessage,
         content: base64data,
         branch: 'main', // Assuming you're working with the main branch
+        sha: sha // Include the sha for updating the existing file
       };
 
       const commitResponse = await axios.put(githubUrl, commitData, { headers });
+      console.warn(commitResponse)
 
       const fileUrl = commitResponse.data.content.download_url;
       const commitUrl = commitResponse.data.commit.html_url;
 
       // Return uploaded file URL and commit URL
       console.log(commitResponse.data);
-      const jsdelivr = `https://cdn.jsdelivr.net/gh/${process.env.ORG_NAME}/${process.env.REPO_NAME}@${commitResponse.data.commit.sha}/${data.name}`;
+      const jsdelivr = `https://cdn.jsdelivr.net/gh/${process.env.ORG_NAME}/${process.env.REPO_NAME}@${commitResponse.data.commit.sha}/${fileName}`;
       return Response.json({ fileurl : jsdelivr, size : commitResponse.data.content.size, fileUrl , commitUrl});
 
     } catch (error) {
-      console.error('Error uploading file to GitHub:', error.message);
-      // res.status(500).json({ error: 'Error uploading file to GitHub' });
+      if (error.response.status === 404) {
+        // File doesn't exist, create a new one
+        const commitMessage = `Upload ${fileName}`;
+        const commitData = {
+          message: commitMessage,
+          content: base64data,
+          branch: 'main', // Assuming you're working with the main branch
+        };
+  
+        const commitResponse = await axios.put(githubUrl, commitData, { headers });
+        console.warn(commitResponse)
+  
+        const fileUrl = commitResponse.data.content.download_url;
+        const commitUrl = commitResponse.data.commit.html_url;
+  
+        // Return uploaded file URL and commit URL
+        console.log(commitResponse.data);
+        const jsdelivr = `https://cdn.jsdelivr.net/gh/${process.env.ORG_NAME}/${process.env.REPO_NAME}@${commitResponse.data.commit.sha}/${fileName}`;
+        return Response.json({ fileurl : jsdelivr, size : commitResponse.data.content.size, fileUrl , commitUrl});
+      } else {
+        console.error('Error updating file on GitHub:', error.message);
+        // Handle other errors
+      }
     } 
 
 
