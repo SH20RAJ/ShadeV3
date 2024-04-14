@@ -1,49 +1,45 @@
-'use client'
-import React, { useRef, useState } from 'react';
-
-// import { useSession } from "next-auth/react"
-
-
+"use client";
+import React, { useRef, useState } from "react";
 function CreatePost() {
-  const [content, setContent] = useState('');
-  const [authorId, setAuthorId] = useState('');
-  const [image, setImage] = useState('');
-  let box = useRef('box');
+  const [content, setContent] = useState("");
+  const [authorId, setAuthorId] = useState("");
+  const [image, setImage] = useState("");
+  let box = useRef("box");
 
-const formData = new FormData();
-formData.append('image', image);
-formData.append('content', content);
+  const formData = new FormData();
+  formData.append("image", image);
+  formData.append("content", content);
 
+  let create = async (e) => {
+    console.log("Creating post");
 
+    e.preventDefault();
+    let headersList = {
+      "Content-Type": "application/json",
+    };
 
-let create = async (e) => {
-  console.log("Creating post");
+    let bodyContent = JSON.stringify({
+      content: content,
+    });
 
-  e.preventDefault();
-  let headersList = {
-    "Content-Type": "application/json"
-   }
-   
-   let bodyContent = JSON.stringify({
-     "content":content,
-   });
-   
-   let response = await fetch("/api/post", { 
-     method: "POST",
-     body: bodyContent,
-     headers: headersList
-   });
-   
-   let data = await response.text();
-   console.log(data);
-   setContent("")
-   alert("Post uploaded successfully");
-  console.log("Created post");
-}
+    let response = await fetch("/api/post", {
+      method: "POST",
+      body: bodyContent,
+      headers: headersList,
+    });
 
-// const { data: session, status } = useSession()
+    let data = await response?.json();
+    console.log(data);
+    setContent("");
+    if (data) {
+      alert("Post uploaded successfully" + data.id);
+      console.log("Created post");
+    }
+  };
 
-// console.log(status);
+  // const { data: session, status } = useSession()
+
+  // console.log(status);
 
   return (
     <div className="w-full rounded-lg p-6 shadow-md">
@@ -117,7 +113,12 @@ let create = async (e) => {
           </div>
         </div>
         <div className="flex justify-between mt-4">
-          <span ref={box} className='flex self-start justify-start ml-[60px] textd'>Hlw Howdy! 😇🌹</span>
+          <span
+            ref={box}
+            className="flex self-start justify-start ml-[60px] textd"
+          >
+            Hlw Howdy! 😇🌹
+          </span>
           <button
             type="submit"
             className=" bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full"

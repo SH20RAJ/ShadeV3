@@ -6,7 +6,7 @@ import { shuffleArray } from "@/lib/utils";
 export default async function ProjectSec() {
   let p = await posts();
 
-  p = 1 ? shuffleArray(p) : p;
+  p = 0 ? shuffleArray(p) : p; //shuffle array or not
   // console.log(p);
   return (
     <>
