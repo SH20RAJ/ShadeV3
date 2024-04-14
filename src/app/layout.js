@@ -1,7 +1,7 @@
 import "./globals.css";
-import Header from "./compo/Head";
 import Sidebar from "./compo/Sidebar";
-import Head from "./compo/Head";
+import Head from "./compo/head";
+import Header from "./compo/Header";
 
 export let metadata = {
   title: "Shade || Home",
