@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // import { useSession } from "next-auth/react"
 
+
 function fileToBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -14,11 +15,20 @@ function fileToBase64(file) {
   });
 }
 
+
+
 function CreateNew() {
   const [content, setContent] = useState('');
   const [authorId, setAuthorId] = useState('');
   const [image, setImage] = useState('');
   let box = useRef('box');
+  const [imgsrc, setImgsrc] = useState('');
+
+ async function setimg(){
+  // let filed = await fileToBase64(image)
+  //    console.log(filed);
+  //    setImgsrc("data:image/jpeg;base64,"+filed)
+ }
 
 
 let create = async (e) => {
@@ -51,11 +61,12 @@ let create = async (e) => {
      headers: headersList
    });
    
-   setContent("")
+   setContent("");
    let data = await response.text();
    console.log(data);
   (() => toast("Post uploaded successfully ✨"))()
   console.log("Created post");
+
 }
 
   return (
@@ -85,7 +96,10 @@ let create = async (e) => {
                   type="file"
                   id="image"
                   name="image"
-                  onChange={(e) => setImage(e.target.files[0])}
+                  onChange={(e) => {
+                    setImage(e.target.files[0]);
+                    setimg()
+                  }}
                   className="hidden"
                 />
                 <svg
@@ -130,6 +144,7 @@ let create = async (e) => {
           </div>
         </div>
         <div className="flex justify-between mt-4">
+          <img src={imgsrc} width={200}/>
           <span ref={box} className='flex self-start justify-start ml-[60px] textd'>Hlw Howdy! 😇🌹</span>
           <button
             type="submit"
