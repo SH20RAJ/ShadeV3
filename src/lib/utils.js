@@ -27,4 +27,23 @@ export function relativeDate(dateString) {
       return `${months} month${months !== 1 ? 's' : ''} ago`;
     }
   }
+
+ export function formatNumber(num) {
+    const suffixes = ['', 'k', 'M', 'B', 'T', 'P', 'E', 'Z', 'Y'];
+    if (num === 0) {
+      return '0';
+    }
+    let magnitude = 0;
+    while (Math.abs(num) >= 1000) {
+      magnitude++;
+      num /= 1000.0;
+    }
+    return num.toFixed(1) + suffixes[magnitude];
+  }
   
+  export function getRandomNumber(min, max) {
+    // Math.random() generates a random number between 0 (inclusive) and 1 (exclusive)
+    // To get a number between min (inclusive) and max (exclusive), we multiply by the range
+    // and add the min value
+    return Math.floor(Math.random() * (max - min) + min);
+  }

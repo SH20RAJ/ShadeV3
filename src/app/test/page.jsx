@@ -1,27 +1,38 @@
 "use client"
-import { useState } from "react"
-export default function Home() {
-const [file, setFile]= useState()
-const onSubmit = async (e) => { 
-  e.preventDefault();
-  console.log(file);
-  let data = new FormData();
-  data.set("file", file)
-  let res = await fetch("/api/mediagur", {
-    method: "POST",
-    body: data,
-  })
-  let response = await res.text()
-  console.log(response);
+import { useEffect } from 'react';
+
+function LikePage() {
+  useEffect(() => {
+    const likePost = async () => {
+      const postId = 1; // Example postId
+      const userId = 1; // Example userId
+      const reaction = 'like'; // Example reaction
+
+      try {
+        const response = await fetch('/api/like', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ postId, userId, reaction }),
+        });
+
+        const data = await response.json();
+        console.log(data); // Handle the response data as needed
+      } catch (error) {
+        console.error('Error liking the post:', error);
+      }
+    };
+
+    likePost();
+  }, []);
+
+  return (
+    <div>
+      <p>Like a post</p>
+      {/* Implement UI elements as needed */}
+    </div>
+  );
 }
-return(
-  <>
-  
-  <form onSubmit={onSubmit}>
-    <input type="file" onChange={(e) => setFile(e.target.files[0])} />
-    <br />
-    <button type="submit">Upload</button>
-  </form>
-  </>
-)
-}
+
+export default LikePage;
