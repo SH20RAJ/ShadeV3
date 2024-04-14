@@ -1,7 +1,8 @@
 import Card from "./Card";
 import posts from "../get/posts";
-import CreatePost from "./CreatePost";
+// import CreatePost from "./CreatePost";
 import { shuffleArray } from "@/lib/utils";
+import CreateNew from "./CreateNew";
 
 export default async function ProjectSec() {
   let p = await posts();
@@ -12,7 +13,7 @@ export default async function ProjectSec() {
     <>
       <div className="projects-section">
         <div className="projects-section-header">
-          <CreatePost />
+          <CreateNew />
         </div>
         <div className="projects-section-line">
           <div className="projects-status">

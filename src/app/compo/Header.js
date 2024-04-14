@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { getUserSession } from "../../lib/sessions";
 let user = await getUserSession()
 
@@ -42,7 +43,7 @@ let Header = async () => {
     </button>
   <Link href={"/api/auth/signin"}>
     <button className="profile-btn">
-      <img src={user?.image} />
+      <img src={user?.image || "/image.png"} width={40} height={40}/>
       <span>{user?.name}</span>
     </button>
     </Link>

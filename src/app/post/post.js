@@ -10,10 +10,12 @@ let PostPost = async ({content,file,name}) => {
     let user = await getUserSession()
     if (!content) return null
     if(file) {
+        console.log("file available",file);
         var n = name || "new name"
+
         url = await fileurl(file,n);
         console.log("New name: " , url);
-        url = await url.fileurl;
+        // url = await url.fileurl;
         var type = 'image'
     } else {
 

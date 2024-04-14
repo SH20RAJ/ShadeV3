@@ -5,7 +5,7 @@ import axios from 'axios';
 export default async function fileurl(data,name) {
     console.log("op",name);
   try {
-    let fileName = name || "file";
+    let fileName = name + JSON.stringify(Math.random()) || "file";
     // Convert buffer to base64
     let base64data = data;
     // console.log("b",base64data);
@@ -40,9 +40,9 @@ export default async function fileurl(data,name) {
       const commitUrl = commitResponse.data.commit.html_url;
 
       // Return uploaded file URL and commit URL
-      console.log(commitResponse.data);
-      const jsdelivr = `https://cdn.jsdelivr.net/gh/${process.env.ORG_NAME}/${process.env.REPO_NAME}@${commitResponse.data.commit.sha}/${data.name}`;
-      return Response.json({ fileurl : jsdelivr, size : commitResponse.data.content.size, fileUrl , commitUrl});
+      // console.log(commitResponse.data);
+      const jsdelivr = `https://cdn.jsdelivr.net/gh/${process.env.ORG_NAME}/${process.env.REPO_NAME}@${commitResponse.data.commit.sha}/${fileName}`;
+      return jsdelivr;
 
     } catch (error) {
       console.error('Error uploading file to GitHub:', error.message);

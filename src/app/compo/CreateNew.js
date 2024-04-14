@@ -1,5 +1,7 @@
 'use client'
 import React, { useRef, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // import { useSession } from "next-auth/react"
 
@@ -12,32 +14,36 @@ function fileToBase64(file) {
   });
 }
 
-function CreatePost() {
+function CreateNew() {
   const [content, setContent] = useState('');
   const [authorId, setAuthorId] = useState('');
   const [image, setImage] = useState('');
   let box = useRef('box');
 
-const formData = new FormData();
-formData.append('file', image);
-formData.append('content', content);
-formData.append('name', image.name);
-
 
 let create = async (e) => {
   console.log("Creating post");
+  (()=> toast("Creating Post ✨"))()
 
   e.preventDefault();
 
   let headersList = {
     "Content-Type": "application/json"
    }
-   let filed = await fileToBase64(image)
-   console.log(filed);
-   let bodyContent = JSON.stringify({
+   
+   if(image){
+     let filed = await fileToBase64(image)
+     console.log(filed);
+    var bodyContent = JSON.stringify({
      "content":content,
      "file":filed
    });
+   } else {
+    var bodyContent = JSON.stringify({
+      "content":content,
+    });
+   }
+   
    
    let response = await fetch("/api/post", { 
      method: "POST",
@@ -45,10 +51,10 @@ let create = async (e) => {
      headers: headersList
    });
    
+   setContent("")
    let data = await response.text();
    console.log(data);
-   setContent("")
-   alert("Post uploaded successfully");
+  (() => toast("Post uploaded successfully ✨"))()
   console.log("Created post");
 }
 
@@ -102,7 +108,7 @@ let create = async (e) => {
                   type="file"
                   id="video"
                   name="video"
-                  // onChange={(e) => setVideo(e.target.files[0])}
+                  onChange={(e) => setImage(e.target.files[0])}
                   className="hidden"
                 />
                 <svg
@@ -133,8 +139,10 @@ let create = async (e) => {
           </button>
         </div>
       </form>
+      <ToastContainer />
+
     </div>
   );
 }
 
-export default CreatePost;
+export default CreateNew;
