@@ -5,7 +5,7 @@ export async function getuser() {
 }
 
 let user = await getuser();
-console.log(user);
+// console.log(user);
 export const GET = async () => {
     
 return Response.json({ status:200, user: user})

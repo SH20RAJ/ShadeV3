@@ -30,7 +30,8 @@
     "react-toastify": "^10.0.5",
     "recharts": "^2.12.4",
     "resend": "^3.2.0",
-    "rich-text-converter": "^1.0.1"
+    "rich-text-converter": "^1.0.1",
+    "showdown": "^2.1.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",

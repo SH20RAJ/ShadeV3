@@ -14,7 +14,7 @@ export async function POST(req, res, next) {
       password: payload.password
     }
   });
-  console.log(user);
+  // console.log(user);
 
   if(user){
     const key = process.env.TOKEN_SECRET || '1234';

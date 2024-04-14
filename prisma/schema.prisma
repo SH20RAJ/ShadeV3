@@ -59,7 +59,7 @@ model User {
 
 model Post {
   id            Int            @id @default(autoincrement())
-  content       String
+  content       String         @db.VarChar(20000)
   image         String?
   contentURL    String?
   type          Type?          @default(text)

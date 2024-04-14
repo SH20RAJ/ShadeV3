@@ -1,6 +1,7 @@
 import "./globals.css";
 import Header from "./compo/Header";
 import Sidebar from "./compo/Sidebar";
+import Head from "./compo/Head";
 
 export let metadata = {
   title: "Shade || Home",
@@ -10,6 +11,10 @@ export let metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <Head />
+
+      </head>
       <body>
         <div className="app-container">
           <Header />

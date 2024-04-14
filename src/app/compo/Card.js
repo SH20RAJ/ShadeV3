@@ -1,4 +1,5 @@
 'use client'
+import converter from "@/lib/showdown";
 import { relativeDate } from "@/lib/utils";
 import Link from "next/link";
 export default function Card({ post }) {
@@ -17,7 +18,7 @@ export default function Card({ post }) {
       },
       body: JSON.stringify({
         postId: post.id,
-        userId: 5,
+        userId: 1,
         reaction : type,
       }),
     });
@@ -26,7 +27,7 @@ export default function Card({ post }) {
   }
   return (
     <>
-      <div className="sm:max-w-md sm:w-auto w-full mx-auto my-8">
+      <div className="postcard sm:max-w-md sm:w-auto w-full mx-auto my-8 overflow-hidden">
         <div className="bg-grey rounded-lg shadow-md w-full  h-full">
           {/* Post Header */}
           <div className="flex items-center px-4 py-3 border-b">
@@ -56,7 +57,10 @@ export default function Card({ post }) {
           </div>
           {/* Post Content */}
           <div className="px-4 py-2">
-            <p className="text-lg  textd">{post.content} </p>
+            <div className="text-lg  textd" dangerouslySetInnerHTML={{ __html : converter.makeHtml(post.content)}}>
+              {/* { converter.makeHtml(post.content) }  */}
+              
+              </div>
             {media}
           </div>
           {/* Post Actions */}

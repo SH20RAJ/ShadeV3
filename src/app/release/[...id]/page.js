@@ -9,18 +9,25 @@ let postx = await post(id)
 if (!postx) return (<center className="text-center w-full">Post Not Found 🤔</center>);
   return(
           <>
-          <div className="container flex w-full flex-col md:flex-row">
+          
+          <div className="projects-section">
+          <div className=" container flex w-full flex-col md:flex-row">
             <div className="w-full">
 
            <Card post={postx} /> 
             </div>
-           <div className="side md:w-[40%] h-screen">
+           {/* <div className="side md:w-[40%] h-screen">
+
+           </div> */}
+           
+          </div>
+
+          </div>
+
             <MessageSec>
               <Articles/>
             </MessageSec>
-           </div>
-           
-          </div>
+
           </>
 
     )

@@ -47,7 +47,7 @@ export default async function posts() {
         };
     });
 
-    console.log(posts);
+    // console.log(posts);
 
     return posts;
 }
