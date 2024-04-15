@@ -16,7 +16,7 @@
 // //   )
 // // }
 'use client';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 
 function YourComponent() {
     const {data: session, status } = useSession();
