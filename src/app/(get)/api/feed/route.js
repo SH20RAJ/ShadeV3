@@ -11,7 +11,7 @@ const GET = async (req,res) => {
     let orderBy = url.searchParams.get("orderBy") || "createdAt";
     let type = url.searchParams.get("type") ;
     let body = await posts({limit,skip,orderBy,type});
-    console.log("body: " + body);
+    // console.log("body: " + body);
   return Response.json({ success: true, data: body})
 }
 

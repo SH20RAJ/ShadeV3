@@ -1,16 +1,18 @@
+'use client'
 import Card from "./Card";
-import posts from "../get/posts";
+
 // import CreatePost from "./CreatePost";
 import { shuffleArray } from "@/lib/utils";
+import TextFeed from "./feeds/text";
 
 
 
 export default async function ProjectSec() {
-  let p = await posts();
-  p = p.data
+  // let p = await posts();
+  // p = p.data
 
 
-  p = 0 ? shuffleArray(p) : p; //shuffle array or not
+  // p = 0 ? shuffleArray(p) : p; //shuffle array or not
   // console.log(p);
   return (
     <>
@@ -22,14 +24,9 @@ export default async function ProjectSec() {
         </div> */}
         <div className="project-boxes jsGridView ">
           <div className="postcontainer flex flex-wrap justify-around">
-            {p.map((post, i) => (
-              <div
-                key={post.id || i}
-                className=" w-full box-border md:w-[40%]  m-2"
-              >
-                <Card post={post}></Card>
-              </div>
-            ))}
+            
+            <TextFeed/>
+
           </div>
         </div>
       </div>
