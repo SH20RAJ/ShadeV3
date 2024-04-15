@@ -15,3 +15,5 @@ export default function Home() {
     </>
   );
 }
+
+export const revalidate = 10;
