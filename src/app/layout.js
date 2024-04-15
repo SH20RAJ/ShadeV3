@@ -2,6 +2,7 @@ import "./globals.css";
 import Sidebar from "./compo/Sidebar";
 import Head from "./compo/head";
 import Header from "./compo/Header";
+import NextAuthSessionProvider from "@/lib/SessionProvider";
 
 export let metadata = {
   title: "Shade || Home",
@@ -11,6 +12,7 @@ export let metadata = {
 
 export default function RootLayout({ children }) {
   return (
+    <NextAuthSessionProvider>
     <html lang="en">
       <head>
         <Head />
@@ -34,5 +36,7 @@ export default function RootLayout({ children }) {
         ></div>
       </body>
     </html>
+
+    </NextAuthSessionProvider>
   );
 }
