@@ -1,12 +1,25 @@
 import prisma from "../../../prisma";
 
-export default async function posts() {
+export default async function posts(options) {
+    const limit = options && options.limit !== undefined ? options.limit : 20;
+    const skip = options && options.skip !== undefined ? options.skip : 0;
+    const orderBy = options && options.orderBy !== undefined ? options.orderBy : "createdAt";
+    let typeFilter = {};
+    if (options?.type) {
+        typeFilter = {
+            type: options.type
+        };
+    }
+    
     let posts = await prisma.post.findMany({
         where: {
-            status: "public"
+            status: "public",
+            ...typeFilter
         },
+        take: parseInt(limit),
+        skip: parseInt(skip),
         orderBy: {
-            createdAt: "desc"
+            [orderBy]: "desc"
         },
         include: {
             author: {
@@ -44,8 +57,17 @@ export default async function posts() {
             ...post,
             likeCounts, // Include the aggregated like counts by reaction type
             commentsCount: post._count.comments // Include the count of comments
+            
         };
     });
+
+    // Adding additional information
+    posts = {
+        count: posts.length,
+        skipped: parseInt(skip),
+        type: options?.type || "any", // Using options.type here
+        data: posts, // Changed from ...posts to avoid overwriting properties
+    };
 
     // console.log(posts);
 

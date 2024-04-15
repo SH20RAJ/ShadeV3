@@ -2,13 +2,12 @@ import Card from "./Card";
 import posts from "../get/posts";
 // import CreatePost from "./CreatePost";
 import { shuffleArray } from "@/lib/utils";
-import CreateNew from "./CreateNew2";
-import converter from "@/lib/showdown";
 
 
 
 export default async function ProjectSec() {
   let p = await posts();
+  p = p.data
 
 
   p = 0 ? shuffleArray(p) : p; //shuffle array or not

@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
         <div className="app-container">
           <Header />
           <div className="app-content">
-            <Sidebar active={"home"} />
+            <Sidebar />
             {children}
           </div>
         </div>
