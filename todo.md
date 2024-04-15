@@ -13,3 +13,6 @@
 - A good post viewer 
 - Mardown editor
 
+
+- Quips
+

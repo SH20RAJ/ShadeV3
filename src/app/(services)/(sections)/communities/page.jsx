@@ -5,7 +5,7 @@ let Page = async () => {
           <>
           
           
-          Community Images Here....
+          Account Page
           
 
           </>

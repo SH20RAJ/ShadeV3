@@ -8,6 +8,7 @@ export let metadata = {
   description: "Home Page",
 };
 
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -19,7 +20,7 @@ export default function RootLayout({ children }) {
         <div className="app-container">
           <Header />
           <div className="app-content">
-            <Sidebar />
+            <Sidebar active={"home"} />
             {children}
           </div>
         </div>

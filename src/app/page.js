@@ -6,6 +6,7 @@ export default function Home() {
     <>
 
       <ProjectSec/>
+      
       <MessageSec>
         <Articles/>
       </MessageSec>

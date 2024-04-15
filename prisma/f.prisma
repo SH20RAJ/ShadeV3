@@ -1,0 +1,182 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Type {
+  video
+  shortvideo
+  text
+  image
+  audio
+  poll
+  game
+  article
+}
+
+enum Status {
+  public
+  private
+  unlisted
+}
+
+enum ReactionType {
+  like
+  love
+  haha
+  wow
+  sad
+  angry
+  dislike
+}
+
+model User {
+  id              Int            @id @default(autoincrement())
+  username        String         @unique
+  email           String         @unique
+  password        String
+  name            String?
+  bio             String?
+  avatar          String?
+  coverPhoto      String?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  posts           Post[]
+  likes           Like[]
+  status          Status         @default(public)
+  comments        Comment[]
+  followers       Follow[]       @relation("UserFollowers")
+  following       Follow[]       @relation("UserFollowing")
+  roles           UserRole[]
+  receivedMessages Message[]     @relation("ReceiverMessages")
+  sentMessages    Message[]     @relation("SenderMessages")
+  pollResponses   PollResponse[]
+  videos          Video[]        @relation("AuthorVideos")
+}
+
+model Post {
+  id            Int            @id @default(autoincrement())
+  content       String         @db.VarChar(20000)
+  image         String?
+  contentURL    String?
+  type          Type?          @default(text)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  author        User           @relation(fields: [authorId], references: [id])
+  authorId      Int
+  status        Status         @default(public)
+  likes         Like[]
+  comments      Comment[]
+  tags          Tag[]
+  pollOptions   PollOption[]
+}
+
+model Like {
+  id            Int            @id @default(autoincrement())
+  user          User           @relation(fields: [userId], references: [id])
+  userId        Int
+  post          Post?           @relation(fields: [postId], references: [id])
+  postId        Int?
+  reaction      ReactionType   @default(like)
+  createdAt     DateTime       @default(now())
+  video          Video?    @relation(fields: [videoId], references: [id])
+  videoId        Int?
+
+}
+
+model Comment {
+  id            Int            @id @default(autoincrement())
+  content       String
+  user          User           @relation(fields: [userId], references: [id])
+  userId        Int
+  post          Post           @relation(fields: [postId], references: [id])
+  postId        Int
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  media         String?        
+  video         Video @relation(fields: [videoId], references: [id])
+  videoId       Int
+}
+
+model Tag {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  posts     Post[]  
+  videos Video[]
+}
+
+model Follow {
+  id            Int            @id @default(autoincrement())
+  follower      User           @relation("UserFollowers", fields: [followerId], references: [id])
+  followerId    Int
+  following     User           @relation("UserFollowing", fields: [followingId], references: [id])
+  followingId   Int
+  createdAt     DateTime       @default(now())
+  @@unique([followerId, followingId])
+}
+
+model UserRole {
+  id            Int            @id @default(autoincrement())
+  userId        Int
+  role          Role
+  user          User           @relation(fields: [userId], references: [id])
+  createdAt     DateTime       @default(now())
+}
+
+enum Role {
+  ADMIN
+  MODERATOR
+  USER
+}
+
+model Message {
+  id            Int            @id @default(autoincrement())
+  content       String
+  senderId      Int
+  receiverId    Int
+  sender        User           @relation("SenderMessages", fields: [senderId], references: [id])
+  receiver      User           @relation("ReceiverMessages", fields: [receiverId], references: [id])
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model PollOption {
+  id        Int      @id @default(autoincrement())
+  postId    Int
+  post      Post     @relation(fields: [postId], references: [id])
+  option    String
+  responses PollResponse[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PollResponse {
+  id          Int      @id @default(autoincrement())
+  pollOptionId Int
+  pollOption  PollOption @relation(fields: [pollOptionId], references: [id])
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+}
+
+model Video {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  videoUrl    String
+  thumbnail   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  author      User     @relation("AuthorVideos", fields: [authorId], references: [id])
+  authorId    Int
+  status      Status   @default(public)
+  likes       Like[]
+  comments    Comment[]
+  tags        Tag[]
+}
