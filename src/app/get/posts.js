@@ -1,16 +1,22 @@
 import prisma from "../../../prisma";
 
-export default async function posts(options) {
-    const limit = options && options.limit !== undefined ? options.limit : 20;
-    const skip = options && options.skip !== undefined ? options.skip : 0;
-    const orderBy = options && options.orderBy !== undefined ? options.orderBy : "createdAt";
+export default async function posts(options, userId = 1) {
+    const limit = options?.limit !== undefined ? options.limit : 20;
+    let skip = options?.skip !== undefined ? options.skip : 0;
+    const orderBy = options?.orderBy !== undefined ? options.orderBy : "createdAt";
+    const page = options?.page !== undefined ? Math.max(options.page, 1) : 1;
+
     let typeFilter = {};
     if (options?.type) {
         typeFilter = {
             type: options.type
         };
     }
-    
+
+    if (page > 1) {
+        skip = (page - 1) * limit;
+    }
+
     let posts = await prisma.post.findMany({
         where: {
             status: "public",
@@ -30,19 +36,21 @@ export default async function posts(options) {
                 }
             },
             likes: {
+                where: {
+                    userId: userId
+                },
                 select: {
-                    reaction: true, // Include the reaction type of each like
+                    reaction: true,
                 }
             },
             _count: {
                 select: {
-                    comments: true, // Count the comments for each post
+                    comments: true,
                 }
             }
         }
     });
 
-    // Manually count likes based on reaction type for each post, ensuring like and haha are initialized to 0
     posts = posts.map(post => {
         const initialCounts = { like: 0, love: 0, haha: 0, wow: 0, sad: 0, angry: 0, dislike: 0 };
         const likeCounts = post.likes.reduce((acc, like) => {
@@ -50,26 +58,35 @@ export default async function posts(options) {
             return acc;
         }, initialCounts);
 
-        // Remove the detailed likes to only include the counts
+        const userLiked = post.likes.length > 0; // Check if user with ID 5 liked this post
+
         delete post.likes;
 
         return {
             ...post,
-            likeCounts, // Include the aggregated like counts by reaction type
-            commentsCount: post._count.comments // Include the count of comments
-            
+            likeCounts,
+            commentsCount: post._count.comments,
+            userLiked: userLiked
         };
     });
 
-    // Adding additional information
+    const totalCount = await prisma.post.count({
+        where: {
+            status: "public",
+            ...typeFilter
+        }
+    });
+
+    const totalPages = Math.ceil(totalCount / limit);
+
     posts = {
         count: posts.length,
         skipped: parseInt(skip),
-        type: options?.type || "any", // Using options.type here
-        data: posts, // Changed from ...posts to avoid overwriting properties
+        type: options?.type || "any",
+        page: page,
+        totalPages: totalPages,
+        data: posts,
     };
-
-    // console.log(posts);
 
     return posts;
 }

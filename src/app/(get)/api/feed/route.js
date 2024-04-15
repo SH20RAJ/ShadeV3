@@ -10,7 +10,8 @@ const GET = async (req,res) => {
     let skip = url.searchParams.get("skip") || 0;
     let orderBy = url.searchParams.get("orderBy") || "createdAt";
     let type = url.searchParams.get("type") ;
-    let body = await posts({limit,skip,orderBy,type});
+    let page = url.searchParams.get("page") ;
+    let body = await posts({limit,skip,orderBy,type,page});
     // console.log("body: " + body);
   return Response.json({ success: true, data: body})
 }
