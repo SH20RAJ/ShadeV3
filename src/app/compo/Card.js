@@ -5,24 +5,66 @@ import Link from "next/link";
 import { useState } from "react";
 export default function Card({ post }) {
 
-  let [init,setInit] = useState(post.userLiked);
-
   let [liked,setLiked] = useState(post.userLiked);
-  // console.log("liked",liked);
+  let [count,setCount] = useState({
+    like: post.likeCounts.like,
+    dislike: post.likeCounts.dislike,
+  });
+
   let media = "";
   if (post.type === "image") {
     media = <img height={"200px"} src={post.contentURL} alt="image" />;
   }
 
 
-  async function handlelike(type){
-    if(liked == type){
-      setInit(true)
-      setLiked(0)
-    } else {
-      setLiked( type)
+  async function handlelike(type) {
+    // If the user liked the post, then remove the like
+    if (type === "like" && liked === "like") {
+      setCount({
+        ...count,
+        like: count.like - 1,
+      });
+      setLiked(0);
     }
-
+    // If the user disliked the post, then remove the dislike
+    else if (type === "dislike" && liked === "dislike") {
+      setCount({
+        ...count,
+        dislike: count.dislike - 1,
+      });
+      setLiked(0);
+    }
+    // If the user liked a post and then disliked it
+    else if (type === "dislike" && liked === "like") {
+      setCount({
+        like: count.like - 1,
+        dislike: count.dislike + 1,
+      });
+      setLiked("dislike");
+    }
+    // If the user disliked a post and then liked it
+    else if (type === "like" && liked === "dislike") {
+      setCount({
+        like: count.like + 1,
+        dislike: count.dislike - 1,
+      });
+      setLiked("like");
+    }
+    // If the user hasn't interacted with the post yet
+    else if (type === "like" && liked === 0) {
+      setCount({
+        ...count,
+        like: count.like + 1,
+      });
+      setLiked("like");
+    } else if (type === "dislike" && liked === 0) {
+      setCount({
+        ...count,
+        dislike: count.dislike + 1,
+      });
+      setLiked("dislike");
+    }
+  
     let res = await fetch("/api/like", {
       method: "POST",
       headers: {
@@ -31,12 +73,13 @@ export default function Card({ post }) {
       body: JSON.stringify({
         postId: post.id,
         userId: 1,
-        reaction : type,
+        reaction: type,
       }),
     });
     let data = await res.json();
     console.log(data);
   }
+  
   return (
     <>
       <div className="postcard flex  sm:max-w-md sm:w-auto w-full mx-auto  my-8 overflow-hidden">
@@ -91,7 +134,7 @@ export default function Card({ post }) {
                   d="m4.5 15.75 7.5-7.5 7.5 7.5"
                 />
               </svg>
-              <span>{ ((init == 0 && liked != "like" && post.likeCounts?.like - 1 ) ) || (liked == "like" && init != "like"  && post.likeCounts?.like +1) || post.likeCounts?.like}</span>
+              <span>{count.like}</span>
             </button>
             <button onClick={()=>handlelike('dislike')} className={`flex items-center space-x-1 text-gray-600 hover:text-red-500 ${liked == "dislike" ? " text-red-600 " : "text-gray-600"}`}>
               <svg
@@ -108,7 +151,7 @@ export default function Card({ post }) {
                   d="m19.5 8.25-7.5 7.5-7.5-7.5"
                 />
               </svg>
-              <span>{liked == "dislike" && post.likeCounts?.dislike +1 || post.likeCounts?.dislike}</span>
+              <span>{count.dislike}</span>
             </button>
             <button className="flex items-center space-x-1 text-gray-600 hover:text-green-500">
               <svg
