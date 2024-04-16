@@ -84,6 +84,7 @@ model Like {
   postId        Int
   reaction      ReactionType   @default(like)
   createdAt     DateTime       @default(now())
+  // @@unique([postId, userId])
 }
 
 model Comment {

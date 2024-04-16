@@ -6,7 +6,7 @@ import { useState } from "react";
 export default function Card({ post }) {
 
   let [liked,setLiked] = useState(post.userLiked);
-  // console.log(post);
+  // console.log("liked",liked);
   let media = "";
   if (post.type === "image") {
     media = <img height={"200px"} src={post.contentURL} alt="image" />;
@@ -19,7 +19,7 @@ export default function Card({ post }) {
     } else {
       setLiked( type)
     }
-    
+
     let res = await fetch("/api/like", {
       method: "POST",
       headers: {

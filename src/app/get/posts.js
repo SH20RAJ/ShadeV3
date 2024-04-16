@@ -1,6 +1,5 @@
 import prisma from "../../../prisma";
 
-
 export default async function posts(options, userId = 1) {
     const limit = options?.limit !== undefined ? options.limit : 20;
     let skip = options?.skip !== undefined ? options.skip : 0;
@@ -37,9 +36,9 @@ export default async function posts(options, userId = 1) {
                 }
             },
             likes: {
-                where: {
-                    userId: userId
-                },
+                // where: {
+                //     userId: userId
+                // },
                 select: {
                     reaction: true,
                 }
@@ -47,19 +46,23 @@ export default async function posts(options, userId = 1) {
             _count: {
                 select: {
                     comments: true,
+                    likes: true,
                 }
             }
         }
     });
 
+    console.log(posts[0].likes);
+
     posts = posts.map(post => {
+
         const initialCounts = { like: 0, love: 0, haha: 0, wow: 0, sad: 0, angry: 0, dislike: 0 };
         const likeCounts = post.likes.reduce((acc, like) => {
             acc[like.reaction] = (acc[like.reaction] || 0) + 1;
             return acc;
         }, initialCounts);
 
-        const userLiked = post.likes.length > 0 ? post.likes[0].reaction : null; // Get the reaction if user liked, otherwise null
+        const userLiked = post.likes.length > 0; // Check if user with ID 5 liked this post
 
         delete post.likes;
 
