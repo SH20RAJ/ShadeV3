@@ -6,7 +6,16 @@ const withPWA = withPWAInit({
 });
 
 
-const nextConfig = {};
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
+  },
+};
 
 // export default withPWA(nextConfig);
 export default nextConfig;

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function PinterestFeed({ images }) {
   return (
@@ -6,7 +7,7 @@ export default function PinterestFeed({ images }) {
       {images.map((image, i) => (
         <Link key={image.id} href={"/release/" + image.id}>
           <div className="textd">
-            <img className="rounded-md" loading="lazy" src={image.contentURL} />
+            <img className="rounded-md" loading="lazy" src={encodeURI("https://imagecdn.app/v2/image/"+image.contentURL)} width={100} height={100}/>
             {image.title || image.content}
           </div>{" "}
         </Link>
