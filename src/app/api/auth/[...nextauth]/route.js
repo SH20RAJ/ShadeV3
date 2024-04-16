@@ -71,6 +71,9 @@ const authOption = {
           avatar: profile.image,
         },
       });
+      profile.username = username;
+      profile.avatar = avatar;
+
     
       return true;
     }
