@@ -1,11 +1,18 @@
+"use client";
+import { useSession } from "next-auth/react";
 import Link from "next/link"
-import Image from "next/image"
-import { getUserSession } from "../../lib/sessions";
-let user = await getUserSession()
+// import Image from "next/image"
+// import { getUserSession } from "../../lib/sessions";
+// let user = await getUserSession()
 
-let getscript = "<script >window.user = "+ JSON.stringify(user)+"</script>";
 
-let Header = async () => {
+
+// let getscript = "<script >window.user = "+ JSON.stringify(user)+"</script>";
+
+let Header = () => {
+  const { data: session, status } = useSession();
+  console.log(session);
+
   return(
           <>
 <div className="app-header">
@@ -43,8 +50,8 @@ let Header = async () => {
     </button>
   <Link href={"/api/auth/signin"}>
     <button className="profile-btn">
-      <img src={user?.image || "/image.png"} width={40} height={40}/>
-      <span>{user?.name}</span>
+      <img src={session?.user?.image || "/logo.png"} width={40} height={40}/>
+      <span>{session?.user?.name}</span>
     </button>
     </Link>
   </div>
@@ -54,9 +61,7 @@ let Header = async () => {
   </button>
 </div>
 
-<div dangerouslySetInnerHTML={{__html:  getscript}} className="script">
-
-</div>
+{/* <div dangerouslySetInnerHTML={{__html:  getscript}} className="script"> </div> */}
 
           
           

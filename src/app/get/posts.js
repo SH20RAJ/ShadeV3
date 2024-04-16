@@ -1,10 +1,13 @@
+import user from "@/lib/user";
 import prisma from "../../../prisma";
 
-export default async function posts(options, userId = 1) {
+
+export default async function posts(options, userId = 1 ) {
     const limit = options?.limit !== undefined ? options.limit : 20;
     let skip = options?.skip !== undefined ? options.skip : 0;
     const orderBy = options?.orderBy !== undefined ? options.orderBy : "createdAt";
     const page = options?.page !== undefined ? Math.max(options.page, 1) : 1;
+    userId = parseInt(userId);
 
     let typeFilter = {};
     if (options?.type) {
