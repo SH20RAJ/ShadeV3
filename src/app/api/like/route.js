@@ -16,7 +16,20 @@ async function handler(req, res) {
       },
     });
 
-    if (existingLike) {
+
+     if (existingLike) {
+
+      if(existingLike.reaction == reaction) {
+        // If like already exists, delete it
+        var data = await prisma.like.delete({
+          where: {
+            id: existingLike.id,
+          },
+        });
+  
+      } else {
+
+
       // If like exists, update it with the new reaction type
       var data = await prisma.like.update({
         where: {
@@ -26,6 +39,9 @@ async function handler(req, res) {
           reaction: reaction,
         },
       });
+        // If like already exists, update it with the new reaction type
+      }
+
     } else {
       // If like does not exist, create a new one with the specified reaction type
       var data = await prisma.like.create({
