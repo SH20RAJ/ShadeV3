@@ -1,6 +1,6 @@
 import Articles from "../compo/Articles";
 import CreateNew from "../compo/createnew/CreateNew2";
-import MessageSec from "../compo/MessageSec";
+import RightBar from "../compo/RightBar";
 export default function Home() {
   return (
     <>
@@ -8,9 +8,9 @@ export default function Home() {
 
       <CreateNew/>
     </div>
-      <MessageSec>
+      <RightBar>
         <Articles/>
-      </MessageSec>
+      </RightBar>
     </>
   );
 }

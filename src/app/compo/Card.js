@@ -2,7 +2,10 @@
 import converter from "@/lib/showdown";
 import { relativeDate } from "@/lib/utils";
 import Link from "next/link";
+import { useState } from "react";
 export default function Card({ post }) {
+
+  let [liked,setLiked] = useState(post.userLiked);
   // console.log(post);
   let media = "";
   if (post.type === "image") {
@@ -11,6 +14,12 @@ export default function Card({ post }) {
 
 
   async function handlelike(type){
+    if(liked == type){
+      setLiked(0)
+    } else {
+      setLiked( type)
+    }
+    
     let res = await fetch("/api/like", {
       method: "POST",
       headers: {
@@ -65,7 +74,7 @@ export default function Card({ post }) {
           </div>
           {/* Post Actions */}
           <div className="flex items-center justify-evenly py-2 border-t">
-<button onClick={() => handlelike('like')} className={`flex items-center space-x-1 text-gray-600 hover:text-blue-500 ${post.userLiked ? "text-blue-600" : ""}`}>              <svg
+<button onClick={() => handlelike('like')} className={`flex items-center space-x-1 hover:text-blue-500 ${liked == "like" ? " text-blue-600 " : "text-gray-600"}`}>              <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -79,9 +88,9 @@ export default function Card({ post }) {
                   d="m4.5 15.75 7.5-7.5 7.5 7.5"
                 />
               </svg>
-              <span>{post.likeCounts?.like}</span>
+              <span>{liked == "like"  && post.likeCounts?.like +1 || post.likeCounts?.like}</span>
             </button>
-            <button onClick={()=>handlelike('dislike')} className="flex items-center space-x-1 text-gray-600 hover:text-red-500">
+            <button onClick={()=>handlelike('dislike')} className={`flex items-center space-x-1 text-gray-600 hover:text-red-500 ${liked == "dislike" ? " text-red-600 " : "text-gray-600"}`}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -96,7 +105,7 @@ export default function Card({ post }) {
                   d="m19.5 8.25-7.5 7.5-7.5-7.5"
                 />
               </svg>
-              <span>{post.likeCounts?.dislike}</span>
+              <span>{liked == "dislike" && post.likeCounts?.dislike +1 || post.likeCounts?.dislike}</span>
             </button>
             <button className="flex items-center space-x-1 text-gray-600 hover:text-green-500">
               <svg

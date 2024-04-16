@@ -1,6 +1,6 @@
 import post from "@/app/get/post";
 import Card from "../../compo/Card";
-import MessageSec from "@/app/compo/MessageSec";
+import RightBar from "@/app/compo/RightBar";
 import Articles from "@/app/compo/Articles";
 
 let Page = async ({params}) => {
@@ -24,9 +24,9 @@ if (!postx) return (<center className="text-center w-full">Post Not Found 🤔</
 
           </div>
 
-            <MessageSec>
+            <RightBar>
               <Articles/>
-            </MessageSec>
+            </RightBar>
 
           </>
 

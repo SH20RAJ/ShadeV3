@@ -1,5 +1,5 @@
 import Articles from "./compo/Articles";
-import MessageSec from "./compo/MessageSec";
+import RightBar from "./compo/RightBar";
 import ProjectSec from "./compo/ProjectSec";
 export default function Home() {
   return (
@@ -7,9 +7,9 @@ export default function Home() {
 
       <ProjectSec/>
       
-      <MessageSec>
+      <RightBar>
         <Articles/>
-      </MessageSec>
+      </RightBar>
 
     
     </>
