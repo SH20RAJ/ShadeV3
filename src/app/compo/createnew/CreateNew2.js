@@ -146,7 +146,7 @@ let addImage = async (image) => {
               className=' w-full bg-transparent border p-2 mb-2' type="text" id='title' name='title' />
             </label>}
 
-            {(postmode !== "image") &&  <textarea
+            {(postmode !== "idmage") &&  <textarea
               id="content"
               name="content"
               rows="3"

@@ -5,10 +5,10 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function Card({ post }) {
-  const [liked, setLiked] = useState(post.userLiked);
+  const [liked, setLiked] = useState(post?.userLiked);
   const [count, setCount] = useState({
-    like: post.likeCounts.like,
-    dislike: post.likeCounts.dislike,
+    like: post.likeCounts?.like,
+    dislike: post.likeCounts?.dislike,
   });
 
   const media = post.type === "image" ? <img height={"200px"} src={post.contentURL} alt="image" /> : null;
