@@ -1,9 +1,17 @@
+import getuser from '@/app/test/getuser';
 import prisma from '../../../../prisma';
 
-async function handler(req, res) {
-  const { postId, userId , reaction } = await req.json();
 
-  if (!postId || !userId) {
+
+async function handler(req, res) {
+  const { postId , reaction } = await req.json();
+  let user = await getuser();
+  let userId = null;
+  let email = user.user.email
+  user = await prisma.user.findUnique({ where : {email: email}});
+  userId = user.id;
+
+  if (!postId ) {
     return Response.json({ message: 'Post ID and User ID are required' });
   }
 

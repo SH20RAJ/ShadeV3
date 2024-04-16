@@ -35,7 +35,7 @@ let Articles = async () => {
                   <input
                     type="checkbox"
                     id={`star-${article.id}`}
-                    checked={article.starred}
+                    defaultChecked={article.starred}
                   />
                   <label htmlFor={`star-${article.id}`}>
                     <svg
