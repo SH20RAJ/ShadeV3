@@ -25,6 +25,7 @@ const authOption = {
   ],
   callbacks: {
     async signIn({ account, profile }) {
+      console.log("profile", profile);
       if (!profile?.email) {
         throw new Error('No profile');
       }
@@ -55,7 +56,7 @@ const authOption = {
       // Generate a temporary password for now (you should handle password securely in production)
       const password = Math.random().toString(36).slice(-8); // Temporary password
     
-      await prisma.user.upsert({
+     let i =  await prisma.user.upsert({
         where: {
           email: profile.email,
         },
@@ -64,16 +65,18 @@ const authOption = {
           name: profile.name,
           username, // Use the generated unique username
           password, // Temporary password
-          avatar: profile.image,
+          avatar: profile.picture,
         },
         update: {
           name: profile.name,
-          avatar: profile.image,
+          avatar: profile.picture,
         },
       });
+      console.log("i",i);
     
       return true;
     }
+
     
     ,
     session,
@@ -87,7 +90,8 @@ const authOption = {
         if (!user) {
           throw new Error('No user found')
         }
-        token.id = user.id
+        token.id = user.id,
+        token.username = user.username
       }
       return token
     },
