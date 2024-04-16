@@ -41,6 +41,7 @@ export default async function posts(options, userId = 1) {
                 // },
                 select: {
                     reaction: true,
+                    userId: true
                 }
             },
             _count: {
@@ -52,7 +53,7 @@ export default async function posts(options, userId = 1) {
         }
     });
 
-    console.log(posts[0].likes);
+    // console.log(posts[0].likes);
 
     posts = posts.map(post => {
 
@@ -62,7 +63,8 @@ export default async function posts(options, userId = 1) {
             return acc;
         }, initialCounts);
 
-        const userLiked = post.likes.length > 0; // Check if user with ID 5 liked this post
+        const userLike = post.likes.find(like => like.userId === userId); // Assuming each like has a userId field
+        const userLiked = userLike ? userLike.reaction : null;
 
         delete post.likes;
 
