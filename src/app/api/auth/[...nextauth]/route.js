@@ -74,6 +74,8 @@ const authOption = {
 
       return true;
     },
+    async redirect(){ return "/"} ,
+
 
     session,
     async jwt({ token, user, account, profile }) {
@@ -90,7 +92,7 @@ const authOption = {
         console.log("token",token);
       }
       return token
-    },
+    }
   },
 }
 

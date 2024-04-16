@@ -1,6 +1,31 @@
 import prisma from '../../../prisma';
+import { getServerSession } from 'next-auth';
 
-export default async function post(id, userId = 1) {
+export default async function post(id) {
+let user = await getServerSession();
+let email = user.user.email;
+
+user = await prisma.user.findUnique({
+  where: {
+    email
+  },
+  select: {
+    username: true,
+    id: true,
+  }
+})
+  // console.log("fefe",user÷2);
+  // let email = user?.user.email || "sh@sh.com";
+  // let user  = await prisma.user.findUnique({
+  //   where: {
+  //     email
+  //   },
+  //   select: {
+  //     username: true,
+  //     id: true,
+  //   }
+  // })
+  let userId = user.id || 2
   var post = await prisma.post.findUnique({
     where: {
       status: "public",
@@ -41,10 +66,13 @@ export default async function post(id, userId = 1) {
     delete post.likes;
 
     post = {
+      userId,
       ...post,
       likeCounts,
+      userId,
       commentsCount: post._count.comments,
       userLiked,
+
     };
   }
 console.log("post",post);

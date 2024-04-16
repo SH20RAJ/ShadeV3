@@ -16,7 +16,7 @@ export default function TextFeed() {
         if (!loading && hasMore) {
             setLoading(true);
             try {
-                const response = await fetch(`/api/feed?type=text&page=${page}`, { cache: 'no-store' });
+                const response = await fetch(`/api/feed?type=text&page=${page}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch posts');
                 }

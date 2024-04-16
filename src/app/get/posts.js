@@ -1,13 +1,22 @@
-import user from "@/lib/user";
 import prisma from "../../../prisma";
 
 
-export default async function posts(options, userId = 1 ) {
+export default async function posts(options ) {
     const limit = options?.limit !== undefined ? options.limit : 20;
     let skip = options?.skip !== undefined ? options.skip : 0;
     const orderBy = options?.orderBy !== undefined ? options.orderBy : "createdAt";
     const page = options?.page !== undefined ? Math.max(options.page, 1) : 1;
-    userId = parseInt(userId);
+    let email = options.user?.user.email || "sh@sh.com";
+    let user  = await prisma.user.findUnique({
+        where: {
+            email
+        },
+        select: {
+            username: true,
+            id: true,
+    }
+    })
+    let userId = (await  user.id)
 
     let typeFilter = {};
     if (options?.type) {
@@ -89,6 +98,7 @@ export default async function posts(options, userId = 1 ) {
     const totalPages = Math.ceil(totalCount / limit);
 
     posts = {
+        userId,
         count: posts.length,
         skipped: parseInt(skip),
         type: options?.type || "any",
