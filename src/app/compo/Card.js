@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useState } from "react";
 export default function Card({ post }) {
 
+  let [init,setInit] = useState(post.userLiked);
+
   let [liked,setLiked] = useState(post.userLiked);
   // console.log("liked",liked);
   let media = "";
@@ -15,6 +17,7 @@ export default function Card({ post }) {
 
   async function handlelike(type){
     if(liked == type){
+      setInit(true)
       setLiked(0)
     } else {
       setLiked( type)
@@ -88,7 +91,7 @@ export default function Card({ post }) {
                   d="m4.5 15.75 7.5-7.5 7.5 7.5"
                 />
               </svg>
-              <span>{liked == "like"  && post.likeCounts?.like +1 || post.likeCounts?.like}</span>
+              <span>{ ((init == 0 && liked != "like" && post.likeCounts?.like - 1 ) ) || (liked == "like" && init != "like"  && post.likeCounts?.like +1) || post.likeCounts?.like}</span>
             </button>
             <button onClick={()=>handlelike('dislike')} className={`flex items-center space-x-1 text-gray-600 hover:text-red-500 ${liked == "dislike" ? " text-red-600 " : "text-gray-600"}`}>
               <svg
