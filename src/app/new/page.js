@@ -1,5 +1,5 @@
 import Articles from "../compo/Articles";
-import CreateNew from "../compo/CreateNew2";
+import CreateNew from "../compo/createnew/CreateNew2";
 import MessageSec from "../compo/MessageSec";
 export default function Home() {
   return (

@@ -62,6 +62,7 @@ model Post {
   content       String         @db.VarChar(20000)
   image         String?
   contentURL    String?
+  title         String?        @db.VarChar(200)
   type          Type?          @default(text)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
