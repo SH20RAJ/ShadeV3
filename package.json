@@ -15,6 +15,7 @@
     "@ducanh2912/next-pwa": "^10.2.6",
     "@heroicons/react": "^1.0.6",
     "@prisma/client": "^5.12.1",
+    "@vercel/analytics": "^1.2.2",
     "axios": "^1.6.8",
     "clsx": "^2.1.0",
     "cookies-next": "^4.1.1",

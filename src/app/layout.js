@@ -3,6 +3,8 @@ import Sidebar from "./compo/Sidebar";
 import Head from "./compo/head";
 import Header from "./compo/Header";
 import NextAuthSessionProvider from "@/lib/SessionProvider";
+import { Analytics } from "@vercel/analytics/react"
+
 
 export let metadata = {
   title: "Shade || Home",
@@ -34,6 +36,7 @@ export default function RootLayout({ children }) {
             __html: '<script src="/script.js"></script> ',
           }}
         ></div>
+        <Analytics/>
       </body>
     </html>
 
