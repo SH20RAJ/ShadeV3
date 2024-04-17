@@ -25,6 +25,7 @@ export default async function posts(options ) {
         };
     }
 
+
     if (page > 1) {
         skip = (page - 1) * limit;
     }
@@ -67,26 +68,31 @@ export default async function posts(options ) {
 
     // console.log(posts[0].likes);
 
-    posts = posts.map(post => {
+posts = posts.map(post => {
+    const initialCounts = { like: 0, love: 0, haha: 0, wow: 0, sad: 0, angry: 0, dislike: 0 };
+    const likeCounts = post.likes.reduce((acc, like) => {
+        acc[like.reaction] = (acc[like.reaction] || 0) + 1;
+        return acc;
+    }, initialCounts);
 
-        const initialCounts = { like: 0, love: 0, haha: 0, wow: 0, sad: 0, angry: 0, dislike: 0 };
-        const likeCounts = post.likes.reduce((acc, like) => {
-            acc[like.reaction] = (acc[like.reaction] || 0) + 1;
-            return acc;
-        }, initialCounts);
+    const userLike = post.likes.find(like => like.userId === userId); // Assuming each like has a userId field
+    const userLiked = userLike ? userLike.reaction : null;
 
-        const userLike = post.likes.find(like => like.userId === userId); // Assuming each like has a userId field
-        const userLiked = userLike ? userLike.reaction : null;
+    // Check if type is 'article' and trim content to first 100 words
+    if (options?.type === 'article' && post.content) {
+        const words = post.content.split(/\s+/).slice(0, 100).join(' ');
+        post.content = words + (post.content.split(/\s+/).length > 100 ? '...' : '');
+    }
 
-        delete post.likes;
+    delete post.likes;
 
-        return {
-            ...post,
-            likeCounts,
-            commentsCount: post._count.comments,
-            userLiked: userLiked
-        };
-    });
+    return {
+        ...post,
+        likeCounts,
+        commentsCount: post._count.comments,
+        userLiked: userLiked
+    };
+});
 
     const totalCount = await prisma.post.count({
         where: {
