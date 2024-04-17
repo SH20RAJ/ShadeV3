@@ -1,6 +1,6 @@
 'use client'
 import converter from "@/lib/showdown";
-import { relativeDate } from "@/lib/utils";
+import { relativeDate } from "@/lib/funcs";
 import Link from "next/link";
 import { useState } from "react";
 

@@ -2,7 +2,7 @@
 'use client'
 import { useState } from "react";
 import converter from "@/lib/showdown";
-import { relativeDate } from "@/lib/utils";
+import { relativeDate } from "@/lib/funcs";
 import Link from "next/link";
 
 export default function Card({ post }) {

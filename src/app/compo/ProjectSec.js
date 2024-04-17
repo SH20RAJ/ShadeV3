@@ -2,7 +2,7 @@
 import Card from "./Card";
 
 // import CreatePost from "./CreatePost";
-import { shuffleArray } from "@/lib/utils";
+import { shuffleArray } from "@/lib/funcs";
 import TextFeed from "./feeds/text";
 
 
