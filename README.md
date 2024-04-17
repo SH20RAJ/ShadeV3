@@ -1,13 +1,14 @@
 # Shade - All in One Social Media
 
-<p align="center">
-<img src="https://shade.sh20raj.com/logo.png" alt="Shade Social Media" />
-</p>
-
 
 ![GitHub top language](https://img.shields.io/github/languages/top/SH20RAJ/ShadeV3?style=flat-square) ![GitHub issues](https://img.shields.io/github/issues/SH20RAJ/ShadeV3?style=flat-square) ![GitHub](https://img.shields.io/github/license/SH20RAJ/ShadeV3?style=flat-square) ![GitHub last commit](https://img.shields.io/github/last-commit/SH20RAJ/ShadeV3?style=flat-square) [![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2FSH20RAJ%2FShadeV3&labelColor=%23d9e3f0&countColor=%23f47373&style=flat)](https://visitorbadge.io/status?path=https%3A%2F%2Fgithub.com%2FSH20RAJ%2FShadeV3)
 
 Welcome to the official repository of **Shade**, your new favorite all-in-one social media platform where you can connect, share, and express yourself with the world. Whether you’re posting text updates, sharing videos, or casting votes in polls, Shade is your go-to place. Explore [shade.sh20raj.com](http://shade.sh20raj.com) and start your journey with us!
+
+<p align="center">
+<img src="https://shade.sh20raj.com/logo.png" alt="Shade Social Media" width="250"/>
+</p>
+
 
 ### 🚀 Features
 
