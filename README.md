@@ -1,7 +1,7 @@
 # Shade - All in One Social Media
 
 <p align="center">
-![Shade Logo](https://shade.sh20raj.com/logo.png)
+<img src="https://shade.sh20raj.com/logo.png" alt="Shade Social Media" />
 </p>
 
 
