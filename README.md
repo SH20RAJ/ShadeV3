@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Shade - All in One Social Media
 
-## Getting Started
+![GitHub top language](https://img.shields.io/github/languages/top/SH20RAJ/ShadeV3?style=flat-square) ![GitHub issues](https://img.shields.io/github/issues/SH20RAJ/ShadeV3?style=flat-square) ![GitHub](https://img.shields.io/github/license/SH20RAJ/ShadeV3?style=flat-square) ![GitHub last commit](https://img.shields.io/github/last-commit/SH20RAJ/ShadeV3?style=flat-square) [![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2FSH20RAJ%2FShadeV3&labelColor=%23d9e3f0&countColor=%23f47373&style=flat)](https://visitorbadge.io/status?path=https%3A%2F%2Fgithub.com%2FSH20RAJ%2FShadeV3)
 
-First, run the development server:
+Welcome to the official repository of **Shade**, your new favorite all-in-one social media platform where you can connect, share, and express yourself with the world. Whether you’re posting text updates, sharing videos, or casting votes in polls, Shade is your go-to place. Explore [shade.sh20raj.com](http://shade.sh20raj.com) and start your journey with us!
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 🚀 Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Various Content Types**: Share content in multiple formats: videos, images, text, audio, polls, games, and articles.
+- **Privacy Settings**: Control the visibility of your posts with options like public, private, and unlisted.
+- **Reactions**: Engage with content through diverse reactions: like, love, haha, wow, sad, angry, and dislike.
+- **Robust User Profiles**: Customize your profile with a bio, avatar, and cover photo.
+- **Real-time Interactions**: Follow your favorite creators, comment on posts, and like what resonates with you.
+- **Messaging**: Stay connected with direct messages between users.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### 🛠 Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Frontend**: Next.js - A React framework for production.
+- **Backend**: Prisma Client JS - Next-generation Node.js and TypeScript ORM for MySQL.
+- **Database**: MySQL - Robust, reliable, and scalable SQL database.
 
-## Learn More
+### 📦 Installation
 
-To learn more about Next.js, take a look at the following resources:
+To get Shade up and running locally, follow these steps:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Clone the repository**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+    ```bash
+    git clone https://github.com/SH20RAJ/ShadeV3.git
+    cd ShadeV3
+    ```
 
-## Deploy on Vercel
+2. **Install dependencies**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    ```bash
+    npm install
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+3. **Set up your MySQL database**
+    
+    - Ensure MySQL is installed and running on your machine.
+    - Create a new database named `shade`.
+    - Update the `.env` file with your `DATABASE_URL`, for example:
+      ```plaintext
+      DATABASE_URL="mysql://USERNAME:PASSWORD@HOST:PORT/shade"
+      ```
+
+4. **Run migrations**
+
+    ```bash
+    npx prisma migrate dev
+    ```
+
+5. **Start the development server**
+
+    ```bash
+    npm run dev
+    ```
+
+    This will start the server at `localhost:3000`.
+
+### 📚 Documentation
+
+For detailed documentation on the project's structure and API endpoints, refer to the [Docs](https://github.com/SH20RAJ/ShadeV3/wiki) section of the GitHub repository.
+
+### 🤝 Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+### 📜 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+### 💬 Contact
+
+**Shade Social Media** - shade.sh20raj.com
+
+**GitHub Repository**: [SH20RAJ/ShadeV3](https://github.com/SH20RAJ/ShadeV3)
+
+🌟 Happy sharing through Shade, your all-in-one platform to connect, share, and express freely! 🌟
