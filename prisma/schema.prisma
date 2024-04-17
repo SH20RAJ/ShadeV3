@@ -6,6 +6,7 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
 enum Type {
   video
   shortvideo
@@ -54,7 +55,7 @@ model User {
   receivedMessages Message[]   @relation("ReceiverMessages")
   sentMessages  Message[]     @relation("SenderMessages")
   pollResponses PollResponse[]
-
+  communities   Community[]    @relation("CommunityMembers")
 }
 
 model Post {
@@ -72,8 +73,8 @@ model Post {
   likes         Like[]
   comments      Comment[]
   tags          Tag[]    
-  pollOptions PollOption[]
-
+  pollOptions   PollOption[]
+  communities   Community[]    @relation("PostCommunities")
 }
 
 model Like {
@@ -84,7 +85,8 @@ model Like {
   postId        Int
   reaction      ReactionType   @default(like)
   createdAt     DateTime       @default(now())
-  // @@unique([postId, userId])
+    // @@unique([postId, userId])
+
 }
 
 model Comment {
@@ -142,7 +144,6 @@ model Message {
   updatedAt     DateTime       @updatedAt
 }
 
-
 model PollOption {
   id        Int      @id @default(autoincrement())
   postId    Int
@@ -160,4 +161,14 @@ model PollResponse {
   userId      Int
   user        User     @relation(fields: [userId], references: [id])
   createdAt   DateTime @default(now())
+}
+
+model Community {
+  id            Int            @id @default(autoincrement())
+  name          String         @unique
+  description   String?
+  members       User[]         @relation("CommunityMembers")
+  posts         Post[]         @relation("PostCommunities")
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
 }
