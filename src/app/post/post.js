@@ -5,10 +5,10 @@ import fileurl from "../get/fileurl";
 
 
 
-let PostPost = async ({content,file,name}) => {
+let PostPost = async ({content = null,file,name,title = null,type}) => {
     console.log("content",content);
     let user = await getUserSession()
-    if (!content) return null
+    // if (!content) return null
     if(file) {
         console.log("file available",file);
         var n = name || "new name"
@@ -19,12 +19,16 @@ let PostPost = async ({content,file,name}) => {
         var type = 'image'
         
     } else {
-
-        var url = null;
-        var type = "text"
-        if(content.length > 1000){
+        if(type === "article") {
             type = 'article'
+        } else {
+           var url = null;
+           var type = "text"
+            if(content.length > 1000){
+                type = 'article'
+            }  
         }
+       
     }
     
     
@@ -34,7 +38,8 @@ let PostPost = async ({content,file,name}) => {
             content: content,
             authorId: user.id, 
             contentURL: url,
-            type: type
+            type: type,
+            title:title
         }
     })
 

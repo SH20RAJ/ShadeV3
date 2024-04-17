@@ -42,7 +42,7 @@ export default function Card({ post }) {
         }),
       });
       let data = await res.json();
-      console.log(data);
+      // console.log(data);
     } catch (error) {
       console.error("Error liking post:", error);
     }

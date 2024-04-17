@@ -1,4 +1,3 @@
-import React from 'react';
 
 const Radio = ({ postmode, setPostmode }) => {
   const handlePostModeChange = (mode) => {
@@ -14,7 +13,7 @@ const Radio = ({ postmode, setPostmode }) => {
             <input
               type="radio"
               id="text-radio"
-              defaultChecked={postmode === 'text'}
+              checked={postmode === 'text'}
               onChange={() => handlePostModeChange('text')}
             />
             <label htmlFor="text-radio" className="w-full py-3 ms-2 text-sm font-medium textd dark:text-gray-300">Text</label>
@@ -25,7 +24,7 @@ const Radio = ({ postmode, setPostmode }) => {
             <input
               type="radio"
               id="image-radio"
-              defaultChecked={postmode === 'image'}
+              checked={postmode === 'image'}
               onChange={() => handlePostModeChange('image')}
             />
             <label htmlFor="image-radio" className="w-full py-3 ms-2 text-sm font-medium textd dark:text-gray-300">Image</label>
@@ -36,7 +35,7 @@ const Radio = ({ postmode, setPostmode }) => {
             <input
               type="radio"
               id="article-radio"
-              defaultChecked={postmode === 'article'}
+              checked={postmode === 'article'}
               onChange={() => handlePostModeChange('article')}
             />
             <label htmlFor="article-radio" className="w-full py-3 ms-2 text-sm font-medium textd dark:text-gray-300">Article</label>
@@ -47,7 +46,7 @@ const Radio = ({ postmode, setPostmode }) => {
             <input
               type="radio"
               id="video-radio"
-              defaultChecked={postmode === 'video'}
+              checked={postmode === 'video'}
               onChange={() => handlePostModeChange('video')}
             />
             <label htmlFor="video-radio" className="w-full py-3 ms-2 text-sm font-medium textd dark:text-gray-300">Video</label>

@@ -75,6 +75,6 @@ user = await prisma.user.findUnique({
 
     };
   }
-console.log("post",post);
+// console.log("post",post);
   return post ? post : null;
 }
