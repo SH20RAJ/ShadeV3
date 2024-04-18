@@ -7,7 +7,6 @@ export default function Head() {
   {/* Theme Color */}
   <meta name="theme-color" content="#359ef6" />
   {/* Background Color */}
-  <style dangerouslySetInnerHTML={{__html: "\n    body {\n        background-color: hotpink;\n    }\n" }} />
   {/* App Icons */}
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192x192.png" />
   <link rel="icon" type="image/png" sizes="256x256" href="/icon-256x256.png" />

@@ -1,6 +1,6 @@
 {
     "theme_color": "#359ef6",
-    "background_color": "hotpink",
+    "background_color": "transparent",
     "display": "standalone",
     "scope": "/",
     "start_url": "/",
