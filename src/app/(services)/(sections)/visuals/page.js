@@ -1,175 +1,113 @@
+'use client'
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton"
 
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { Input } from "@/components/ui/input"
-import Imgcard from "./compo/imgcard"
+import { useState, useEffect } from "react";
 
-export default function Component() {
+export default function Visuals() {
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const req = await fetch("/api/feed?type=image&limit=20");
+        const data = await req.json();
+        setImages(data.data.data);
+        setLoading(false)
+        // console.log(data.data.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
-    <div className="flex h-screen w-full">
-      <div className="flex flex-col border-r bg-gray-100 p-6 dark:border-gray-800 dark:bg-gray-950 lg:hidden">
-        <div className="mb-6 flex items-center justify-between">
-          <img
-            alt="User Avatar"
-            className="h-10 w-10 rounded-full"
-            height={40}
-            src="/placeholder.svg"
-            style={{
-              aspectRatio: "40/40",
-              objectFit: "cover",
-            }}
-            width={40}
-          />
-          <Button className="lg:hidden" size="icon" variant="outline">
-            <MenuIcon className="h-6 w-6" />
-            <span className="sr-only">Toggle sidebar</span>
+    <div className="flex flex-wrap gap-4 h-full overflow-auto ">
+      {loading && <> {Array(20).fill(0).map((_,i)=> <SkeletonCard key={i}/>)} </>}
+      {images && images.map((image) => (
+        <Imgcard key={image.id} post={image} />
+      ))}
+    </div>
+  );
+}
+
+function Imgcard({ post }) {
+  return (
+    <div className="relative h-80 min-w-80 group overflow-hidden rounded-lg flex-1 sm:flex-[0_0_calc(50%-1rem)] md:flex-[0_0_calc(33.33%-1rem)] lg:flex-[0_0_calc(25%-1rem)]">
+      <Link href={"/release/"+post.id} className="absolute inset-0 z-10">
+          <span className="sr-only">View post</span>
+      </Link>
+      <img
+        alt="Image 1"
+        className="w-full h-full object-cover transition-all group-hover:scale-105"
+        height={400}
+        src={"https://res.cloudinary.com/practicaldev/image/fetch/"+post.contentURL}
+        style={{
+          aspectRatio: "600/400",
+          objectFit: "cover",
+        }}
+        width={600}
+      />
+      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 flex items-end justify-between opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="flex gap-2">
+          <Button className="bg-white/20 hover:bg-white/30 text-white" size="icon" variant="ghost">
+            <AwardIcon className="w-5 h-5" />
+          </Button>
+          <Button className="bg-white/20 hover:bg-white/30 text-white" size="icon" variant="ghost">
+            <AngryIcon className="w-5 h-5" />
+          </Button>
+          <Button className="bg-white/20 hover:bg-white/30 text-white" size="icon" variant="ghost">
+            <ThumbsDownIcon className="w-5 h-5" />
           </Button>
         </div>
-        <nav className="flex-1 space-y-2">
-          <Link
-            className="flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-800"
-            href="#"
-          >
-            <HomeIcon className="mr-3 h-5 w-5" />
-            <span className="sr-only">Home</span>
-          </Link>
-          <Link
-            className="flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-800"
-            href="#"
-          >
-            <ExpandIcon className="mr-3 h-5 w-5" />
-            <span className="sr-only">Explore</span>
-          </Link>
-          <Link
-            className="flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-800"
-            href="#"
-          >
-            <UserIcon className="mr-3 h-5 w-5" />
-            <span className="sr-only">Profile</span>
-          </Link>
-          <Link
-            className="flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-800"
-            href="#"
-          >
-            <SettingsIcon className="mr-3 h-5 w-5" />
-            <span className="sr-only">Settings</span>
-          </Link>
-        </nav>
+        <Link href={"/release/"+post.id} className=" inset-0 z-10 -mr-20">
+        <Button className="bg-white/20 hover:bg-white/30 text-white" size="icon" variant="ghost">
+          <ArrowRightIcon className="w-5 h-5" />
+        </Button>
+        </Link>
+        <Button className="bg-white/20 hover:bg-white/30 text-white" size="icon" variant="ghost">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+        </svg>
+        </Button>
+
+  
+
       </div>
-      <div className="hidden w-64 flex-col border-r bg-gray-100 p-6 dark:border-gray-800 dark:bg-gray-950 lg:flex">
-        <div className="mb-6">
-          <div className="mb-4 flex items-center">
-            <img
-              alt="User Avatar"
-              className="h-10 w-10 rounded-full"
-              height={40}
-              src="/placeholder.svg"
-              style={{
-                aspectRatio: "40/40",
-                objectFit: "cover",
-              }}
-              width={40}
-            />
-            <div className="ml-3">
-              <h3 className="text-base font-semibold">John Doe</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400">@johndoe</p>
-            </div>
-          </div>
-          <Input
-            className="w-full rounded-md border border-gray-200 bg-white px-4 py-2 text-sm shadow-sm focus:border-gray-400 focus:outline-none dark:border-gray-800 dark:bg-gray-900 dark:text-gray-50"
-            placeholder="Search"
-            type="search"
-          />
-        </div>
-        <nav className="flex-1 space-y-2">
-          <Link
-            className="flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-800"
-            href="#"
-          >
-            <HomeIcon className="mr-3 h-5 w-5" />
-            Home
-          </Link>
-          <Link
-            className="flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-800"
-            href="#"
-          >
-            <ExpandIcon className="mr-3 h-5 w-5" />
-            Explore
-          </Link>
-          <Link
-            className="flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-800"
-            href="#"
-          >
-            <UserIcon className="mr-3 h-5 w-5" />
-            Profile
-          </Link>
-          <Link
-            className="flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-800"
-            href="#"
-          >
-            <SettingsIcon className="mr-3 h-5 w-5" />
-            Settings
-          </Link>
-        </nav>
-      </div>
-      <div className="flex-1 overflow-y-auto">
-        <header className="sticky top-0 z-10 border-b bg-white/40 px-4 py-4 backdrop-blur-sm dark:border-gray-800 dark:bg-gray-950/40 lg:px-6">
-          <div className="flex items-center justify-between">
-            <h1 className="text-xl font-bold">Gallery</h1>
-            <div className="flex items-center space-x-4">
-              <Link
-                className="rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-800"
-                href="#"
-              >
-                Home
-              </Link>
-              <Link
-                className="rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-800"
-                href="#"
-              >
-                Explore
-              </Link>
-              <Link
-                className="rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-800"
-                href="#"
-              >
-                Profile
-              </Link>
-              <Link
-                className="rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-800"
-                href="#"
-              >
-                Settings
-              </Link>
-            </div>
-          </div>
-        </header>
-        <main className="grid grid-cols-2 gap-4 p-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:p-6">
-          <Link className="relative group" href="#">
-            <img
-              alt="Image 1"
-              className="h-full w-full rounded-md object-cover transition-opacity duration-300 group-hover:opacity-80"
-              height={300}
-              src="/placeholder.svg"
-              style={{
-                aspectRatio: "300/300",
-                objectFit: "cover",
-              }}
-              width={300}
-            />
-            <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-              <ZoomInIcon className="h-8 w-8 text-white" />
-            </div>
-          </Link>
-          <Imgcard/>
-         
-        </main>
+    </div>
+  );
+}
+
+ 
+export function SkeletonCard() {
+  return (
+    <div className="flex flex-col relative h-80 min-w-80 group overflow-hidden rounded-lg flex-1 ">
+      <Skeleton className="h-full w-[350px] rounded-xl" />
+      <div className="space-y-2 mt-4">
+        <Skeleton className="h-4 w-[250px]" />
+        <Skeleton className="h-4 w-[200px]" />
       </div>
     </div>
   )
 }
 
-function ExpandIcon(props) {
+
+function Loading(){
+  return (
+    <div className="w-full h-full flex items-center justify-center">
+      <div className="w-12 h-12 bg-gray-200 rounded-full animate-spin"></div>
+    </div>
+  )
+}
+
+// Include the definitions for AngryIcon, ArrowRightIcon, AwardIcon, and ThumbsDownIcon here
+
+
+function AngryIcon(props) {
   return (
     <svg
       {...props}
@@ -183,16 +121,18 @@ function ExpandIcon(props) {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <path d="m21 21-6-6m6 6v-4.8m0 4.8h-4.8" />
-      <path d="M3 16.2V21m0 0h4.8M3 21l6-6" />
-      <path d="M21 7.8V3m0 0h-4.8M21 3l-6 6" />
-      <path d="M3 7.8V3m0 0h4.8M3 3l6 6" />
+      <circle cx="12" cy="12" r="10" />
+      <path d="M16 16s-1.5-2-4-2-4 2-4 2" />
+      <path d="M7.5 8 10 9" />
+      <path d="m14 9 2.5-1" />
+      <path d="M9 10h0" />
+      <path d="M15 10h0" />
     </svg>
   )
 }
 
 
-function HomeIcon(props) {
+function ArrowRightIcon(props) {
   return (
     <svg
       {...props}
@@ -206,14 +146,14 @@ function HomeIcon(props) {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-      <polyline points="9 22 9 12 15 12 15 22" />
+      <path d="M5 12h14" />
+      <path d="m12 5 7 7-7 7" />
     </svg>
   )
 }
 
 
-function MenuIcon(props) {
+function AwardIcon(props) {
   return (
     <svg
       {...props}
@@ -227,15 +167,14 @@ function MenuIcon(props) {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <line x1="4" x2="20" y1="12" y2="12" />
-      <line x1="4" x2="20" y1="6" y2="6" />
-      <line x1="4" x2="20" y1="18" y2="18" />
+      <circle cx="12" cy="8" r="6" />
+      <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" />
     </svg>
   )
 }
 
 
-function SettingsIcon(props) {
+function ThumbsDownIcon(props) {
   return (
     <svg
       {...props}
@@ -249,52 +188,18 @@ function SettingsIcon(props) {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
-      <circle cx="12" cy="12" r="3" />
+      <path d="M17 14V2" />
+      <path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22h0a3.13 3.13 0 0 1-3-3.88Z" />
     </svg>
   )
 }
 
 
-function UserIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-      <circle cx="12" cy="7" r="4" />
-    </svg>
-  )
-}
-
-
-function ZoomInIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <circle cx="11" cy="11" r="8" />
-      <line x1="21" x2="16.65" y1="21" y2="16.65" />
-      <line x1="11" x2="11" y1="8" y2="14" />
-      <line x1="8" x2="14" y1="11" y2="11" />
-    </svg>
-  )
-}
+const post = {
+  title: "Title",
+  description: "Description",
+  image: "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/aa607305-0dab-4f5b-955e-6ae36713ae4e/original=true/ffkklllll.jpeg",
+  date: "2020-01-01",
+  author: "Author",
+  slug: "slug",
+};

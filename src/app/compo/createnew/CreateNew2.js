@@ -189,7 +189,7 @@ const { data: session, status } = useSession();
                     </svg>
               </label>}
 
-              {postmode === "image" || postmode === "article" && <label htmlFor="image" className="mr-2">
+              {(postmode === "image" || postmode === "article") && <label htmlFor="image" className="mr-2">
                 <input
                   type="file"
                   id="image"
@@ -246,7 +246,7 @@ const { data: session, status } = useSession();
 
             </div>
 
-                    {image && postmode == "image" || postmode === "article" && (<><br/><img className='w-full' src={imgsrc}/></>) }
+                    {((image && postmode == "image" )|| postmode === "article" )&& (<><br/><img className='w-full' src={imgsrc}/></>) }
             
           </div>
         </div>
