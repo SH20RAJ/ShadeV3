@@ -156,7 +156,7 @@ const { data: session, status } = useSession();
              <span className=' '></span>
             <input 
               placeholder={(postmode === "article") && "Title of your Article" || postmode === "image" && "Cation your Image 🔥" || postmode === "video" && "Video Title ✨" }
-              className=' w-full bg-transparent border p-2 mb-2' type="text" id='title' name='title'
+              className=' w-full bg-transparent  p-2 mb-2 border-black dark:border-white border-b' type="text" id='title' name='title'
               onChange={(e)=> {setTitle(e.target.value);console.log(title);}}
               />
             </label>}
@@ -169,7 +169,7 @@ const { data: session, status } = useSession();
               onFocus={(e)=>adjustTextareaHeight(e.target)}
               onBlur={(e)=>adjustTextareaHeight(e.target)}
               onChange={(e) => setContent(e.target.value,"blur")}
-              className="w-full resize-verticle bg-transparent dark:text-emerald-400 text-pink-800 dark:bg-transparent focus:outline-none border-b-2 border-gray-300 dark:border-gray-600 placeholder-gray-400"
+              className="w-full resize-verticle bg-transparent dark:text-emerald-400 text-pink-800 dark:bg-transparent focus:outline-none border-b-2 border-gray-300 dark:border-gray-600 placeholder-gray-400 p-2"
               placeholder={(postmode === "article") && "Write the Markdown Content Here 😇" || postmode === "text" && "What's happening? 🍀" || postmode === "video" && "Video description goes here ✨" }
             ></textarea>}
             

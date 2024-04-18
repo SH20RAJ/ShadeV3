@@ -1,7 +1,7 @@
 import prisma from "../../../prisma";
 
 
-export default async function posts(options ) {
+export default async function posts(options) {
     const limit = options?.limit !== undefined ? options.limit : 20;
     let skip = options?.skip !== undefined ? options.skip : 0;
     const orderBy = options?.orderBy !== undefined ? options.orderBy : "createdAt";
@@ -19,11 +19,32 @@ export default async function posts(options ) {
     let userId = (await  user.id)
 
     let typeFilter = {};
+    let postFilter = {};
+    let userFilter = {};
+
     if (options?.type) {
         typeFilter = {
             type: options.type
         };
     }
+    if (options?.userId) {
+        userFilter = {
+            userId: parseInt(options.userId)
+        };
+    }
+    if (options?.postId) {
+        userFilter = {
+            id: parseInt(options.postId)
+        };
+    }
+
+    console.log(typeFilter);
+
+    let filter = {
+       ...postFilter,
+       ...userFilter,
+       ...typeFilter
+    };
 
 
     if (page > 1) {
@@ -33,7 +54,7 @@ export default async function posts(options ) {
     let posts = await prisma.post.findMany({
         where: {
             status: "public",
-            ...typeFilter
+            ...filter
         },
         take: parseInt(limit),
         skip: parseInt(skip),

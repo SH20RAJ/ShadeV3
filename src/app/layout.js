@@ -1,9 +1,27 @@
 import "./globals.css";
+import "./article.css";
 import Sidebar from "./compo/Sidebar";
 import Head from "./compo/head";
 import Header from "./compo/Header";
 import NextAuthSessionProvider from "@/lib/SessionProvider";
 import { Analytics } from "@vercel/analytics/react"
+// This is the root layout component for your Next.js app.
+// Learn more: https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts#root-layout-required
+
+import { Chivo } from 'next/font/google'
+import { Comfortaa } from 'next/font/google'
+
+const chivo = Chivo({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-chivo',
+})
+const comfortaa = Comfortaa({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-comfortaa',
+})
+
 
 
 export let metadata = {
@@ -15,17 +33,19 @@ export let metadata = {
 export default function RootLayout({ children }) {
   return (
     <NextAuthSessionProvider>
-    <html lang="en">
+    <html lang="en" className="dark">
       <head>
         <Head />
 
       </head>
-      <body>
+      <body className={chivo.variable + comfortaa.variable}>
         <div className="app-container">
           <Header />
           <div className="app-content">
             <Sidebar />
+            <div className="overflow-auto flex w-full justify-center">
             {children}
+            </div>
           </div>
         </div>
 

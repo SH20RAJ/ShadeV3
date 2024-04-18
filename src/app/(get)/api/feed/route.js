@@ -13,7 +13,8 @@ const GET = async (req,res) => {
     let orderBy = url.searchParams.get("orderBy") || "createdAt";
     let type = url.searchParams.get("type") ;
     let page = url.searchParams.get("page") ;
-    let body = await posts({limit,skip,orderBy,type,page,user});
+    let postId = url.searchParams.get("postId") ;
+    let body = await posts({limit,skip,orderBy,type,page,user,postId});
 
     return Response.json({ success: true, data: body})
 }

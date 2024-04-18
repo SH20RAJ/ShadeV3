@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import url("./main.css");
+@import url("./article.css");
 
 @layer base {
   :root {
