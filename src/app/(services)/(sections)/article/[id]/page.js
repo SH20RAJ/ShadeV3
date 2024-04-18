@@ -19,8 +19,8 @@ export default async function Component({params}) {
   return (
     <div className="flex flex-col min-h-screen w-full">
       <main className="flex-1 p-6 md:p-8">
-        <div className="max-w-3xl mx-auto">
-          <article className="bg-white rounded-lg shadow-md overflow-hidden dark:bg-gray-950">
+        <div className="max-w-4xl mx-auto">
+          <article className="bg-white rounded-lg shadow-md overflow-hidden dark:bg-gray-800">
             {post.contentURL || 1  && <img
               alt="Blog Post Image"
               className="w-full h-64 object-cover"
