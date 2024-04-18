@@ -13,7 +13,7 @@ export default async function Component({params}) {
   let result = await posts({postId: id});
   let post = result.data[0];
 
-  console.log(post); /
+  // console.log(post); 
 
 
   return (
