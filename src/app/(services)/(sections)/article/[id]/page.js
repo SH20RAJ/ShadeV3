@@ -3,12 +3,17 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import posts from "@/app/get/posts";
+import Showdown from "showdown";
+import converter from "@/lib/showdown";
+import { relativeDate } from "@/lib/funcs";
 
 export default async function Component({params}) {
   let id = params.id;
 
   let result = await posts({postId: id});
-  console.log(result.data);
+  let post = result.data[0];
+
+  console.log(post); /
 
 
   return (
@@ -16,17 +21,17 @@ export default async function Component({params}) {
       <main className="flex-1 p-6 md:p-8">
         <div className="max-w-3xl mx-auto">
           <article className="bg-white rounded-lg shadow-md overflow-hidden dark:bg-gray-950">
-            <img
+            {post.contentURL || 1  && <img
               alt="Blog Post Image"
               className="w-full h-64 object-cover"
               height={600}
-              src="/placeholder.svg"
+              src={post.contentURL ||"/logo.png"}
               style={{
                 aspectRatio: "1200/600",
                 objectFit: "cover",
               }}
               width={1200}
-            />
+            />}
             <div className="p-8">
               <div className="flex items-center space-x-2 mb-4">
                 <Badge className="bg-gray-100 text-gray-900 px-2 py-1 rounded-md dark:bg-gray-800 dark:text-gray-50">
@@ -39,82 +44,25 @@ export default async function Component({params}) {
                   Trends
                 </Badge>
               </div>
-              <h1 className="text-3xl font-bold mb-4">Mastering the Art of Minimalist Design</h1>
+              <h1 className="text-3xl font-bold mb-4">{post?.title}</h1>
               <div className="flex items-center space-x-4 mb-6">
                 <div className="flex items-center space-x-2">
                   <img
                     alt="Author Avatar"
                     className="rounded-full"
                     height={40}
-                    src="/placeholder.svg"
+                    src={post.author.avatar ||"/placeholder.svg"}
                     style={{
                       aspectRatio: "40/40",
                       objectFit: "cover",
                     }}
                     width={40}
                   />
-                  <span className="text-gray-500 dark:text-gray-400">John Doe</span>
+                  <span className="text-gray-500 dark:text-gray-400">{post?.author.name}</span>
                 </div>
-                <span className="text-gray-500 dark:text-gray-400">April 15, 2023</span>
+                <span className="text-gray-500 dark:text-gray-400">{ relativeDate(post.createdAt)}</span>
               </div>
-              <div className="prose prose-lg prose-gray dark:prose-invert">
-                <p>
-                  In this blog post, we'll explore the principles of minimalist design and how to apply them to your
-                  projects for a clean, modern, and visually appealing look.
-                </p>
-                <h2>What is Minimalist Design?</h2>
-                <p>
-                  Minimalist design is an approach that focuses on simplicity, functionality, and elegance. It
-                  emphasizes the use of clean lines, negative space, and a limited color palette to create a visually
-                  striking and uncluttered aesthetic.
-                </p>
-                <h2>Key Principles of Minimalist Design</h2>
-                <ul>
-                  <li>
-                    Simplicity: Minimalist design aims to reduce elements to their essential forms, eliminating
-                    unnecessary details and distractions.
-                  </li>
-                  <li>
-                    Functionality: Every element in a minimalist design should serve a clear purpose, with a focus on
-                    usability and practicality.
-                  </li>
-                  <li>
-                    Balance: Minimalist design often relies on a harmonious balance of positive and negative space,
-                    creating a sense of visual balance and calm.
-                  </li>
-                  <li>
-                    Elegance: Minimalist designs are characterized by a refined, sophisticated, and timeless aesthetic,
-                    often achieved through the use of high-quality materials and precise execution.
-                  </li>
-                </ul>
-                <h2>Applying Minimalist Design Principles</h2>
-                <p>To apply the principles of minimalist design to your projects, consider the following strategies:</p>
-                <ol>
-                  <li>
-                    Identify and eliminate unnecessary elements: Carefully examine each component of your design and
-                    remove anything that doesn't serve a clear purpose.
-                  </li>
-                  <li>
-                    Prioritize functionality: Ensure that every element in your design is optimized for usability and
-                    ease of use.
-                  </li>
-                  <li>
-                    Utilize negative space: Embrace the power of empty space to create a sense of balance and focus on
-                    the essential elements.
-                  </li>
-                  <li>
-                    Stick to a limited color palette: Choose a few complementary colors and use them consistently
-                    throughout your design.
-                  </li>
-                  <li>
-                    Emphasize high-quality materials and craftsmanship: Select materials and finishes that convey a
-                    sense of quality and attention to detail.
-                  </li>
-                </ol>
-                <p>
-                  By applying these principles, you can create minimalist designs that are both visually stunning and
-                  highly functional, leaving a lasting impression on your audience.
-                </p>
+              <div className="prose prose-lg prose-gray dark:prose-invert" dangerouslySetInnerHTML={{ __html : converter.makeHtml(post.content) }}>
               </div>
               <div className="flex items-center space-x-4 mt-6">
                 <Button size="icon" variant="ghost">

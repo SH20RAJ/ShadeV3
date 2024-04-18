@@ -52,7 +52,7 @@ function Articles() {
             <div className="message-box" key={article.id || i}>
               <div className="message-content">
                 <div className="message-header">
-                  <Link href={`/release/${article.id}`}>
+                  <Link href={`/article/${article.id}`}>
                     <div className="name cursor-pointer">{article.title || "Title Not Given"}</div>
                   </Link>
                   <div className="star-checkbox">
