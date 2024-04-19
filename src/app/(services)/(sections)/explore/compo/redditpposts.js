@@ -32,7 +32,7 @@ export function RedditPosts() {
   return (
     (<div className="flex h-screen w-full flex-col">
          <main className="flex-1 p-4 md:p-6">
-          <div className="grid gap-4">
+          <div className="flex flex-col">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-bold">Popular Posts</h2>
               <DropdownMenu>
@@ -52,9 +52,9 @@ export function RedditPosts() {
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
-            <div className="grid gap-4">
+            <div className="flex flex-col gap-4" >
               <div
-                className="flex gap-4 rounded-md border bg-white p-4 shadow-sm dark:border-gray-800 dark:bg-gray-950">
+                className="flex gap-4 rounded-md border bg-white p-4 shadow-sm dark:border-gray-800 dark:bg-gray-950"  >
                 <div className="flex flex-col items-center gap-2">
                   <Button
                     className="rounded-full p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-50"
@@ -70,10 +70,10 @@ export function RedditPosts() {
                     <ChevronDownIcon className="h-5 w-5" />
                   </Button>
                 </div>
-                <div className="flex w-40">
+                <div className="flex w-full sm:w-40">
                   <img
                     alt="Post thumbnail"
-                    className="rounded-md object-cover self-center self-center"
+                    className="rounded-md object-cover self-center "
                     height="100"
                     src="/placeholder.svg"
                     style={{
@@ -126,7 +126,7 @@ export function RedditPosts() {
                     <ChevronDownIcon className="h-5 w-5" />
                   </Button>
                 </div>
-                <div className="flex w-40">
+                <div className="flex w-full sm:w-40">
                   <img
                     alt="Post thumbnail"
                     className="rounded-md object-cover self-center"
@@ -182,7 +182,7 @@ export function RedditPosts() {
                     <ChevronDownIcon className="h-5 w-5" />
                   </Button>
                 </div>
-                <div className="flex w-40">
+                <div className="flex w-full sm:w-40">
                   <img
                     alt="Post thumbnail"
                     className="rounded-md object-cover self-center"

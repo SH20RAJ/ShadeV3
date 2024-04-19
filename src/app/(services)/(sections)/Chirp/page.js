@@ -132,7 +132,7 @@ function TwitterIcon(props) {
 export  function ChirpSidebar() {
   return (
     <>
-    <div className="space-y-4">
+    <div className="w-full space-y-4">
           <div
             className="bg-white dark:bg-gray-950 rounded-lg shadow-lg overflow-hidden">
             <div className="p-4 border-b dark:border-gray-800">
@@ -244,7 +244,7 @@ export  function ChirpSidebar() {
 export function ChirpCarousel(){
   return <>
   
-  <div className="flex items-center justify-between">
+  <div className="flex items-center justify-between w-full">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button className="flex items-center gap-2" variant="outline">

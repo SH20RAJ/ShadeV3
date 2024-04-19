@@ -32,7 +32,7 @@ import { ContextMenuTrigger, ContextMenuItem, ContextMenuContent, ContextMenu } 
 
 export function YoutubeFeed() {
   return (
-    (<div className="flex flex-col">
+    (<div className="flex flex-col w-full">
 
      
         <div className="flex-1 sm:p-6">

@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 
 export default function Sidebar({active}) {
-  const [sidebar,setSidebar] = useState(0)
+  const [sidebar,setSidebar] = useState(1)
 
   active = (usePathname()).substring(1);
   return (
@@ -82,7 +82,7 @@ export default function Sidebar({active}) {
             <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
           </svg>
         </Link>
-        <Link href={"/planer"}  className={"app-sidebar-link " + (active === "planer" ? "active" : "")}>
+        <Link href={"/explore"}  className={"app-sidebar-link " + (active === "explore" ? "active" : "")}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width={24}

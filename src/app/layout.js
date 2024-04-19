@@ -10,6 +10,7 @@ import { Analytics } from "@vercel/analytics/react"
 
 import { Chivo } from 'next/font/google'
 import { Comfortaa } from 'next/font/google'
+import { HeaderV2 } from "@/components/header-v2";
 
 const chivo = Chivo({
   subsets: ['latin'],
@@ -40,10 +41,11 @@ export default function RootLayout({ children }) {
       </head>
       <body className={chivo.variable + comfortaa.variable}>
         <div className="app-container">
-          <Header />
+          <HeaderV2 />
+          {/* <Header /> */}
           <div className="app-content">
             <Sidebar />
-            <div className="overflow-auto flex w-full justify-center">
+            <div className="overflow-y-auto flex w-full justify-center">
             {children}
             </div>
           </div>
