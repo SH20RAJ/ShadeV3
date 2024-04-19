@@ -70,7 +70,7 @@ export function Blogfeed() {
                 alt="Featured Blog Post"
                 className="rounded-lg object-cover"
                 height={500}
-                src={firstpost.contentURL || "/placeholder.svg"}
+                src={firstpost?.contentURL || "/placeholder.svg"}
                 style={{
                   aspectRatio: "800/500",
                   objectFit: "cover",
@@ -79,13 +79,13 @@ export function Blogfeed() {
             </div>
             <div>
               <span className="text-sm font-medium text-gray-400 uppercase">Featured Post</span>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-2">{firstpost.title}</h1>
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-2">{firstpost?.title}</h1>
               <p className="text-gray-300 mt-4">
                 {firstpost.content.substring(0,200)}
               </p>
               <Link
                 className="inline-flex items-center mt-6 bg-gray-800 hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-md"
-                href={"/article/"+firstpost.id}>
+                href={"/article/"+firstpost?.id}>
                 Read More
                 <ArrowRightIcon className="ml-2 h-5 w-5" />
               </Link>
@@ -101,7 +101,7 @@ export function Blogfeed() {
 
 
             {remainingPost.map((post)=> 
-          <div key={post.id} className="bg-white rounded-lg shadow-md overflow-hidden">
+          <div key={post.id} className="bg-white dark:bg-slate-900 rounded-lg shadow-lg overflow-hidden">
           <img
             alt="Blog Post 1"
             className="w-full h-48 object-cover"
@@ -112,13 +112,13 @@ export function Blogfeed() {
               objectFit: "cover",
             }}
             width={400} />
-          <div className="p-6">
+          <div className="p-6 ">
             <h3 className="text-xl font-bold mb-2">{post.title}</h3>
             <p className="text-gray-600 mb-4">
               {post.content.substring(0,200)}
               </p>
             <Link
-              className="inline-flex items-center text-gray-800 hover:text-gray-900 font-medium"
+              className="inline-flex items-center dark:text-slate-200 text-gray-800 hover:text-gray-900 font-medium"
               href={"/article/"+post.id}>
               Read More
               <ArrowRightIcon className="ml-2 h-5 w-5" />

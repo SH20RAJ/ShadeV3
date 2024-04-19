@@ -28,96 +28,10 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { DropdownMenuTrigger, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuItem, DropdownMenuContent, DropdownMenu } from "@/components/ui/dropdown-menu"
 
-export function Redditclone() {
+export function RedditPosts() {
   return (
     (<div className="flex h-screen w-full flex-col">
-      <header
-        className="flex h-14 items-center justify-between border-b bg-gray-100 px-4 dark:border-gray-800 dark:bg-gray-950">
-        <Link className="flex items-center gap-2" href="#">
-          <ReplyAllIcon className="h-6 w-6 text-orange-500" />
-          <span className="text-lg font-bold">Reddit</span>
-        </Link>
-        <div className="relative w-full max-w-md">
-          <SearchIcon
-            className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500 dark:text-gray-400" />
-          <Input
-            className="w-full rounded-full bg-white px-10 py-2 shadow-sm transition-colors hover:bg-gray-50 focus:bg-gray-50 dark:bg-gray-900 dark:text-gray-50 dark:hover:bg-gray-800 dark:focus:bg-gray-800"
-            placeholder="Search Reddit"
-            type="search" />
-        </div>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              className="rounded-full border border-gray-200 w-8 h-8 dark:border-gray-800"
-              size="icon"
-              variant="ghost">
-              <img
-                alt="Avatar"
-                className="rounded-full"
-                height="32"
-                src="/placeholder.svg"
-                style={{
-                  aspectRatio: "32/32",
-                  objectFit: "cover",
-                }}
-                width="32" />
-              <span className="sr-only">Toggle user menu</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Settings</DropdownMenuItem>
-            <DropdownMenuItem>Support</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Logout</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </header>
-      <div className="flex flex-1">
-        <nav
-          className="hidden h-full w-60 flex-col border-r bg-gray-100 p-4 dark:border-gray-800 dark:bg-gray-950 md:flex">
-          <h3 className="mb-4 text-sm font-semibold">Subreddit Categories</h3>
-          <div className="grid gap-2">
-            <Link
-              className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-gray-500 transition-colors hover:bg-gray-200 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-50"
-              href="#">
-              <HomeIcon className="h-4 w-4" />
-              Home
-            </Link>
-            <Link
-              className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-gray-500 transition-colors hover:bg-gray-200 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-50"
-              href="#">
-              <TrendingUpIcon className="h-4 w-4" />
-              Trending
-            </Link>
-            <Link
-              className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-gray-500 transition-colors hover:bg-gray-200 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-50"
-              href="#">
-              <RocketIcon className="h-4 w-4" />
-              r/AskReddit
-            </Link>
-            <Link
-              className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-gray-500 transition-colors hover:bg-gray-200 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-50"
-              href="#">
-              <LightbulbIcon className="h-4 w-4" />
-              r/Showerthoughts
-            </Link>
-            <Link
-              className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-gray-500 transition-colors hover:bg-gray-200 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-50"
-              href="#">
-              <SmileIcon className="h-4 w-4" />
-              r/Jokes
-            </Link>
-            <Link
-              className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-gray-500 transition-colors hover:bg-gray-200 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-50"
-              href="#">
-              <CodeIcon className="h-4 w-4" />
-              r/ProgrammerHumor
-            </Link>
-          </div>
-        </nav>
-        <main className="flex-1 p-4 md:p-6">
+         <main className="flex-1 p-4 md:p-6">
           <div className="grid gap-4">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-bold">Popular Posts</h2>
@@ -156,10 +70,10 @@ export function Redditclone() {
                     <ChevronDownIcon className="h-5 w-5" />
                   </Button>
                 </div>
-                <div className="flex-1">
+                <div className="flex w-40">
                   <img
                     alt="Post thumbnail"
-                    className="rounded-md object-cover"
+                    className="rounded-md object-cover self-center self-center"
                     height="100"
                     src="/placeholder.svg"
                     style={{
@@ -212,10 +126,10 @@ export function Redditclone() {
                     <ChevronDownIcon className="h-5 w-5" />
                   </Button>
                 </div>
-                <div className="flex-1">
+                <div className="flex w-40">
                   <img
                     alt="Post thumbnail"
-                    className="rounded-md object-cover"
+                    className="rounded-md object-cover self-center"
                     height="100"
                     src="/placeholder.svg"
                     style={{
@@ -268,10 +182,10 @@ export function Redditclone() {
                     <ChevronDownIcon className="h-5 w-5" />
                   </Button>
                 </div>
-                <div className="flex-1">
+                <div className="flex w-40">
                   <img
                     alt="Post thumbnail"
-                    className="rounded-md object-cover"
+                    className="rounded-md object-cover self-center"
                     height="100"
                     src="/placeholder.svg"
                     style={{
@@ -310,7 +224,6 @@ export function Redditclone() {
             </div>
           </div>
         </main>
-      </div>
     </div>)
   );
 }

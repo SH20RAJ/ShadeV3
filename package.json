@@ -33,6 +33,7 @@
     "escape-html-whitelist": "^0.1.4",
     "formidable": "^3.5.1",
     "he": "^1.2.0",
+    "isomorphic-dompurify": "^2.7.0",
     "jsdom": "^24.0.0",
     "lucide-react": "^0.370.0",
     "next": "^14.2.1",

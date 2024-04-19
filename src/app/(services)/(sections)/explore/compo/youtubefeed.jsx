@@ -32,75 +32,10 @@ import { ContextMenuTrigger, ContextMenuItem, ContextMenuContent, ContextMenu } 
 
 export function YoutubeFeed() {
   return (
-    (<div className="flex flex-col h-screen">
-      <header
-        className="bg-gray-900 text-white py-4 px-6 flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <Link className="flex items-center gap-2" href="#">
-            <YoutubeIcon className="w-8 h-8 text-red-500" />
-            <span className="text-xl font-bold">YouTube</span>
-          </Link>
-          <form className="flex-1 max-w-md">
-            <div className="relative">
-              <Input
-                className="bg-gray-800 text-white rounded-full pl-10 pr-4 py-2 w-full"
-                placeholder="Search"
-                type="text" />
-              <SearchIcon
-                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-            </div>
-          </form>
-        </div>
-        <div className="flex items-center gap-4">
-          <Button size="icon" variant="ghost">
-            <UploadIcon className="w-6 h-6" />
-            <span className="sr-only">Upload</span>
-          </Button>
-          <Button size="icon" variant="ghost">
-            <SignalIcon className="w-6 h-6" />
-            <span className="sr-only">Notifications</span>
-          </Button>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button size="icon" variant="ghost">
-                <Avatar className="w-8 h-8 rounded-full">
-                  <AvatarImage alt="User Avatar" src="/placeholder-user.jpg" />
-                  <AvatarFallback>JD</AvatarFallback>
-                </Avatar>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem>Your channel</DropdownMenuItem>
-              <DropdownMenuItem>YouTube Studio</DropdownMenuItem>
-              <DropdownMenuItem>Switch account</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem>Help</DropdownMenuItem>
-              <DropdownMenuItem>Sign out</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      </header>
-      <div className="flex flex-1">
-        <nav className="bg-gray-900 text-white py-6 px-4 flex flex-col gap-4">
-          <Button className="justify-start gap-2" size="sm" variant="ghost">
-            <HomeIcon className="w-5 h-5" />
-            Home
-          </Button>
-          <Button className="justify-start gap-2" size="sm" variant="ghost">
-            <TrendingUpIcon className="w-5 h-5" />
-            Trending
-          </Button>
-          <Button className="justify-start gap-2" size="sm" variant="ghost">
-            <SubscriptIcon className="w-5 h-5" />
-            Subscriptions
-          </Button>
-          <Button className="justify-start gap-2" size="sm" variant="ghost">
-            <LibraryIcon className="w-5 h-5" />
-            Library
-          </Button>
-        </nav>
-        <div className="flex-1 bg-gray-100 dark:bg-gray-950 p-6">
+    (<div className="flex flex-col">
+
+     
+        <div className="flex-1 p-6">
           <div className="flex gap-2 overflow-x-auto pb-4">
             <Button className="whitespace-nowrap" size="sm" variant="ghost">
               All
@@ -132,7 +67,58 @@ export function YoutubeFeed() {
           </div>
           <div
             className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <div className="relative group">
+            
+            <VideoComponent/>
+            <VideoComponent/>
+            <VideoComponent/>
+            <VideoComponent/>
+            <VideoComponent/>
+            <VideoComponent/>
+            <VideoComponent/>
+            <VideoComponent/>
+            <VideoComponent/>
+            <VideoComponent/>
+            <VideoComponent/>
+            <VideoComponent/>
+            
+          </div>
+          <div className="mt-8 mb-8">
+            <h2 className="text-xl font-bold mb-4">Shorts</h2>
+            <div
+              className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+              <ShortsComponent/>
+              <ShortsComponent/>
+              <ShortsComponent/>
+              <ShortsComponent/>
+              <ShortsComponent/>
+            </div>
+          </div>
+          <hr />
+          <div
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-10">
+            
+            <VideoComponent/>
+            <VideoComponent/>
+            <VideoComponent/>
+            <VideoComponent/>
+            <VideoComponent/>
+            <VideoComponent/>
+            <VideoComponent/>
+            <VideoComponent/>
+            <VideoComponent/>
+            <VideoComponent/>
+            <VideoComponent/>
+            <VideoComponent/>
+            
+          </div>
+        </div>
+    </div>)
+  );
+}
+
+
+export function VideoComponent(){
+  return <div className="relative group">
               <ContextMenu>
                 <ContextMenuTrigger className="absolute inset-0 z-10">
                   <span className="sr-only">Open context menu</span>
@@ -178,104 +164,48 @@ export function YoutubeFeed() {
                 </div>
               </div>
             </div>
-            <div className="relative group">
-              <ContextMenu>
-                <ContextMenuTrigger className="absolute inset-0 z-10">
-                  <span className="sr-only">Open context menu</span>
-                </ContextMenuTrigger>
-                <ContextMenuContent className="w-48">
-                  <ContextMenuItem>
-                    <ClockIcon className="w-4 h-4 mr-2" />
-                    Save to Watch Later
-                  </ContextMenuItem>
-                  <ContextMenuItem>
-                    <PlusIcon className="w-4 h-4 mr-2" />
-                    Add to Playlist
-                  </ContextMenuItem>
-                  <ContextMenuItem>
-                    <ShareIcon className="w-4 h-4 mr-2" />
-                    Share
-                  </ContextMenuItem>
-                  <ContextMenuItem>
-                    <FlagIcon className="w-4 h-4 mr-2" />
-                    Report
-                  </ContextMenuItem>
-                </ContextMenuContent>
-              </ContextMenu>
-              <img
-                alt="Video Thumbnail"
-                className="w-full h-48 object-cover rounded-lg group-hover:opacity-50 transition-opacity"
-                height={180}
-                src="/placeholder.svg"
-                style={{
-                  aspectRatio: "320/180",
-                  objectFit: "cover",
-                }}
-                width={320} />
-              <div className="p-2">
-                <h3 className="font-semibold text-base line-clamp-2">
-                  Vercel Ship Keynote: Introducing the frontend cloud
-                </h3>
-                <div
-                  className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-                  <div>Vercel</div>
-                  <div>•</div>
-                  <div>70K subscribers</div>
-                  <div>•</div>
-                  <div>5 days ago</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="mt-8">
-            <h2 className="text-xl font-bold mb-4">Shorts</h2>
-            <div
-              className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-              <div className="relative group">
-                <ContextMenu>
-                  <ContextMenuTrigger className="absolute inset-0 z-10">
-                    <span className="sr-only">Open context menu</span>
-                  </ContextMenuTrigger>
-                  <ContextMenuContent className="w-48">
-                    <ContextMenuItem>
-                      <ClockIcon className="w-4 h-4 mr-2" />
-                      Save to Watch Later
-                    </ContextMenuItem>
-                    <ContextMenuItem>
-                      <PlusIcon className="w-4 h-4 mr-2" />
-                      Add to Playlist
-                    </ContextMenuItem>
-                    <ContextMenuItem>
-                      <ShareIcon className="w-4 h-4 mr-2" />
-                      Share
-                    </ContextMenuItem>
-                    <ContextMenuItem>
-                      <FlagIcon className="w-4 h-4 mr-2" />
-                      Report
-                    </ContextMenuItem>
-                  </ContextMenuContent>
-                </ContextMenu>
-                <img
-                  alt="Shorts Thumbnail"
-                  className="w-full h-[426px] object-cover rounded-lg group-hover:opacity-50 transition-opacity"
-                  height={426}
-                  src="/placeholder.svg"
-                  style={{
-                    aspectRatio: "240/426",
-                    objectFit: "cover",
-                  }}
-                  width={240} />
-                <div
-                  className="absolute bottom-2 right-2 bg-black/50 text-white px-2 py-1 rounded-full text-xs">
-                  0:15
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>)
-  );
+}
+
+export function ShortsComponent() {
+  return <div className="relative group">
+  <ContextMenu>
+    <ContextMenuTrigger className="absolute inset-0 z-10">
+      <span className="sr-only">Open context menu</span>
+    </ContextMenuTrigger>
+    <ContextMenuContent className="w-48">
+      <ContextMenuItem>
+        <ClockIcon className="w-4 h-4 mr-2" />
+        Save to Watch Later
+      </ContextMenuItem>
+      <ContextMenuItem>
+        <PlusIcon className="w-4 h-4 mr-2" />
+        Add to Playlist
+      </ContextMenuItem>
+      <ContextMenuItem>
+        <ShareIcon className="w-4 h-4 mr-2" />
+        Share
+      </ContextMenuItem>
+      <ContextMenuItem>
+        <FlagIcon className="w-4 h-4 mr-2" />
+        Report
+      </ContextMenuItem>
+    </ContextMenuContent>
+  </ContextMenu>
+  <img
+    alt="Shorts Thumbnail"
+    className="w-full h-[426px] object-cover rounded-lg group-hover:opacity-50 transition-opacity"
+    height={426}
+    src="/placeholder.svg"
+    style={{
+      aspectRatio: "240/426",
+      objectFit: "cover",
+    }}
+    width={240} />
+  <div
+    className="absolute bottom-2 right-2 bg-black/50 text-white px-2 py-1 rounded-full text-xs">
+    0:15
+  </div>
+</div>
 }
 
 function ClockIcon(props) {

@@ -1,12 +1,13 @@
-import prisma from "../../../prisma";
-import { getUserSession } from "../../lib/sessions";
-import fileurl from "../get/fileurl";
 // import DOMPurify from 'isomorphic-dompurify';
 
+import { getUserSession } from "@/lib/sessions";
+import prisma from "../../../../prisma";
+import fileurl from "@/app/get/fileurl";
 
 
 
-let PostPost = async ({content = null,file,name,title = null,type}) => {
+
+let UpdatePost = async ({content = null,file,name,title = null,type,id}) => {
 
     // content = DOMPurify.sanitize(content);
     // console.log("content",content);
@@ -36,7 +37,11 @@ let PostPost = async ({content = null,file,name,title = null,type}) => {
     
     
 
-    let post = await prisma.post.create({
+    let post = await prisma.post.update({
+        where: {
+            id: id,
+            authorId: user.id
+        },
         data : {
             content: content,
             authorId: user.id, 
@@ -52,4 +57,4 @@ let PostPost = async ({content = null,file,name,title = null,type}) => {
 
 }
 
-export default PostPost;
+export default UpdatePost;
