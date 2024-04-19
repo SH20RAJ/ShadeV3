@@ -37,7 +37,7 @@ export default function Visuals() {
 
 function Imgcard({ post }) {
   return (
-    <div className="relative h-80 min-w-80 group overflow-hidden rounded-lg flex-1 sm:flex-[0_0_calc(50%-1rem)] md:flex-[0_0_calc(33.33%-1rem)] lg:flex-[0_0_calc(25%-1rem)]">
+    <div style={{backdropFilter:`blur(40px)`,backgroundImage:`url('/blurred.jpeg')`,backgroundSize:`cover`,backgroundRepeat:`no-repeat`,backgroundPosition:`center`}} className="relative h-80 min-w-80 backdrop:blur-md bg-slate-600 group overflow-hidden rounded-lg flex-1 sm:flex-[0_0_calc(50%-1rem)] md:flex-[0_0_calc(33.33%-1rem)] lg:flex-[0_0_calc(25%-1rem)]">
       <Link href={"/release/"+post.id} className="absolute inset-0 z-10">
           <span className="sr-only">View post</span>
       </Link>
@@ -46,6 +46,7 @@ function Imgcard({ post }) {
         className="w-full h-full object-cover transition-all group-hover:scale-105"
         height={400}
         src={"https://res.cloudinary.com/practicaldev/image/fetch/"+post.contentURL}
+
         style={{
           aspectRatio: "600/400",
           objectFit: "cover",

@@ -1,7 +1,9 @@
 document?.addEventListener('DOMContentLoaded', function () {
   var modeSwitch = document.querySelector('.mode-switch');
+  console.warn(modeSwitch);
 
   modeSwitch?.addEventListener('click', function () {
+
     document.documentElement.classList.toggle('dark');
     modeSwitch.classList.toggle('active');
     if (document.documentElement.classList.contains('dark')) {
