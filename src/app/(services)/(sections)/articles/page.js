@@ -1,19 +1,19 @@
+import { Blogfeed } from "./compo/Blogfeed";
 import NewsFeeds from "./compo/NewsFeeds";
 
 let Page = async () => {
 
   return(
           <>
-
-          <div className=" w-full textd">
+          <div>
+          <Blogfeed/>
           <NewsFeeds/>
+
+          </div>
+          
                   
           
-          Community Images Here....
-          </div>
-
-        
-
+    
           </>
 
     )

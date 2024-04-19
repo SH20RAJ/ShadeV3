@@ -21,13 +21,13 @@ export default async function Component({params}) {
       <main className="flex-1 p-6 md:p-8">
         <div className="max-w-4xl mx-auto">
           <article className="bg-white rounded-lg shadow-md overflow-hidden dark:bg-gray-800">
-            {post.contentURL || 1  && <img
+            {<img
               alt="Blog Post Image"
               className="w-full h-64 object-cover"
-              height={600}
-              src={post.contentURL ||"/logo.png"}
+              height={"100%"}
+              src={post?.contentURL ||"/logo.png"}
               style={{
-                aspectRatio: "1200/600",
+                // aspectRatio: "1200/600",
                 objectFit: "cover",
               }}
               width={1200}
@@ -51,7 +51,7 @@ export default async function Component({params}) {
                     alt="Author Avatar"
                     className="rounded-full"
                     height={40}
-                    src={post.author.avatar ||"/placeholder.svg"}
+                    src={post?.author.avatar ||"/placeholder.svg"}
                     style={{
                       aspectRatio: "40/40",
                       objectFit: "cover",
@@ -60,9 +60,9 @@ export default async function Component({params}) {
                   />
                   <span className="text-gray-500 dark:text-gray-400">{post?.author.name}</span>
                 </div>
-                <span className="text-gray-500 dark:text-gray-400">{ relativeDate(post.createdAt)}</span>
+                <span className="text-gray-500 dark:text-gray-400">{ relativeDate(post?.createdAt)}</span>
               </div>
-              <div className="prose prose-lg prose-gray dark:prose-invert" dangerouslySetInnerHTML={{ __html : converter.makeHtml(post.content) }}>
+              <div className="prose prose-lg prose-gray dark:prose-invert" dangerouslySetInnerHTML={{ __html : converter.makeHtml(post?.content) }}>
               </div>
               <div className="flex items-center space-x-4 mt-6">
                 <Button size="icon" variant="ghost">

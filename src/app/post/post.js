@@ -38,6 +38,7 @@ let PostPost = async ({content = null,file,name,title = null,type}) => {
             content: content,
             authorId: user.id, 
             contentURL: url,
+            image: url,
             type: type,
             title:title
         }
