@@ -108,6 +108,7 @@
     border-radius: 4px;
     background-color: var(--main-color);
     position: relative;
+    cursor: pointer;
   }
   .app-icon:before, .app-icon:after {
     content: "";
@@ -770,7 +771,11 @@
     }
   
     .app-sidebar, .app-icon {
-      display: none;
+      /* display: none; */
+    }
+    .app-icon {
+      margin: 20px;
+
     }
   
     .app-content {

@@ -1,15 +1,19 @@
 
 'use client'
 
+import { ContextMenu, ContextMenuTrigger } from '@radix-ui/react-context-menu';
 import Link from 'next/link'
 import { useParams, usePathname } from 'next/navigation'
+import { useState } from 'react';
 
 
 export default function Sidebar({active}) {
+  const [sidebar,setSidebar] = useState(0)
+
   active = (usePathname()).substring(1);
   return (
     <>
-      <div className="app-sidebar">
+      <div className="app-sidebar" style={{display : (sidebar?"block":"none")}}>
       <Link href={"/"} className={"app-sidebar-link " + (active === "" ? "active" : "")}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -134,7 +138,10 @@ export default function Sidebar({active}) {
             <line x1={21} y1={12} x2={9} y2={12} />
           </svg>
         </Link>
+
       </div>
+        <div className="sidebar-toggler absolute top-0 left-0 z-40 h-12 w-12  ml-4 flex text-lg  cursor-pointer p-4 rounded-full" onClick={()=> setSidebar(!sidebar)}>
+    </div>
     </>
   );
 }

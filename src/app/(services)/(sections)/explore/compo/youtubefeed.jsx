@@ -35,7 +35,7 @@ export function YoutubeFeed() {
     (<div className="flex flex-col">
 
      
-        <div className="flex-1 p-6">
+        <div className="flex-1 sm:p-6">
           <div className="flex gap-2 overflow-x-auto pb-4">
             <Button className="whitespace-nowrap" size="sm" variant="ghost">
               All
