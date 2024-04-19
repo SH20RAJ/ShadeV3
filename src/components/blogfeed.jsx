@@ -29,7 +29,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 
-export function blogfeed() {
+export function Blogfeed() {
   return (
     (<div className="flex flex-col min-h-screen">
       <header className="bg-gray-900 text-white py-6 md:py-8 lg:py-10">

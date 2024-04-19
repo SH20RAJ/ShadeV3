@@ -58,7 +58,7 @@ export default function text() {
             </DropdownMenu>
             {/* <Slider className="w-[200px]" defaultValue={[0]} max={100} step={1} /> */}
           </div>
-          <Carousel className="w-[90%] -m-8 self-center m-auto">
+          <Carousel className="w-[90%] self-center m-auto">
             <CarouselContent>
               <CarouselItem className="md:basis-1/2 lg:basis-1/3">
                 <div className="p-1">
