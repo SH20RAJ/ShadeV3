@@ -29,9 +29,7 @@ export default function NewsFeeds() {
   const remainingPost = feed.length > 4 ? feed[4] : null;
 
   return (
-    <div>
-      <div>
-        <div className="m mx-auto p-4">
+        <div className="m mx-auto p-4 w-full">
           {loading ? (
             <Loader />
           ) : (
@@ -122,14 +120,12 @@ export default function NewsFeeds() {
             </div>
           )}
         </div>
-      </div>
-    </div>
   );
 }
 
 function Loader() {
   return (
-    <div className="flex flex-col md:flex-row -mx-1.5 p-4 animate-pulse">
+    <div className="flex flex-col md:flex-row -mx-1.5 p-4 animate-pulse w-full">
   <a href="/article/87" className="h-72 md:h-auto w-full md:w-7/12 mx-1.5 mb-6 md:mb-0 group">
     <div className="h-72 md:h-full relative">
       <img src="https://shade.sh20raj.com/placeholder.svg" className="absolute z-0 object-cover w-full h-72 md:h-full rounded-md" />

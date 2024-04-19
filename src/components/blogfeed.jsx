@@ -23,15 +23,44 @@ To read more about using these font, please visit the Next.js documentation:
 - App Directory: https://nextjs.org/docs/app/building-your-application/optimizing/fonts
 - Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
 **/
+'use client'
 import Link from "next/link"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
+import { relativeDate } from "@/lib/funcs";
+import { useEffect, useState } from "react";
+
 
 export function Blogfeed() {
+  const [loading, setLoading] = useState(true);
+  const [feed, setFeed] = useState([]);
+
+  useEffect(() => {
+    const fetchdata = async () => {
+      try {
+        const res = await fetch("/api/randomfeed?limit=4&type=article");
+        const data = await res.json();
+        setFeed(data.data);
+        setLoading(false);
+        console.log(feed, loading);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchdata();
+  }, []); // Empty dependency array ensures this effect runs only once on mount
+
+  // Splitting the feed array into two separate arrays
+  const threeposts = feed.slice(1);
+  const firstpost = feed[0]
+
+
   return (
-    (<div className="flex flex-col min-h-screen">
+    (loading)?(<Loader/>):(<div className="flex flex-col min-h-screen">
       <header className="bg-gray-900 text-white py-6 md:py-8 lg:py-10">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -49,7 +78,7 @@ export function Blogfeed() {
             </div>
             <div>
               <span className="text-sm font-medium text-gray-400 uppercase">Featured Post</span>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-2">The Future of Web Development</h1>
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-2">{firstpost.title}</h1>
               <p className="text-gray-300 mt-4">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl eget ultricies tincidunt,
                 nisl nisl aliquam nisl, eget aliquam nisl nisl eget nisl.
@@ -299,4 +328,13 @@ function SearchIcon(props) {
       <path d="m21 21-4.3-4.3" />
     </svg>)
   );
+}
+
+
+//
+
+function Loader() {
+  return (
+    "Loading..."
+  )
 }

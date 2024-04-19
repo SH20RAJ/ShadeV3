@@ -23,15 +23,45 @@ To read more about using these font, please visit the Next.js documentation:
 - App Directory: https://nextjs.org/docs/app/building-your-application/optimizing/fonts
 - Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
 **/
+'use client'
 import Link from "next/link"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
+import { relativeDate } from "@/lib/funcs";
+import { useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton"
+
 
 export function Blogfeed() {
+  const [loading, setLoading] = useState(true);
+  const [feed, setFeed] = useState([]);
+
+  useEffect(() => {
+    const fetchdata = async () => {
+      try {
+        const res = await fetch("/api/randomfeed?limit=7&type=article");
+        const data = await res.json();
+        setFeed(data.data);
+        setLoading(false);
+        console.log(feed, loading);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchdata();
+  }, []); // Empty dependency array ensures this effect runs only once on mount
+
+  // Splitting the feed array into two separate arrays
+  const remainingPost = feed.slice(1);
+  const firstpost = feed[0]
+
+
   return (
-    (<div className="flex flex-col min-h-screen">
+    (loading)?(<Loader/>):(<div className="flex flex-col min-h-screen">
       <header className="bg-gray-900 text-white py-6 md:py-8 lg:py-10">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -40,7 +70,7 @@ export function Blogfeed() {
                 alt="Featured Blog Post"
                 className="rounded-lg object-cover"
                 height={500}
-                src="/placeholder.svg"
+                src={firstpost.contentURL || "/placeholder.svg"}
                 style={{
                   aspectRatio: "800/500",
                   objectFit: "cover",
@@ -49,14 +79,13 @@ export function Blogfeed() {
             </div>
             <div>
               <span className="text-sm font-medium text-gray-400 uppercase">Featured Post</span>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-2">The Future of Web Development</h1>
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-2">{firstpost.title}</h1>
               <p className="text-gray-300 mt-4">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl eget ultricies tincidunt,
-                nisl nisl aliquam nisl, eget aliquam nisl nisl eget nisl.
+                {firstpost.content.substring(0,200)}
               </p>
               <Link
                 className="inline-flex items-center mt-6 bg-gray-800 hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-md"
-                href="#">
+                href={"/article/"+firstpost.id}>
                 Read More
                 <ArrowRightIcon className="ml-2 h-5 w-5" />
               </Link>
@@ -69,86 +98,42 @@ export function Blogfeed() {
           <div className="container mx-auto px-4 md:px-6 lg:px-8">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-8">Recent Posts</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-              <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                <img
-                  alt="Blog Post 1"
-                  className="w-full h-48 object-cover"
-                  height={250}
-                  src="/placeholder.svg"
-                  style={{
-                    aspectRatio: "400/250",
-                    objectFit: "cover",
-                  }}
-                  width={400} />
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2">Mastering React: A Comprehensive Guide</h3>
-                  <p className="text-gray-600 mb-4">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl eget ultricies tincidunt,
-                    nisl nisl aliquam nisl, eget aliquam nisl nisl eget nisl.
-                  </p>
-                  <Link
-                    className="inline-flex items-center text-gray-800 hover:text-gray-900 font-medium"
-                    href="#">
-                    Read More
-                    <ArrowRightIcon className="ml-2 h-5 w-5" />
-                  </Link>
-                </div>
-              </div>
-              <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                <img
-                  alt="Blog Post 2"
-                  className="w-full h-48 object-cover"
-                  height={250}
-                  src="/placeholder.svg"
-                  style={{
-                    aspectRatio: "400/250",
-                    objectFit: "cover",
-                  }}
-                  width={400} />
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2">Exploring the Power of TypeScript</h3>
-                  <p className="text-gray-600 mb-4">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl eget ultricies tincidunt,
-                    nisl nisl aliquam nisl, eget aliquam nisl nisl eget nisl.
-                  </p>
-                  <Link
-                    className="inline-flex items-center text-gray-800 hover:text-gray-900 font-medium"
-                    href="#">
-                    Read More
-                    <ArrowRightIcon className="ml-2 h-5 w-5" />
-                  </Link>
-                </div>
-              </div>
-              <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                <img
-                  alt="Blog Post 3"
-                  className="w-full h-48 object-cover"
-                  height={250}
-                  src="/placeholder.svg"
-                  style={{
-                    aspectRatio: "400/250",
-                    objectFit: "cover",
-                  }}
-                  width={400} />
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2">Unleashing the Potential of Serverless</h3>
-                  <p className="text-gray-600 mb-4">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl eget ultricies tincidunt,
-                    nisl nisl aliquam nisl, eget aliquam nisl nisl eget nisl.
-                  </p>
-                  <Link
-                    className="inline-flex items-center text-gray-800 hover:text-gray-900 font-medium"
-                    href="#">
-                    Read More
-                    <ArrowRightIcon className="ml-2 h-5 w-5" />
-                  </Link>
-                </div>
-              </div>
+
+
+            {remainingPost.map((post)=> 
+          <div key={post.id} className="bg-white rounded-lg shadow-md overflow-hidden">
+          <img
+            alt="Blog Post 1"
+            className="w-full h-48 object-cover"
+            height={250}
+            src={post.contentURL || "/placeholder.svg"}
+            style={{
+              aspectRatio: "400/250",
+              objectFit: "cover",
+            }}
+            width={400} />
+          <div className="p-6">
+            <h3 className="text-xl font-bold mb-2">{post.title}</h3>
+            <p className="text-gray-600 mb-4">
+              {post.content.substring(0,200)}
+              </p>
+            <Link
+              className="inline-flex items-center text-gray-800 hover:text-gray-900 font-medium"
+              href={"/article/"+post.id}>
+              Read More
+              <ArrowRightIcon className="ml-2 h-5 w-5" />
+            </Link>
+          </div>
+        </div>
+      )}
+
+              
+
             </div>
           </div>
         </section>
       </main>
-
+     
     </div>)
   );
 }
@@ -190,4 +175,13 @@ function SearchIcon(props) {
       <path d="m21 21-4.3-4.3" />
     </svg>)
   );
+}
+
+
+//
+
+function Loader() {
+  return (
+    "....."
+  )
 }

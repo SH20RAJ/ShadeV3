@@ -6,6 +6,8 @@ export default function Head() {
   <link rel="manifest" href="/manifest.json" />
   {/* Theme Color */}
   <meta name="theme-color" content="#359ef6" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
   {/* Background Color */}
   {/* App Icons */}
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192x192.png" />
