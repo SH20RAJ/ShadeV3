@@ -1,5 +1,5 @@
 document?.addEventListener('DOMContentLoaded', function () {
-  var modeSwitch = document.querySelector('.mode-switch');
+  var modeSwitch = document.querySelector('#modeto');
   console.warn(modeSwitch);
 
   modeSwitch?.addEventListener('click', function () {

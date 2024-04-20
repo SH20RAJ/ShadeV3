@@ -41,8 +41,8 @@ export default function RootLayout({ children }) {
       </head>
       <body className={chivo.variable + comfortaa.variable}>
         <div className="app-container">
-          {/* <HeaderV2 /> */}
-          <Header />
+          <HeaderV2 />
+          {/* <Header /> */}
           <div className="app-content">
             <Sidebar />
             <div className="overflow-y-auto flex w-full justify-center">

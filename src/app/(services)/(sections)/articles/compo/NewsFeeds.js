@@ -86,7 +86,7 @@ export default function NewsFeeds() {
                     className="flex items-center group mb-3 pb-3 border-b"
                   >
                     <img
-                      src={post.contentURL}
+                      src={post.contentURL || "/logo.png"}
                       className="rounded-md object-cover mr-3 h-24 w-24"
                     />
                     <div className="flex-1">

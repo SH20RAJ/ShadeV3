@@ -49,7 +49,7 @@ export default function TextFeed() {
             {posts.map((post, index) => {
                 const isLastPost = posts.length === index + 1;
                 return (
-                    <div key={post.id || index} className="w-full md:w-[40%] m-2" ref={isLastPost ? lastPostRef : null}>
+                    <div key={index} className="w-full md:w-[40%] m-2" ref={isLastPost ? lastPostRef : null}>
                         <Card post={post} />
                     </div>
                 );

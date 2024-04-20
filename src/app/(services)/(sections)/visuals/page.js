@@ -28,8 +28,8 @@ export default function Visuals() {
   return (
     <div className="flex flex-wrap gap-4 h-full overflow-auto ">
       {loading && <> {Array(20).fill(0).map((_,i)=> <SkeletonCard key={i}/>)} </>}
-      {images && images.map((image) => (
-        <Imgcard key={image.id} post={image} />
+      {images && images.map((image,i) => (
+        <Imgcard key={i} post={image} />
       ))}
     </div>
   );

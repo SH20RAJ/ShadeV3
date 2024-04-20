@@ -100,9 +100,11 @@ export function Blogfeed() {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
 
 
-            {remainingPost.map((post)=> 
-          <div key={post.id} className="bg-white dark:bg-slate-900 rounded-lg shadow-lg overflow-hidden">
-          <img
+            {remainingPost.map((post,i)=> 
+          <div key={i} className="bg-white dark:bg-slate-900 rounded-lg shadow-lg overflow-hidden">
+          <Link
+              className=""
+              href={"/article/"+post.id}><img
             alt="Blog Post 1"
             className="w-full h-48 object-cover"
             height={250}
@@ -117,13 +119,14 @@ export function Blogfeed() {
             <p className="text-gray-600 mb-4">
               {post.content.substring(0,200)}
               </p>
-            <Link
-              className="inline-flex items-center dark:text-slate-200 text-gray-800 hover:text-gray-900 font-medium"
-              href={"/article/"+post.id}>
+            
+
+                <span className="inline-flex items-center dark:text-slate-200 text-gray-800 hover:text-gray-900 font-medium">
               Read More
               <ArrowRightIcon className="ml-2 h-5 w-5" />
-            </Link>
+              </span>
           </div>
+            </Link>
         </div>
       )}
 

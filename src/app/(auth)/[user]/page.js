@@ -46,7 +46,7 @@ let Page = async ({params}) => {
           </div>
         </div>
         <div className="postscontainer">
-            {userdata?.posts?.map((post) => <Card key={post.id} post={post}/>)}
+            {userdata?.posts?.map((post,i) => <Card key={i} post={post}/>)}
         </div>
       </div>
       

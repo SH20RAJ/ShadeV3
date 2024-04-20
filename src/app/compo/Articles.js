@@ -26,8 +26,8 @@ function Articles() {
   }, []);
 
   // Skeleton layout
-  const renderSkeleton = () => (
-    <div className="message-box">
+  const RenderSkeleton = ({key}) => (
+    <div key={key} className="message-box">
       <div className="message-content">
         <Skeleton width="70%" height={20} />
         <Skeleton width="90%" height={15} style={{ marginTop: '10px' }} />
@@ -46,7 +46,7 @@ function Articles() {
       </div>
       <div className="messages">
         {loading ? (
-          Array.from({ length: 15 }).map((_, index) => renderSkeleton())
+          Array.from({ length: 15 }).map((_, key) => <RenderSkeleton key={key}/>)
         ) : (
           articles.map((article, i) => (
             <div className="message-box" key={article.id || i}>
