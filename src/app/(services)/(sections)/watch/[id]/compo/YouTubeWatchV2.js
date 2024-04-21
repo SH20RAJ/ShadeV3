@@ -29,6 +29,10 @@ import { CardTitle, CardDescription, CardHeader, CardContent, Card } from "@/com
 import { Input } from "@/components/ui/input"
 import { DropdownMenuTrigger, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuItem, DropdownMenuContent, DropdownMenu } from "@/components/ui/dropdown-menu"
 import Image from "next/image"
+import Video from "../video"
+
+
+
 export function YouTubeWatchV2() {
   return (
     (<div className="w-full">
@@ -39,14 +43,7 @@ export function YouTubeWatchV2() {
           <div className="flex flex-col gap-4">
             <div className="rounded-xl overflow-hidden">
               <span className="w-full aspect-video rounded-md bg-muted" />
-              <div id="video" className="w-full h-full" 
-              dangerouslySetInnerHTML={{__html : `<video id="my-video" class="sopplayer" controls preload="auto" data-setup="{}" width="100%">
-              <!-- Use class="sopplayer" and data-setup="{}" -->
-              <source src="https://cdn.jsdelivr.net/gh/SH20RAJ/Sopplayer@main/sample.mp4" type="video/mp4" />
-            </video>`}}
->
-{/* <Image src={"/placeholder.svg"} height={600} width={500}/> */}
-              </div>
+              <Video/>
             </div>
             <div className="py-2 flex flex-col gap-2">
               <h1 className="text-xl font-semibold line-clamp-2">
