@@ -119,30 +119,8 @@ export function YoutubeFeed() {
 
 export function VideoComponent(){
   return <div className="relative group">
-              <ContextMenu>
-                <ContextMenuTrigger className="absolute inset-0 z-10">
-                  <span className="sr-only">Open context menu</span>
-                </ContextMenuTrigger>
-                <ContextMenuContent className="w-48">
-                  <ContextMenuItem>
-                    <ClockIcon className="w-4 h-4 mr-2" />
-                    Save to Watch Later
-                  </ContextMenuItem>
-                  <ContextMenuItem>
-                    <PlusIcon className="w-4 h-4 mr-2" />
-                    Add to Playlist
-                  </ContextMenuItem>
-                  <ContextMenuItem>
-                    <ShareIcon className="w-4 h-4 mr-2" />
-                    Share
-                  </ContextMenuItem>
-                  <ContextMenuItem>
-                    <FlagIcon className="w-4 h-4 mr-2" />
-                    Report
-                  </ContextMenuItem>
-                </ContextMenuContent>
-              </ContextMenu>
-              <img
+              
+              <Link href={"/watch/4"}><img
                 alt="Video Thumbnail"
                 className="w-full h-48 object-cover rounded-lg group-hover:opacity-50 transition-opacity"
                 height={180}
@@ -151,9 +129,9 @@ export function VideoComponent(){
                   aspectRatio: "320/180",
                   objectFit: "cover",
                 }}
-                width={320} />
+                width={320} /></Link>
               <div className="p-2">
-                <h3 className="font-semibold text-base line-clamp-2">Introducing the Frontend Cloud</h3>
+              <Link href={"/watch/4"}><h3 className="font-semibold text-base line-clamp-2">Introducing the Frontend Cloud</h3></Link>
                 <div
                   className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
                   <div>Vercel</div>
@@ -161,6 +139,33 @@ export function VideoComponent(){
                   <div>1.2M views</div>
                   <div>•</div>
                   <div>2 months ago</div>
+                  <div className="absolute   right-0">
+                  <DropdownMenu>
+                <DropdownMenuTrigger className=" outline-none">
+                 <MenuIcon/>
+
+                  <span className="sr-only">Open Dropdown menu</span>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-48">
+                  <DropdownMenuItem>
+                    <ClockIcon className="w-4 h-4 mr-2" />
+                    Save to Watch Later
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <PlusIcon className="w-4 h-4 mr-2" />
+                    Add to Playlist
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <ShareIcon className="w-4 h-4 mr-2" />
+                    Share
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <FlagIcon className="w-4 h-4 mr-2" />
+                    Report
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+                 </DropdownMenu>
+                  </div>
                 </div>
               </div>
             </div>
@@ -225,6 +230,12 @@ function ClockIcon(props) {
       <polyline points="12 6 12 12 16 14" />
     </svg>)
   );
+}
+
+export function MenuIcon(props) {
+  return  <svg xmlns="http://www.w3.org/2000/svg" {...props} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M3 4.5h14.25M3 9h9.75M3 13.5h9.75m4.5-4.5v12m0 0-3.75-3.75M17.25 21 21 17.25" />
+</svg>
 }
 
 
