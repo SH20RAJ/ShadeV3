@@ -36,18 +36,19 @@ export function YouTubeWatchV2() {
       <div className="flex sm:flex-col">
 
         <main className="flex   gap-6 p-4 md:p-6 flex-col sm:flex-row">
-          <div className="grid gap-4">
+          <div className="flex flex-col gap-4">
             <div className="rounded-xl overflow-hidden">
               <span className="w-full aspect-video rounded-md bg-muted" />
               <div id="video" className="w-full h-full" 
-              dangerouslySetInnerHTML={{__html : `<div id="driveplyr9"></div>
-<script player="fluid" src="https://driveplyr.appspages.online/player.js" data-id="9" data-height="500px" data-width="100%" data-type="driveplyr" defer></script>
-`}}
+              dangerouslySetInnerHTML={{__html : `<video id="my-video" class="sopplayer" controls preload="auto" data-setup="{}" width="100%">
+              <!-- Use class="sopplayer" and data-setup="{}" -->
+              <source src="https://cdn.jsdelivr.net/gh/SH20RAJ/Sopplayer@main/sample.mp4" type="video/mp4" />
+            </video>`}}
 >
 {/* <Image src={"/placeholder.svg"} height={600} width={500}/> */}
               </div>
             </div>
-            <div className="py-2 grid gap-2">
+            <div className="py-2 flex flex-col gap-2">
               <h1 className="text-xl font-semibold line-clamp-2">
                 Vercel Ship Keynote: Introducing the frontend cloud
               </h1>
@@ -76,7 +77,7 @@ export function YouTubeWatchV2() {
               </p>
             </div>
           </div>
-          <div className="grid gap-4">
+          <div className="flex flex-col gap-4">
             <div className="flex items-start gap-4 relative">
               <Link className="absolute inset-0" href="#">
                 <span className="sr-only">View</span>
