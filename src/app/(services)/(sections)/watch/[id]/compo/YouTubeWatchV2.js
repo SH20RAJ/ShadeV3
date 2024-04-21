@@ -58,8 +58,8 @@ export function YouTubeWatchV2() {
                     src="/placeholder.svg"
                     width={40} />
                   <div className="text-sm">
-                    <div className="font-semibold">Vercel</div>
-                    <div className="text-xs text-gray-500 dark:text-gray-400">70K subscribers</div>
+                    <div className="font-semibold">SH20RAJ</div>
+                    <div className="text-xs text-gray-500 dark:text-gray-400">50M subscribers</div>
                   </div>
                 </div>
                 <div className="ml-auto">
