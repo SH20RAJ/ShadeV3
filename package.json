@@ -56,12 +56,15 @@
     "tw-elements": "^2.0.0"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.11.2",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.1.4",
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
-    "webpack": "^5.91.0"
+    "vercel": "^34.1.7",
+    "webpack": "^5.91.0",
+    "wrangler": "^3.53.1"
   },
   "prisma": {
     "schema": "prisma/schema.prisma"
