@@ -12,6 +12,8 @@ import { Chivo } from 'next/font/google'
 import { Comfortaa } from 'next/font/google'
 import { HeaderV2 } from "@/components/header-v2";
 
+export const runtime = "edge";
+
 const chivo = Chivo({
   subsets: ['latin'],
   display: 'swap',
