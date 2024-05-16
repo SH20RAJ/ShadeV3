@@ -23,7 +23,8 @@ To read more about using these font, please visit the Next.js documentation:
 - App Directory: https://nextjs.org/docs/app/building-your-application/optimizing/fonts
 - Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
 **/
-'use client'
+"use client";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -42,54 +43,109 @@ import {
   CardFooter,
   Card,
 } from "@/components/ui/card";
-import { useState } from "react";
+import axios from "axios";
 
-export function UploadNewVideo() {
+export default function UploadNewVideo() {
   const [remoteuploadmode, setremoteuploadmode] = useState(true);
+  const [uploading, setUploading] = useState(false);
+  const [privacy, setPrivacy] = useState("public");
+
+  const videoUrlRef = useRef(null);
+  const titleRef = useRef(null);
+  const descriptionRef = useRef(null);
 
   const uploadVideo = async () => {
+    try {
+      // Get field values from refs
+      const videoUrl = videoUrlRef.current.value;
+      const title = titleRef.current.value;
+      const description = descriptionRef.current.value;
 
-    return new Promise((resolve, reject)=>{
-      
-    })
-  }
+      // Validate if video URL is provided
+      if (!videoUrl) {
+        return alert("Please provide a video URL");
+      }
+
+      // Validate if title is provided
+      if (!title) {
+        return alert("Please provide a title");
+      }
+
+      // Validate if description is provided
+      if (!description) {
+        return alert("Please provide a description");
+      }
+
+      setUploading(true);
+
+      // Send video data to backend for processing
+      const response = await axios.post("/api/uploadVideo", {
+        videoUrl,
+        title,
+        description,
+        privacy,
+      });
+
+      setUploading(false);
+
+      // Display success message
+      alert(response.data.message);
+    } catch (error) {
+      setUploading(false);
+      console.error("Error uploading video:", error);
+      alert("Error uploading video. Please try again.");
+    }
+  };
 
   return (
     <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto py-8 px-4">
       <div className="space-y-6">
         <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-6 flex flex-col items-center justify-center h-80">
-        <Label htmlFor="video">
-  <div>
-    <div className=" cursor-pointer inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 rounded-md px-8" size="lg" variant="outline">
-      <UploadIcon className="mr-2 h-5 w-5" />
-      Upload Video
-    </div>
-    <Input id="video" type="file" className="sr-only" />
-  </div>
-</Label>
+          <Label htmlFor="videourl">
+            <div
+              className="cursor-pointer inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 rounded-md px-8"
+              size="lg"
+              variant="outline"
+            >
+              <UploadIcon className="mr-2 h-5 w-5" />
+              Upload Video
+            </div>
+          </Label>
           <p className="mt-2 text-sm text-center text-gray-500 dark:text-gray-400">
             Drag and drop a video file or click to select <br />
-            {/* <center> */}
-              <Button variant="ghost"  onClick={()=>setremoteuploadmode(!remoteuploadmode)}>Remote Upload</Button>
-            {/* </center> */}
+            <Button
+              variant="ghost"
+              onClick={() => setremoteuploadmode(!remoteuploadmode)}
+            >
+              Remote Upload
+            </Button>
           </p>
         </div>
         <div className="space-y-4">
-          {
-            (remoteuploadmode && <>
-            <div>
-            <Label htmlFor="videourl">Video URL</Label>
-            <Input id="videourl" type="url" placeholder="Enter a Video URL" />
-          </div>
-            </>)
-          }
+          {remoteuploadmode && (
+            <>
+              <div>
+                <Label htmlFor="videourl">Video URL</Label>
+                <Input
+                  ref={videoUrlRef}
+                  id="videourl"
+                  type="url"
+                  placeholder="Enter a Video URL"
+                />
+              </div>
+            </>
+          )}
           <div>
             <Label htmlFor="title">Title</Label>
-            <Input id="title" placeholder="Enter a title" />
+            <Input ref={titleRef} id="title" placeholder="Enter a title" />
           </div>
           <div>
             <Label htmlFor="description">Description</Label>
-            <Textarea id="description" placeholder="Enter a description" />
+            <Textarea
+              ref={descriptionRef}
+              id="description"
+              placeholder="Enter a description"
+            />
           </div>
           <div>
             <Label htmlFor="tags">Tags</Label>
@@ -99,10 +155,6 @@ export function UploadNewVideo() {
             <Label htmlFor="thumbnail">Thumbnail</Label>
             <Input id="thumbnail" type="file" />
           </div>
-          {/* <div>
-            <Label htmlFor="captions">Captions</Label>
-            <Input id="captions" type="file" />
-          </div> */}
         </div>
       </div>
       <div className="space-y-6">
@@ -125,25 +177,24 @@ export function UploadNewVideo() {
             <div className=" space-y-4 mt-4">
               <div>
                 <Label htmlFor="privacy">Privacy</Label>
-                <Select defaultValue="public" id="privacy">
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select privacy" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="public">Public</SelectItem>
-                    <SelectItem value="unlisted">Unlisted</SelectItem>
-                    <SelectItem value="private">Private</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div>
-                <Label htmlFor="schedule">Schedule</Label>
-                <Input id="schedule" type="datetime-local" />
+                <select
+                  value={privacy}
+                  onChange={(e) => setPrivacy(e.target.value)}
+                  id="privacy"
+                  className="w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-accent focus:ring-accent dark:text-black"
+                >
+                  <option value="public">Public</option>
+                  <option value="unlisted">Unlisted</option>
+                  <option value="private">Private</option>
+                </select>
               </div>
             </div>
           </CardContent>
           <CardFooter className="w-full   ">
-            <Button className="w-full disabled:bg-black dark:text-white" disabled onClick={()=>uploadVideo()}>
+            <Button
+              className="w-full disabled:bg-black dark:text-white"
+              onClick={() => uploadVideo()}
+            >
               UPLOAD
             </Button>
           </CardFooter>

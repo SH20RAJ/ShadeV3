@@ -1,9 +1,10 @@
-import { UploadNewVideo } from "../compo/UploadNewVideo";
+import UploadNewVideo  from "../compo/UploadNewVideo";
 
-export default function NewVideo() {
+const NewVideo = () => {
   return (
     <div>
       <UploadNewVideo/>
     </div>
   )
 }
+export default NewVideo;
