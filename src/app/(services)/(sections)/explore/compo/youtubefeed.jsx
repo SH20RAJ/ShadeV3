@@ -37,31 +37,31 @@ export function YoutubeFeed() {
      
         <div className="flex-1 sm:p-6">
           <div className="flex gap-2 overflow-x-auto pb-4">
-            <Button className="whitespace-nowrap" size="sm" variant="ghost">
+            <Button className="whitespace-nowrap bg-grey-200" size="sm" variant="ghost">
               All
             </Button>
-            <Button className="whitespace-nowrap" size="sm" variant="ghost">
+            <Button className="whitespace-nowrap bg-grey-200" size="sm" variant="ghost">
               Trending
             </Button>
-            <Button className="whitespace-nowrap" size="sm" variant="ghost">
+            <Button className="whitespace-nowrap bg-grey-200" size="sm" variant="ghost">
               Music
             </Button>
-            <Button className="whitespace-nowrap" size="sm" variant="ghost">
+            <Button className="whitespace-nowrap bg-grey-200" size="sm" variant="ghost">
               Gaming
             </Button>
-            <Button className="whitespace-nowrap" size="sm" variant="ghost">
+            <Button className="whitespace-nowrap bg-grey-200" size="sm" variant="ghost">
               News
             </Button>
-            <Button className="whitespace-nowrap" size="sm" variant="ghost">
+            <Button className="whitespace-nowrap bg-grey-200" size="sm" variant="ghost">
               Movies
             </Button>
-            <Button className="whitespace-nowrap" size="sm" variant="ghost">
+            <Button className="whitespace-nowrap bg-grey-200" size="sm" variant="ghost">
               Live
             </Button>
-            <Button className="whitespace-nowrap" size="sm" variant="ghost">
+            <Button className="whitespace-nowrap bg-grey-200" size="sm" variant="ghost">
               Sports
             </Button>
-            <Button className="whitespace-nowrap" size="sm" variant="ghost">
+            <Button className="whitespace-nowrap bg-grey-200" size="sm" variant="ghost">
               Learning
             </Button>
           </div>

@@ -40,7 +40,7 @@ export function YouTubeWatchV2() {
       <div className="flex sm:flex-col">
 
         <main className="flex   gap-6 p-4 md:p-6 flex-col sm:flex-row">
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 sm:w-2/3">
             <div className="rounded-xl overflow-hidden">
               <span className="w-full aspect-video rounded-md bg-muted" />
               <Video/>
