@@ -3,19 +3,23 @@ import React, { useEffect } from 'react';
 import Plyr from "plyr";
 import "plyr/dist/plyr.css";  // Ensure you include the Plyr CSS for styling
 
-export default function Video() {
+export default function Video({contentURL, image}) {
+
   useEffect(() => {
     // Ensure this code runs only in the client environment
     if (typeof window !== "undefined") {
       const player = new Plyr('#player', {
-        // You can add Plyr options here
+
       });
+
+
 
       // Setup the video source for Plyr using the provided MP4 URL
       player.source = {
         type: 'video',
+        poster : image,
         sources: [{
-          src: 'https://cdn.jsdelivr.net/gh/SH20RAJ/Sopplayer@main/sample.mp4',
+          src: contentURL || 'https://cdn.jsdelivr.net/gh/SH20RAJ/Sopplayer@main/sample.mp4',
           type: 'video/mp4', // Specify the MIME type for the MP4 format
         }],
       };

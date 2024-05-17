@@ -30,24 +30,29 @@ import { Input } from "@/components/ui/input"
 import { DropdownMenuTrigger, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuItem, DropdownMenuContent, DropdownMenu } from "@/components/ui/dropdown-menu"
 import Image from "next/image"
 import Video from "../video"
+import post from "@/app/get/post"
 
 
 
-export function YouTubeWatchV2() {
+export async function YouTubeWatchV2({id}) {
+  let postx = await post(id)
+
   return (
     (<div className="w-full">
-      
+      {
+        // JSON.stringify(postx)
+      }
       <div className="flex sm:flex-col">
 
         <main className="flex   gap-6 p-4 md:p-6 flex-col sm:flex-row">
           <div className="flex flex-col gap-4 sm:w-2/3">
             <div className="rounded-xl overflow-hidden">
               <span className="w-full aspect-video rounded-md bg-muted" />
-              <Video/>
+              <Video contentURL={postx.contentURL} image={postx.image}/>
             </div>
             <div className="py-2 flex flex-col gap-2">
               <h1 className="text-xl font-semibold line-clamp-2">
-                Vercel Ship Keynote: Introducing the frontend cloud
+                {postx.title}
               </h1>
               <div className="flex gap-2 items-center">
                 <div className="flex gap-2 items-center">
@@ -69,8 +74,7 @@ export function YouTubeWatchV2() {
             </div>
             <div className="bg-gray-100 rounded-xl p-4 text-sm dark:bg-gray-800">
               <p>
-                Today, we're introducing the frontend cloud, where frontend developers build, test, and deploy
-                high-quality web applications efficiently and quickly, all on Vercel.
+                {postx.content}
               </p>
             </div>
           </div>

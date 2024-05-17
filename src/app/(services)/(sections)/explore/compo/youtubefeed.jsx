@@ -23,14 +23,38 @@ To read more about using these font, please visit the Next.js documentation:
 - App Directory: https://nextjs.org/docs/app/building-your-application/optimizing/fonts
 - Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
 **/
+'use client'
 import Link from "next/link"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar"
 import { DropdownMenuTrigger, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuContent, DropdownMenu } from "@/components/ui/dropdown-menu"
 import { ContextMenuTrigger, ContextMenuItem, ContextMenuContent, ContextMenu } from "@/components/ui/context-menu"
+import { useEffect, useState } from "react"
 
 export function YoutubeFeed() {
+  const [loading, setLoading] = useState(true);
+  const [feed, setFeed] = useState([]);
+
+
+  useEffect(() => {
+    const fetchdata = async () => {
+      try {
+        const res = await fetch("/api/randomfeed?limit=7&type=video");
+        const data = await res.json();
+        setFeed(data.data);
+        setLoading(false);
+        console.log(feed, loading);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchdata();
+  }, []); // Empty dependency array ensures this effect runs only once on mount
+
+
   return (
     (<div className="flex flex-col w-full">
 
@@ -67,19 +91,15 @@ export function YoutubeFeed() {
           </div>
           <div
             className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            
-            <VideoComponent/>
-            <VideoComponent/>
-            <VideoComponent/>
-            <VideoComponent/>
-            <VideoComponent/>
-            <VideoComponent/>
-            <VideoComponent/>
-            <VideoComponent/>
-            <VideoComponent/>
-            <VideoComponent/>
-            <VideoComponent/>
-            <VideoComponent/>
+
+              {
+                feed.map((feed,i) => <VideoComponent feed={feed} key={i}  />)
+              }
+
+              {
+                loading && Array(25).fill(0).map((i2,i)=> <VideoComponentSkeleton key={i} />) 
+              }
+
             
           </div>
           <div className="mt-8 mb-8">
@@ -117,24 +137,25 @@ export function YoutubeFeed() {
 }
 
 
-export function VideoComponent(){
+export function VideoComponent({feed}){
   return <div className="relative group">
               
-              <Link href={"/watch/4"}><img
+              <Link href={"/watch/"+feed?.id}>
+                <img
                 alt="Video Thumbnail"
                 className="w-full h-48 object-cover rounded-lg group-hover:opacity-50 transition-opacity"
                 height={180}
-                src="/placeholder.svg"
+                src={feed?.image||"/placeholder.svg"}
                 style={{
                   aspectRatio: "320/180",
                   objectFit: "cover",
                 }}
                 width={320} /></Link>
               <div className="p-2">
-              <Link href={"/watch/4"}><h3 className="font-semibold text-base line-clamp-2">Introducing the Frontend Cloud</h3></Link>
+              <Link href={"/watch/4"}><h3 className="font-semibold text-base line-clamp-2">{feed?.title || " _ "}</h3></Link>
                 <div
                   className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-                  <div>Vercel</div>
+                  <div>{feed?.author?.name}</div>
                   <div>•</div>
                   <div>1.2M views</div>
                   <div>•</div>
@@ -170,6 +191,32 @@ export function VideoComponent(){
               </div>
             </div>
 }
+
+
+export function VideoComponentSkeleton() {
+  return (
+    <div className="relative group">
+      <div className="animate-pulse">
+        <div className="w-full h-48 bg-gray-300 rounded-lg"></div>
+      </div>
+      <div className="p-2">
+        <div className="animate-pulse">
+          <div className="h-4 bg-gray-300 rounded w-4/4 mb-2"></div>
+          {/* <div className="h-4 bg-gray-300 rounded w-1/2 mb-2"></div> */}
+        </div>
+        <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+          <div className="animate-pulse w-12 h-4 bg-gray-300 rounded"></div>
+          <div>•</div>
+          <div className="animate-pulse w-16 h-4 bg-gray-300 rounded"></div>
+          <div>•</div>
+          <div className="animate-pulse w-20 h-4 bg-gray-300 rounded"></div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
 
 export function ShortsComponent() {
   return <div className="relative group">

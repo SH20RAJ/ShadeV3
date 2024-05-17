@@ -4,6 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useRouter } from 'next/navigation'
+
+
 import {
   SelectValue,
   SelectTrigger,
@@ -19,8 +22,13 @@ import {
   Card,
 } from "@/components/ui/card";
 import axios from "axios";
+import { redirect } from "next/navigation";
 
 export default function UploadNewVideo() {
+  const router = useRouter()
+  
+  
+  
   const [remoteuploadmode, setremoteuploadmode] = useState(true);
   const [uploading, setUploading] = useState(false);
   const [privacy, setPrivacy] = useState("public");
@@ -99,6 +107,12 @@ export default function UploadNewVideo() {
 
       // Display success message
       alert(response.data.message);
+      console.log(response);
+      console.log(response.message);
+router.push("/watch/"+response.data.post.id)
+
+
+      // redirect("/watch/"+response.data.post.id)
     } catch (error) {
       setUploading(false);
       console.error("Error uploading video:", error);
