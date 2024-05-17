@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-export default function Home() {
+export default function MediaGurUploader() {
 const [file, setFile]= useState()
 const onSubmit = async (e) => { 
   e.preventDefault();
