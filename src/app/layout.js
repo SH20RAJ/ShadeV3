@@ -5,6 +5,9 @@ import Head from "./compo/head";
 import Header from "./compo/Header";
 import NextAuthSessionProvider from "@/lib/SessionProvider";
 import { Analytics } from "@vercel/analytics/react"
+import NextTopLoader from 'nextjs-toploader';
+
+
 // This is the root layout component for your Next.js app.
 // Learn more: https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts#root-layout-required
 
@@ -40,6 +43,8 @@ export default function RootLayout({ children }) {
 
       </head>
       <body className={chivo.variable + comfortaa.variable}>
+      <NextTopLoader />
+
         <div className="app-container">
           <HeaderV2 />
           {/* <Header /> */}
