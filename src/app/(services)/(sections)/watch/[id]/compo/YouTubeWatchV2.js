@@ -34,12 +34,15 @@ import post from "@/app/get/post"
 import randomfeed from "@/app/get/randomfeed"
 import { relativeDate, relativeNumber } from "@/lib/funcs"
 import { tempViews } from "@/app/(services)/tempViews"
-
-
+import { getPost } from "@/app/(get)/api/getPost/getPost"
 
 
 export async function YouTubeWatchV2({id}) {
-  let postx = await post(id)
+  // let postx = await post(id)
+
+  let postx = await getPost(id);
+
+
   let views = await tempViews(id);
 
 
