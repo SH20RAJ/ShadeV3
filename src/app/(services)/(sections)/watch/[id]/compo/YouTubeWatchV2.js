@@ -104,6 +104,7 @@ const RecomenddedVideos = async () => {
   })
   return videos;
 }
+
 const RecomenddedVideo = ({video}) => {
 
   return <div className="flex items-start gap-4 relative">
