@@ -11,6 +11,7 @@ export default async function Component({params}) {
   let id = params.id;
 
   let result = await posts({postId: id});
+  
   let post = result.data[0];
 
   // console.log(post); 
