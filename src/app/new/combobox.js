@@ -40,7 +40,7 @@ const languages = [
   { label: "Japanese", value: "ja" },
   { label: "Korean", value: "ko" },
   { label: "Chinese", value: "zh" },
-] as const
+]
 
 const FormSchema = z.object({
   language: z.string({
@@ -53,7 +53,7 @@ export function ComboboxForm() {
     resolver: zodResolver(FormSchema),
   })
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  function onSubmit(data) {
     toast({
       title: "You submitted the following values:",
       description: (
