@@ -33,11 +33,14 @@ import Video from "../video"
 import post from "@/app/get/post"
 import randomfeed from "@/app/get/randomfeed"
 import { relativeDate, relativeNumber } from "@/lib/funcs"
+import { tempViews } from "@/app/(services)/tempViews"
 
 
 
 export async function YouTubeWatchV2({id}) {
   let postx = await post(id)
+  let views = await tempViews(id);
+
 
   return (
     (<div className="w-full">
@@ -78,6 +81,7 @@ export async function YouTubeWatchV2({id}) {
               </div>
             </div>
             <div className="bg-gray-100 rounded-xl p-4 text-sm dark:bg-gray-800">
+              <div className="views">{postx.tempViews}</div>
               <p>
                 {postx.content}
               </p>
@@ -114,7 +118,7 @@ const RecomenddedVideo = ({video}) => {
   <div className="text-sm">
     <div className="font-medium line-clamp-2">{video?.title}</div>
     <div className="text-xs text-gray-500 line-clamp-1 dark:text-gray-400">{video?.user?.name}</div>
-    <div className="text-xs text-gray-500 line-clamp-1 dark:text-gray-400">{relativeNumber(video?.views || 3980703)} views · { relativeDate(video?.createdAt)}</div>
+    <div className="text-xs text-gray-500 line-clamp-1 dark:text-gray-400">{relativeNumber(parseInt(video?.tempViews))} views · { relativeDate(video?.createdAt)}</div>
   </div>
 </div>
 }

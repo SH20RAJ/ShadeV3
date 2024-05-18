@@ -31,6 +31,7 @@ import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar"
 import { DropdownMenuTrigger, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuContent, DropdownMenu } from "@/components/ui/dropdown-menu"
 import { ContextMenuTrigger, ContextMenuItem, ContextMenuContent, ContextMenu } from "@/components/ui/context-menu"
 import { useEffect, useState } from "react"
+import { relativeNumber } from "@/lib/funcs"
 
 export function YoutubeFeed() {
   const [loading, setLoading] = useState(true);
@@ -157,7 +158,7 @@ export function VideoComponent({feed}){
                   className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
                   <div>{feed?.user?.name}</div>
                   <div>•</div>
-                  <div>1.2M views</div>
+                  <div>{relativeNumber(parseInt(feed?.tempViews))} views</div>
                   <div>•</div>
                   <div>2 months ago</div>
                   <div className="absolute   right-0">

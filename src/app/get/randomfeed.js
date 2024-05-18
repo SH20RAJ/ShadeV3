@@ -24,6 +24,7 @@ let randomfeed = async ({
     Post.type,
     Post.createdAt ,
     Post.updatedAt ,
+    Post.tempViews ,
     Post.status,
     JSON_OBJECT(
         'id', User.id,

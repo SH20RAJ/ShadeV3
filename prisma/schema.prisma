@@ -79,6 +79,7 @@ model Post {
   pollOptions   PollOption[]
   communities   Community[]    @relation("PostCommunities")
   views         View[]         // Added relation to View model
+  tempViews     Int?            @default(0)
 }
 
 model Video {
