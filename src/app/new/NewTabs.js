@@ -1,5 +1,4 @@
 "use client"
-'use client';
 import { useState, useEffect } from 'react';
 import { ImageUp, Newspaper, PlayCircleIcon, PodcastIcon } from 'lucide-react';
 import Link from 'next/link';

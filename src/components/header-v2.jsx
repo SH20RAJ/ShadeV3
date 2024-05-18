@@ -28,20 +28,23 @@ import { DropdownMenuTrigger, DropdownMenuLabel, DropdownMenuSeparator, Dropdown
 import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar"
 import { AlertCircleIcon, ArrowRightIcon, ArticleIcon, BellIcon, CalendarIcon, InboxIcon, LogOutIcon, MoonIcon, MountainIcon, PlayIcon, PlusIcon, SearchIcon, SettingsIcon, UserIcon } from "@/lib/icons";
 import { BirdIcon, BookAIcon, PencilIcon, PlayCircleIcon } from "lucide-react";
+import Subh from "./subh";
 
 
 export function HeaderV2() {
   const { data: session, status } = useSession();
+
   let user = session?.user;
   console.log();
   return (
     (<div className="flex flex-col  ">
       <header
         className="flex items-center justify-between px-4 py-3 md:px-6 md:py-4 bg-white dark:bg-gray-900 shadow-sm">
-        <Link href="/" className="flex items-center gap-2 font-semibold text-gray-900 dark:text-gray-50">
+        <div href="/" className="flex items-center gap-2 font-semibold text-gray-900 dark:text-gray-50">
            <MountainIcon className="h-6 w-6 sm:mr-4" />
-            <span>Shade</span>
-          </Link>
+            <Link href={"/"}><span>Shade</span></Link>
+            { <Subh/>}
+          </div>
 
         <div className="flex items-center gap-4">
           <div className="relative flex-1 max-w-md md:max-w-none">
