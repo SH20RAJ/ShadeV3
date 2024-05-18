@@ -1,13 +1,11 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useRouter } from 'next/navigation'
 import 'react-toastify/dist/ReactToastify.css';
-
-
 
 import {
   SelectValue,
@@ -28,34 +26,28 @@ import { redirect } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 
 export default function UploadNewVideo() {
-  const router = useRouter()
-  
-  
+  const router = useRouter();
   
   const [remoteuploadmode, setremoteuploadmode] = useState(true);
   const [uploading, setUploading] = useState(false);
   const [privacy, setPrivacy] = useState("public");
 
-  const videoUrlRef = useRef(null);
-  const titleRef = useRef(null);
-  const descriptionRef = useRef(null);
-  const tagRef = useRef(null);
-  const thumbnailRef = useRef(null);
-  const thumbRef = useRef(null);
+  const [videoUrl, setVideoUrl] = useState('');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [tags, setTags] = useState('');
   const [thumbnail, setThumbnail] = useState();
-  const [thumbnailURL, setThumbnailURL] = useState();
-
+  const [thumbnailURL, setThumbnailURL] = useState('');
+  
   const getThumbnail = async (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      // thumbRef.current.src = reader.result;
       console.log(reader.result);
     };
 
-    setThumbnail(e.target.files[0]);
-    console.log(thumbnail);
+    setThumbnail(file);
 
     let data = new FormData();
     data.set("file", file);
@@ -67,38 +59,27 @@ export default function UploadNewVideo() {
 
     let response = await res.json();
     console.log("Thumbnail :- ", response);
-    setThumbnailURL(response.fileurl)
+    setThumbnailURL(response.fileurl);
   };
 
   const uploadVideo = async () => {
     try {
-      // Get field values from refs
-      const videoUrl = videoUrlRef.current.value;
-      const title = titleRef.current.value;
-      const tags = tagRef.current.value;
-      const thumbnail = thumbnailRef.current.value;
-      const description = descriptionRef.current.value;
-
       // Validate if video URL is provided
       if (!videoUrl) {
-         toast.warn(`Enter Video URL`)
-        return 
-        alert("Please provide a video URL");
+        toast.warn(`Enter Video URL`);
+        return;
       }
 
       // Validate if title is provided
       if (!title) {
-        toast.warn(`Please provide a title`)
-
-        return 
-        alert("Please provide a title");
+        toast.warn(`Please provide a title`);
+        return;
       }
 
       // Validate if description is provided
       if (!description) {
-        toast.warn(`Please provide a description`)
-        return 
-        alert("Please provide a description");
+        toast.warn(`Please provide a description`);
+        return;
       }
 
       setUploading(true);
@@ -116,18 +97,12 @@ export default function UploadNewVideo() {
       setUploading(false);
 
       // Display success message
-      // alert(response.data.message);
       toast.success(response.data.message);
       console.log(response);
       console.log(response.message);
-      router.push("/watch/"+response.data.post.id)
-      router.push("/")
       (() => {
-        location.href = "/watch/"+response.data.post.id
-      })()
-
-
-      // redirect("/watch/"+response.data.post.id)
+        location.href = "/watch/" + response.data.post.id;
+      })();
     } catch (error) {
       setUploading(false);
       console.error("Error uploading video:", error);
@@ -165,7 +140,8 @@ export default function UploadNewVideo() {
               <div>
                 <Label htmlFor="videourl">Video URL</Label>
                 <Input
-                  ref={videoUrlRef}
+                  value={videoUrl}
+                  onChange={(e) => setVideoUrl(e.target.value)}
                   id="videourl"
                   type="url"
                   placeholder="Enter a Video URL"
@@ -175,12 +151,18 @@ export default function UploadNewVideo() {
           )}
           <div>
             <Label htmlFor="title">Title</Label>
-            <Input ref={titleRef} id="title" placeholder="Enter a title" />
+            <Input
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              id="title"
+              placeholder="Enter a title"
+            />
           </div>
           <div>
             <Label htmlFor="description">Description</Label>
             <Textarea
-              ref={descriptionRef}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
               id="description"
               placeholder="Enter a description"
             />
@@ -188,7 +170,8 @@ export default function UploadNewVideo() {
           <div>
             <Label htmlFor="tags">Tags</Label>
             <Input
-              ref={tagRef}
+              value={tags}
+              onChange={(e) => setTags(e.target.value)}
               id="tags"
               placeholder="Add tags separated by commas"
             />
@@ -197,10 +180,9 @@ export default function UploadNewVideo() {
             <Label htmlFor="thumbnail">Thumbnail</Label>
             <input
               type="text"
-              ref={thumbnailRef}
-              placeholder="Enter a thumbnail URL"
               value={thumbnailURL}
-              onChange={(e)=>setThumbnailURL(e.target.value)} 
+              onChange={(e) => setThumbnailURL(e.target.value)}
+              placeholder="Enter a thumbnail URL"
             />
             <Input id="thumbnail" type="file" onChange={getThumbnail} />
           </div>
@@ -211,12 +193,14 @@ export default function UploadNewVideo() {
           <CardHeader>{/* <CardTitle>Video Preview</CardTitle> */}</CardHeader>
           <CardContent>
             <div className="aspect-video rounded-lg overflow-hidden">
+              {
+                videoUrl && <video controls src={videoUrl} poster={thumbnailURL}></video>
+              }
               <img
                 alt="Video thumbnail"
                 className="w-full h-full object-cover"
                 height={360}
                 src={thumbnailURL || "/placeholder.svg"}
-                ref={thumbRef}
                 style={{
                   aspectRatio: "640/360",
                   objectFit: "cover",
@@ -244,6 +228,7 @@ export default function UploadNewVideo() {
             <Button
               className="w-full disabled:bg-black dark:text-white"
               onClick={uploadVideo}
+              disabled={uploading}
             >
               UPLOAD
             </Button>
@@ -251,7 +236,6 @@ export default function UploadNewVideo() {
         </Card>
       </div>
       <ToastContainer />
-
     </div>
   );
 }
