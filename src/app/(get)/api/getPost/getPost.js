@@ -16,7 +16,8 @@ export async function getPost(id) {
                 select: {
                     username: true,
                     avatar: true,
-                    name: true
+                    name: true,
+                    id: true
                 }
             }
         }
