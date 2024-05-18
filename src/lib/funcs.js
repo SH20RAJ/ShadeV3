@@ -40,6 +40,8 @@ export function relativeDate(dateString) {
     }
     return num.toFixed(1) + suffixes[magnitude];
   }
+
+  export const relativeNumber = formatNumber;
   
   export function getRandomNumber(min, max) {
     // Math.random() generates a random number between 0 (inclusive) and 1 (exclusive)

@@ -35,35 +35,36 @@ enum ReactionType {
 }
 
 model User {
-  id            Int            @id @default(autoincrement())
-  username      String         @unique
-  email         String         @unique
-  password      String
-  name          String?
-  bio           String?
-  avatar        String?
-  coverPhoto    String?
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  posts         Post[]
-  likes         Like[]
-  videos        Video[]
-  status        Status         @default(public)
-  comments      Comment[]
-  followers     Follow[]       @relation("UserFollowers")
-  following     Follow[]       @relation("UserFollowing")
-  roles         UserRole[]
-  receivedMessages Message[]   @relation("ReceiverMessages")
-  sentMessages  Message[]     @relation("SenderMessages")
-  pollResponses PollResponse[]
-  communities   Community[]    @relation("CommunityMembers")
+  id                Int            @id @default(autoincrement())
+  username          String         @unique
+  email             String         @unique
+  password          String
+  name              String?
+  bio               String?
+  avatar            String?
+  coverPhoto        String?
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+  posts             Post[]
+  likes             Like[]
+  videos            Video[]
+  status            Status         @default(public)
+  comments          Comment[]
+  followers         Follow[]       @relation("UserFollowers")
+  following         Follow[]       @relation("UserFollowing")
+  roles             UserRole[]
+  receivedMessages  Message[]      @relation("ReceiverMessages")
+  sentMessages      Message[]      @relation("SenderMessages")
+  pollResponses     PollResponse[]
+  communities       Community[]    @relation("CommunityMembers")
+  views             View[]         // Added relation to View model
 }
 
 model Post {
   id            Int            @id @default(autoincrement())
   content       String         @db.VarChar(20000)
   taglist       String?        @db.VarChar(2000)
-  image         String?
+  image         String?        @db.VarChar(2000)
   contentURL    String?
   title         String?        @db.VarChar(200)
   type          Type?          @default(text)
@@ -74,9 +75,10 @@ model Post {
   status        Status         @default(public)
   likes         Like[]
   comments      Comment[]
-  tags          Tag[]    
+  tags          Tag[]
   pollOptions   PollOption[]
   communities   Community[]    @relation("PostCommunities")
+  views         View[]         // Added relation to View model
 }
 
 model Video {
@@ -92,6 +94,7 @@ model Video {
   updatedAt   DateTime @updatedAt
   status      Status   @default(public) // Added to control visibility
   likes       Like[]   // Added to handle likes specifically for videos
+  views       View[]   // Added relation to View model
 }
 
 model Like {
@@ -106,7 +109,6 @@ model Like {
   createdAt     DateTime       @default(now())
   @@unique([userId, postId, videoId])
 }
-
 
 model Comment {
   id            Int            @id @default(autoincrement())
@@ -170,7 +172,7 @@ model PollOption {
   option    String
   responses PollResponse[]
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }
 
 model PollResponse {
@@ -189,5 +191,22 @@ model Community {
   members       User[]         @relation("CommunityMembers")
   posts         Post[]         @relation("PostCommunities")
   createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
+  updatedAt     DateTime       @default(now())
+}
+
+model View {
+  id          Int      @id @default(autoincrement())
+  videoId     Int?
+  postId      Int?
+  userId      Int?
+  ipAddress   String?
+  createdAt   DateTime @default(now())
+  
+  video       Video?   @relation(fields: [videoId], references: [id])
+  post        Post?    @relation(fields: [postId], references: [id])
+  user        User?    @relation(fields: [userId], references: [id])
+  
+  @@index([videoId])
+  @@index([postId])
+  @@index([userId])
 }

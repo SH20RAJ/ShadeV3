@@ -49,6 +49,8 @@ ORDER BY
     // type ? [type, limit, skip] : [limit, skip]
   );
 
+  // return results;
+
   return results.map((post) => ({
     ...post,
     user: JSON.parse(post.user), // parse the JSON string into an object

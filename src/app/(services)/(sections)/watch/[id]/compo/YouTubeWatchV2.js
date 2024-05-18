@@ -31,6 +31,8 @@ import { DropdownMenuTrigger, DropdownMenuLabel, DropdownMenuSeparator, Dropdown
 import Image from "next/image"
 import Video from "../video"
 import post from "@/app/get/post"
+import randomfeed from "@/app/get/randomfeed"
+import { relativeDate, relativeNumber } from "@/lib/funcs"
 
 
 
@@ -55,18 +57,21 @@ export async function YouTubeWatchV2({id}) {
                 {postx.title}
               </h1>
               <div className="flex gap-2 items-center">
+                <Link href={"/"+postx.author.username}>
+                
                 <div className="flex gap-2 items-center">
                   <img
                     alt="Thumbnail"
                     className="rounded-full object-cover aspect-square"
                     height={40}
-                    src="/placeholder.svg"
+                    src={postx.author?.avatar}
                     width={40} />
                   <div className="text-sm">
-                    <div className="font-semibold">SH20RAJ</div>
+                    <div className="font-semibold">{postx.author?.name}</div>
                     <div className="text-xs text-gray-500 dark:text-gray-400">50M subscribers</div>
                   </div>
                 </div>
+                </Link>
                 <div className="ml-auto">
                   <Button variant="outline">Subscribe</Button>
                 </div>
@@ -79,236 +84,37 @@ export async function YouTubeWatchV2({id}) {
             </div>
           </div>
           <div className="flex flex-col gap-4">
-            <div className="flex items-start gap-4 relative">
-              <Link className="absolute inset-0" href="#">
-                <span className="sr-only">View</span>
-              </Link>
-              <img
-                alt="Thumbnail"
-                className="aspect-video rounded-lg object-cover"
-                height={94}
-                src="/placeholder.svg"
-                width={168} />
-              <div className="text-sm">
-                <div className="font-medium line-clamp-2">Introducing v0: Generative UI</div>
-                <div className="text-xs text-gray-500 line-clamp-1 dark:text-gray-400">Vercel</div>
-                <div className="text-xs text-gray-500 line-clamp-1 dark:text-gray-400">300K views · 5 days ago</div>
-              </div>
-            </div>
-            <div className="flex items-start gap-4 relative">
-              <Link className="absolute inset-0" href="#">
-                <span className="sr-only">View</span>
-              </Link>
-              <img
-                alt="Thumbnail"
-                className="aspect-video rounded-lg object-cover"
-                height={94}
-                src="/placeholder.svg"
-                width={168} />
-              <div className="text-sm">
-                <div className="font-medium line-clamp-2">Introducing the frontend cloud</div>
-                <div className="text-xs text-gray-500 line-clamp-1 dark:text-gray-400">Vercel</div>
-                <div className="text-xs text-gray-500 line-clamp-1 dark:text-gray-400">1.2M views · 2 months ago</div>
-              </div>
-            </div>
-            <div className="flex items-start gap-4 relative">
-              <Link className="absolute inset-0" href="#">
-                <span className="sr-only">View</span>
-              </Link>
-              <img
-                alt="Thumbnail"
-                className="aspect-video rounded-lg object-cover"
-                height={94}
-                src="/placeholder.svg"
-                width={168} />
-              <div className="text-sm">
-                <div className="font-medium line-clamp-2">Using Vercel KV with Svelte</div>
-                <div className="text-xs text-gray-500 line-clamp-1 dark:text-gray-400">Lee Robinson</div>
-                <div className="text-xs text-gray-500 line-clamp-1 dark:text-gray-400">21K views · 1 week ago</div>
-              </div>
-            </div>
-            <div className="flex items-start gap-4 relative">
-              <Link className="absolute inset-0" href="#">
-                <span className="sr-only">View</span>
-              </Link>
-              <img
-                alt="Thumbnail"
-                className="aspect-video rounded-lg object-cover"
-                height={94}
-                src="/placeholder.svg"
-                width={168} />
-              <div className="text-sm">
-                <div className="font-medium line-clamp-2">Loading UI with Next.js 13</div>
-                <div className="text-xs text-gray-500 line-clamp-1 dark:text-gray-400">Delba</div>
-                <div className="text-xs text-gray-500 line-clamp-1 dark:text-gray-400">12K views · 10 days ago</div>
-              </div>
-            </div>
+            <RecomenddedVideos/>
+            
           </div>
         </main>
       </div>
     </div>)
   );
 }
-
-function BellIcon(props) {
-  return (
-    (<svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round">
-      <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
-      <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
-    </svg>)
-  );
+const RecomenddedVideos = async () => {
+  let posts = await randomfeed({limit : 10,type : "video"});
+  let videos = posts.map((post,i) => {
+    return <RecomenddedVideo key={i} video={post}/>;
+  })
+  return videos;
 }
+const RecomenddedVideo = ({video}) => {
 
-
-function CompassIcon(props) {
-  return (
-    (<svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round">
-      <circle cx="12" cy="12" r="10" />
-      <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
-    </svg>)
-  );
-}
-
-
-function HistoryIcon(props) {
-  return (
-    (<svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round">
-      <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
-      <path d="M3 3v5h5" />
-      <path d="M12 7v5l4 2" />
-    </svg>)
-  );
-}
-
-
-function HomeIcon(props) {
-  return (
-    (<svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round">
-      <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-      <polyline points="9 22 9 12 15 12 15 22" />
-    </svg>)
-  );
-}
-
-
-function LibraryIcon(props) {
-  return (
-    (<svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round">
-      <path d="m16 6 4 14" />
-      <path d="M12 6v14" />
-      <path d="M8 8v12" />
-      <path d="M4 4v16" />
-    </svg>)
-  );
-}
-
-
-function SearchIcon(props) {
-  return (
-    (<svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round">
-      <circle cx="11" cy="11" r="8" />
-      <path d="m21 21-4.3-4.3" />
-    </svg>)
-  );
-}
-
-
-function VideoIcon(props) {
-  return (
-    (<svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round">
-      <path d="m22 8-6 4 6 4V8Z" />
-      <rect width="14" height="12" x="2" y="6" rx="2" ry="2" />
-    </svg>)
-  );
-}
-
-
-function YoutubeIcon(props) {
-  return (
-    (<svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round">
-      <path
-        d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
-      <path d="m10 15 5-3-5-3z" />
-    </svg>)
-  );
+  return <div className="flex items-start gap-4 relative">
+  <Link className="absolute inset-0" href={"/watch/"+video?.id}>
+    <span className="sr-only">View</span>
+  </Link>
+  <img
+    alt="Thumbnail"
+    className="aspect-video rounded-lg object-cover"
+    height={94}
+    src={video?.image || "/placeholder.svg"}
+    width={168} />
+  <div className="text-sm">
+    <div className="font-medium line-clamp-2">{video?.title}</div>
+    <div className="text-xs text-gray-500 line-clamp-1 dark:text-gray-400">{video?.user?.name}</div>
+    <div className="text-xs text-gray-500 line-clamp-1 dark:text-gray-400">{relativeNumber(video?.views || 3980703)} views · { relativeDate(video?.createdAt)}</div>
+  </div>
+</div>
 }

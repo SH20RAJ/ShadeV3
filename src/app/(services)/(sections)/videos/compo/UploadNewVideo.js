@@ -5,6 +5,8 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useRouter } from 'next/navigation'
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 import {
@@ -23,6 +25,7 @@ import {
 } from "@/components/ui/card";
 import axios from "axios";
 import { redirect } from "next/navigation";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function UploadNewVideo() {
   const router = useRouter()
@@ -78,17 +81,24 @@ export default function UploadNewVideo() {
 
       // Validate if video URL is provided
       if (!videoUrl) {
-        return alert("Please provide a video URL");
+         toast.warn(`Enter Video URL`)
+        return 
+        alert("Please provide a video URL");
       }
 
       // Validate if title is provided
       if (!title) {
-        return alert("Please provide a title");
+        toast.warn(`Please provide a title`)
+
+        return 
+        alert("Please provide a title");
       }
 
       // Validate if description is provided
       if (!description) {
-        return alert("Please provide a description");
+        toast.warn(`Please provide a description`)
+        return 
+        alert("Please provide a description");
       }
 
       setUploading(true);
@@ -106,10 +116,15 @@ export default function UploadNewVideo() {
       setUploading(false);
 
       // Display success message
-      alert(response.data.message);
+      // alert(response.data.message);
+      toast.success(response.data.message);
       console.log(response);
       console.log(response.message);
-router.push("/watch/"+response.data.post.id)
+      router.push("/watch/"+response.data.post.id)
+      router.push("/")
+      (() => {
+        location.href = "/watch/"+response.data.post.id
+      })()
 
 
       // redirect("/watch/"+response.data.post.id)
@@ -183,8 +198,9 @@ router.push("/watch/"+response.data.post.id)
             <input
               type="text"
               ref={thumbnailRef}
-              hidden
-              readOnly={true}
+              placeholder="Enter a thumbnail URL"
+              value={thumbnailURL}
+              onChange={(e)=>setThumbnailURL(e.target.value)} 
             />
             <Input id="thumbnail" type="file" onChange={getThumbnail} />
           </div>
@@ -234,6 +250,8 @@ router.push("/watch/"+response.data.post.id)
           </CardFooter>
         </Card>
       </div>
+      <ToastContainer />
+
     </div>
   );
 }

@@ -27,6 +27,7 @@ import { Badge } from "@/components/ui/badge"
 import { DropdownMenuTrigger, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuItem, DropdownMenuContent, DropdownMenu } from "@/components/ui/dropdown-menu"
 import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar"
 import { AlertCircleIcon, ArrowRightIcon, ArticleIcon, BellIcon, CalendarIcon, InboxIcon, LogOutIcon, MoonIcon, MountainIcon, PlayIcon, PlusIcon, SearchIcon, SettingsIcon, UserIcon } from "@/lib/icons";
+import { BirdIcon, BookAIcon, PencilIcon, PlayCircleIcon } from "lucide-react";
 
 
 export function HeaderV2() {
@@ -76,7 +77,7 @@ export function HeaderV2() {
               <DropdownMenuSeparator />
               <Link href={"/new/chirp"}>
               <DropdownMenuItem>
-                <UserIcon className="mr-2 h-4 w-4" />
+                <BirdIcon className="mr-2 h-4 w-4" />
                 Chirp
               </DropdownMenuItem>
 
@@ -84,7 +85,7 @@ export function HeaderV2() {
               <Link href={"/new/video"}>
 
               <DropdownMenuItem>
-                <PlayIcon className="mr-2 h-4 w-4" />
+                <PlayCircleIcon className="mr-2 h-4 w-4" />
                 Video
               </DropdownMenuItem>
               </Link>
@@ -93,14 +94,14 @@ export function HeaderV2() {
               <DropdownMenuSeparator />
               <Link href={"/new/post"}>
               <DropdownMenuItem>
-                <LogOutIcon className="mr-2 h-4 w-4" />
+                <PencilIcon className="mr-2 h-4 w-4" />
                 Post
               </DropdownMenuItem>
               </Link>
               <Link href={"/new"}>
 
               <DropdownMenuItem>
-                <ArticleIcon className="mr-2 h-4 w-4" />
+                <BookAIcon className="mr-2 h-4 w-4" />
                 Article
               </DropdownMenuItem>
               </Link>

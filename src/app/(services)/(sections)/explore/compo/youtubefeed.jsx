@@ -155,7 +155,7 @@ export function VideoComponent({feed}){
               <Link href={"/watch/4"}><h3 className="font-semibold text-base line-clamp-2">{feed?.title || " _ "}</h3></Link>
                 <div
                   className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-                  <div>{feed?.author?.name}</div>
+                  <div>{feed?.user?.name}</div>
                   <div>•</div>
                   <div>1.2M views</div>
                   <div>•</div>
