@@ -100,9 +100,13 @@ export default function UploadNewVideo() {
       toast.success(response.data.message);
       console.log(response);
       console.log(response.message);
-      (() => {
-        location.href = "/watch/" + response.data.post.id;
-      })();
+      setTimeout(() => {
+        (() => {
+          
+          location.href = "/watch/" + response.data.post.id;
+        })();
+        
+      }, 2000);
     } catch (error) {
       setUploading(false);
       console.error("Error uploading video:", error);

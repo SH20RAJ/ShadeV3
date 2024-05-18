@@ -9,7 +9,24 @@ export default function Video({contentURL, image}) {
     // Ensure this code runs only in the client environment
     if (typeof window !== "undefined") {
       const player = new Plyr('#player', {
+        controls: [
 
+        'play-large', // The large play button in the center
+        // 'rewind', // Rewind button
+        'play', // Play/pause button
+        // 'fast-forward', // Fast forward button
+        'progress', // The progress bar and scrubber
+        'current-time', // The current time of playback
+        'duration', // The full duration of the media
+        'mute', // Mute/unmute button
+        'captions', // Toggle captions
+        'settings', // Settings menu
+        'pip', // Picture-in-picture button
+        'airplay', // Airplay button
+        // 'download', // Download button
+        'fullscreen' // Fullscreen button
+    ],
+        keyboard : { focused: true, global: true }
       });
 
 

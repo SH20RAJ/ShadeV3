@@ -8,7 +8,7 @@
 .env*
 # testing
 /coverage
-
+.hide*
 # next.js
 /.next/
 /out/
