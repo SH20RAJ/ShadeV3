@@ -8,12 +8,12 @@ import { useState } from 'react';
 
 
 export default function Sidebar({active}) {
-  const [sidebar,setSidebar] = useState(1)
+  const [sidebar,setSidebar] = useState(0)
 
   active = (usePathname()).substring(1);
   return (
     <>
-      <div className="app-sidebar" style={{display : (sidebar?"block":"none")}}>
+      <div className="app-sidebar" style={{display : (sidebar?"flex":"")}}>
       <Link href={"/"} className={"app-sidebar-link " + (active === "" ? "active" : "")}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
