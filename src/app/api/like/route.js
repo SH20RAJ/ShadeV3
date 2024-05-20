@@ -1,4 +1,4 @@
-import getuser from '@/app/test/getuser';
+import getuser from '@/app/(root)/test/getuser';
 import prisma from '../../../../prisma';
 
 

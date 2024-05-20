@@ -2,7 +2,7 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import posts from "@/app/get/posts";
+import posts from "@/app/(root)/get/posts";
 import Showdown from "showdown";
 import converter from "@/lib/showdown";
 import { relativeDate } from "@/lib/funcs";

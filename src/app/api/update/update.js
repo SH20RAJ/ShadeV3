@@ -2,7 +2,7 @@
 
 import { getUserSession } from "@/lib/sessions";
 import prisma from "../../../../prisma";
-import fileurl from "@/app/get/fileurl";
+import fileurl from "@/app/(root)/get/fileurl";
 
 
 

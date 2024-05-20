@@ -1,5 +1,5 @@
-import prisma from "../../../prisma";
-import { getUserSession } from "../../lib/sessions";
+import prisma from "../../../../prisma";
+import { getUserSession } from "@/lib/sessions";
 import fileurl from "../get/fileurl";
 // import DOMPurify from 'isomorphic-dompurify';
 

@@ -1,4 +1,4 @@
-import fileurl from "@/app/get/fileurl";
+import fileurl from "@/app/(root)/get/fileurl";
 
 export async function POST(req) {
   let data = await req.json();

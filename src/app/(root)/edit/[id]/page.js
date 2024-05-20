@@ -1,4 +1,4 @@
-import prisma from "../../../../prisma";
+import prisma from "../../../../../prisma";
 import Articles from "../../../compo/Articles";
 import RightBar from "../../../compo/RightBar";
 import EditNew from "./EditNew";

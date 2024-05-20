@@ -1,4 +1,4 @@
-import PostPost from "@/app/post/post";
+import PostPost from "@/app/(root)/post/post";
 
 export async function POST(req) {
   let data = await req.json();
