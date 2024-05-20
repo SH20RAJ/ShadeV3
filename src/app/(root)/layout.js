@@ -1,8 +1,8 @@
-import "./globals.css";
-import "./article.css";
-import Sidebar from "./compo/Sidebar";
-import Head from "./compo/head";
-import Header from "./compo/Header";
+import "@/app/globals.css";
+import "@/app/article.css";
+import Sidebar from "../compo/Sidebar";
+import Head from "../compo/head";
+import Header from "../compo/Header";
 import NextAuthSessionProvider from "@/lib/SessionProvider";
 import { Analytics } from "@vercel/analytics/react"
 import NextTopLoader from 'nextjs-toploader';

@@ -38,12 +38,23 @@ export default function RootLayout({ children }) {
   return (
     <NextAuthSessionProvider>
     <html lang="en" className="dark">
+      <head>
+        <Head />
+
+      </head>
       <body className={chivo.variable + comfortaa.variable}>
       <NextTopLoader />
 
-      {
-        children
-      }
+        <div className="app-container">
+          <HeaderV2 />
+          {/* <Header /> */}
+          <div className="app-content">
+            <Sidebar />
+            <div className="overflow-y-auto flex w-full justify-center">
+            {children}
+            </div>
+          </div>
+        </div>
 
         <style></style>
         <div

@@ -1,5 +1,5 @@
-import RightBar from "../../compo/RightBar";
-import ProjectSec from "../../compo/ProjectSec";
+import RightBar from "../../../compo/RightBar";
+import ProjectSec from "../../../compo/ProjectSec";
 
 let Page = async () => {
   return (

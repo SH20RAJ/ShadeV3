@@ -1,7 +1,7 @@
 
 
-import posts from '@/app/get/posts'
-import getuser from '@/app/test/getuser';
+import posts from '@/app/(root)/get/posts'
+import getuser from '@/app/(root)/test/getuser';
 
 const GET = async (req,res) => {
   let user = await getuser();

@@ -1,4 +1,4 @@
-import randomfeed from "@/app/get/randomfeed";
+import randomfeed from "@/app/(root)/get/randomfeed";
 
 
 

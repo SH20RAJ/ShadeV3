@@ -1,5 +1,5 @@
 import post from "@/app/get/post";
-import Card from "../../compo/Card";
+import Card from "../../../compo/Card";
 import RightBar from "@/app/compo/RightBar";
 import Articles from "@/app/compo/Articles";
 import { getPost } from "@/app/(get)/api/getPost/getPost";

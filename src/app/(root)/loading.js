@@ -1,4 +1,4 @@
-import Loader from "./compo/loader";
+import Loader from "../compo/loader";
 
 let Loading = async () => {
   return (

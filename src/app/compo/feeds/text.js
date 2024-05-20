@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import Card from '../../compo/Card';
+import Card from '../Card';
 import CardLoading from '../loading/Card';
 
 export default function TextFeed() {
