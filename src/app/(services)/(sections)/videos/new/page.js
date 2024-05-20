@@ -1,8 +1,8 @@
-import NewTabs from "@/app/new/NewTabs";
+import NewTabs from "@/app/(root)/new/NewTabs";
 import UploadNewVideo  from "../compo/UploadNewVideo";
 const NewVideo = () => {
   return (
-    <div>
+    <div className=" overflow-auto">
       <NewTabs />
       <UploadNewVideo/>
     </div>

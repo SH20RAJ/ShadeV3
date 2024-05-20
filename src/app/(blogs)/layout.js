@@ -14,7 +14,6 @@ import NextTopLoader from 'nextjs-toploader';
 import { Chivo } from 'next/font/google'
 import { Comfortaa } from 'next/font/google'
 import { HeaderV2 } from "@/components/header-v2";
-import { StudioHeader, StudioSidebar } from "./studio/StudioEdit";
 
 const chivo = Chivo({
   subsets: ['latin'],
@@ -35,25 +34,19 @@ export let metadata = {
 };
 
 
-export default function RootLayout({ children }) {
+export default function BlogLayout({ children }) {
   return (
     <NextAuthSessionProvider>
     <html lang="en" className="dark">
-      <body className={chivo.variable + comfortaa.variable}>
+      <head>
+        <Head />
+
+      </head>
+      <body className="">
       <NextTopLoader />
-
-      
-    <div className="flex">
-      <StudioSidebar className={"flex w-[18%] "}/>
-      <div className="flex flex-col">
-        <StudioHeader/>
-        { children }
-      </div>
-    </div>
-
-
-      
-
+      {
+        children
+      }
         <style></style>
         <div
           className="footer"
