@@ -44,6 +44,10 @@ Blog, Video, Text, Image
         metadata : "notstarted"
     }
 
+points [
+    "users can create blogs and channels and communities",
+    "treat community like a user  capabilities"
+]
 
 new {
     communityChooseOption : "notstarted",
