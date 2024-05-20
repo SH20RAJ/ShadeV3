@@ -27,7 +27,7 @@ import { Badge } from "@/components/ui/badge"
 import { DropdownMenuTrigger, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuItem, DropdownMenuContent, DropdownMenu } from "@/components/ui/dropdown-menu"
 import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar"
 import { AlertCircleIcon, ArrowRightIcon, ArticleIcon, BellIcon, CalendarIcon, InboxIcon, LogOutIcon, MoonIcon, MountainIcon, PlayIcon, PlusIcon, SearchIcon, SettingsIcon, UserIcon } from "@/lib/icons";
-import { BirdIcon, BookAIcon, PencilIcon, PlayCircleIcon } from "lucide-react";
+import { BirdIcon, BookAIcon, HandshakeIcon, PencilIcon, PlayCircleIcon } from "lucide-react";
 import Subh from "./subh";
 
 
@@ -192,6 +192,12 @@ export function HeaderV2() {
               <DropdownMenuItem>
                 <UserIcon className="mr-2 h-4 w-4" />
                 Profile
+              </DropdownMenuItem>
+                </Link>
+              <Link href={"/studio/"}>
+              <DropdownMenuItem>
+                <HandshakeIcon className="mr-2 h-4 w-4" />
+                Studio
               </DropdownMenuItem>
                 </Link>
               <DropdownMenuItem>

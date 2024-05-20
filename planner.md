@@ -24,7 +24,10 @@
 
 Dashboard {
     video_studios: {
-        notcreated: true;
+        notcreated: true,
+        components : {
+            studioedit: true,
+        }
     }
 }
 
