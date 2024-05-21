@@ -6,7 +6,7 @@
 Welcome to the official repository of **Shade**, your new favorite all-in-one social media platform where you can connect, share, and express yourself with the world. Whether you’re posting text updates, sharing videos, or casting votes in polls, Shade is your go-to place. Explore [shade.sh20raj.com](http://shade.sh20raj.com) and start your journey with us!
 
 <p align="center">
-<img src="https://shade.sh20raj.com/logo.png" alt="Shade Social Media" width="250"/>
+<img src="https://shade.cool/logo.png" alt="Shade Social Media" width="250"/>
 </p>
 
 
