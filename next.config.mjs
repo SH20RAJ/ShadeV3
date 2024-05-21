@@ -16,20 +16,11 @@ const nextConfig = {
     ],
   },
   reactStrictMode: true,
-  async rewrites() {
-    return [
-      {
-        source: '/',
-        destination: '/music',
-        has: [
-          {
-            type: 'host',
-            value: 'music.shade.cool',
-          },
-        ],
-      },
-    ];
-  },
+  beforeFiles: [{
+    source: ':path*',
+    has: [{ type: 'host',  value: 'music.shade.cool' }],
+    destination: '/music/:path*',
+  }]
 };
 
 export default withPWA(nextConfig);
