@@ -16,6 +16,20 @@ const nextConfig = {
     ],
   },
   reactStrictMode: true,
+  async rewrites() {
+    return [
+      {
+        source: '/',
+        destination: '/music',
+        has: [
+          {
+            type: 'host',
+            value: 'music.shade.cool',
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default withPWA(nextConfig);
