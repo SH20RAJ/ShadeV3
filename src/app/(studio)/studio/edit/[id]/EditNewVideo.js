@@ -24,6 +24,9 @@ import {
 import axios from "axios";
 import { redirect } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
+import { getPost } from "@/app/(get)/api/getPost/getPost";
+
+
 
 export default function EditNewVideo() {
   const router = useRouter();
@@ -137,6 +140,8 @@ export default function EditNewVideo() {
               Remote Upload
             </Button>
           </p>
+
+          
         </div>
         <div className="space-y-4">
           {remoteuploadmode && (
