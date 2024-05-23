@@ -1,5 +1,4 @@
-import { StudioEdit } from "./StudioEdit";
-import Link from "next/link";
+import { StudioPage } from "./StudioPage";
 
 
 
@@ -8,10 +7,10 @@ export const metadata = {
     title : "Studio | Shade"
 }
 // app/studio/page.js
-export default function StudioPage() {
+export default function page() {
     return (
       <>
-      <StudioEdit/>
+      <StudioPage/>
       </>
     );
   }

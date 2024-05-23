@@ -16,11 +16,6 @@ const nextConfig = {
     ],
   },
   reactStrictMode: true,
-  beforeFiles: [{
-    source: ':path*',
-    has: [{ type: 'host',  value: 'music.shade.cool' }],
-    destination: '/music/:path*',
-  }]
 };
 
 export default withPWA(nextConfig);
