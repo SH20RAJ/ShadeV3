@@ -28,7 +28,7 @@ import { getPost } from "@/app/(get)/api/getPost/getPost";
 
 
 
-export default function EditNewVideo() {
+export default function EditNewVideo({id}) {
   const router = useRouter();
   
   const [remoteuploadmode, setremoteuploadmode] = useState(true);
@@ -117,6 +117,24 @@ export default function EditNewVideo() {
     }
   };
 
+  const getVideoDetails = async () => {
+    try {
+      const response = await axios.get(
+        `/api/getPostWithAuth?id=${id}`
+      );
+
+      console.log(response);
+      const video = response.data;
+      setTitle(video.title);
+      setDescription(video.content);
+      setThumbnailURL(video.image);
+      setVideoUrl(video.contentURL);
+    } catch (error) {
+      console.error("Error fetching video details:", error);
+      // alert("Error fetching video details. Please try again.");
+    }
+  }
+getVideoDetails()
   return (
     <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto py-8 px-4">
       <div className="space-y-6">
