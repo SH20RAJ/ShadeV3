@@ -4,15 +4,28 @@ let randomfeed = async ({
   type,
   limit = 20,
   skip = 0,
-  orderBy = "Post.createdAt",
+  orderBy,
 }) => {
   let filter = "";
   if (type) {
     filter = "WHERE Post.type = ?";
   }
 
-  let orderClause = orderBy ? `ORDER BY ${orderBy}` : "ORDER BY Post.createdAt";
+  let orderClause = "ORDER BY RAND()";
 
+  if(orderBy == "latest"){
+    orderClause = "ORDER BY Post.createdAt DESC";
+  }
+  else if(orderBy == "popular"){
+    orderClause = "ORDER BY Post.tempViews DESC";
+  }
+  else if(orderBy == "trending"){
+    orderClause = "ORDER BY Post.tempViews DESC";
+  }
+  else if(orderBy == "random"){
+    orderClause = "ORDER BY RAND()";
+  }
+  
   const results = await prisma.$queryRawUnsafe(
     `SELECT 
     Post.id,
@@ -44,8 +57,10 @@ JOIN
     User ON Post.authorId = User.id
 WHERE 
     Post.type = ${"'"+type+"'"} OR 'video'
-ORDER BY 
-    RAND();
+    ${
+      orderClause
+    }
+
 `
     // type ? [type, limit, skip] : [limit, skip]
   );

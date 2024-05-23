@@ -7,7 +7,7 @@ export  async function GET(req,res){
     console.log(req.nextUrl.searchParams);
     let limit = req.nextUrl.searchParams.get("limit") || 20;
     let skip = req.nextUrl.searchParams.get("skip") || 0;
-    let orderBy = req.nextUrl.searchParams.get("orderBy") || "createdAt";
+    let orderBy = req.nextUrl.searchParams.get("orderBy") ;
     let type = req.nextUrl.searchParams.get("type") ;
 
     let posts = await randomfeed({limit,type,skip,orderBy});

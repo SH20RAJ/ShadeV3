@@ -32,6 +32,8 @@ import { DropdownMenuTrigger, DropdownMenuItem, DropdownMenuSeparator, DropdownM
 import { ContextMenuTrigger, ContextMenuItem, ContextMenuContent, ContextMenu } from "@/components/ui/context-menu"
 import { useEffect, useState } from "react"
 import { relativeNumber } from "@/lib/funcs"
+import YouTubeChips from "./YouTubeChips"
+import LatestVideos from "./LatestVideos"
 
 export function YoutubeFeed() {
   const [loading, setLoading] = useState(true);
@@ -61,35 +63,7 @@ export function YoutubeFeed() {
 
      
         <div className="flex-1 sm:p-6">
-          <div className="flex gap-2 overflow-x-auto pb-4">
-            <Button className="whitespace-nowrap bg-grey-200" size="sm" variant="ghost">
-              All
-            </Button>
-            <Button className="whitespace-nowrap bg-grey-200" size="sm" variant="ghost">
-              Trending
-            </Button>
-            <Button className="whitespace-nowrap bg-grey-200" size="sm" variant="ghost">
-              Music
-            </Button>
-            <Button className="whitespace-nowrap bg-grey-200" size="sm" variant="ghost">
-              Gaming
-            </Button>
-            <Button className="whitespace-nowrap bg-grey-200" size="sm" variant="ghost">
-              News
-            </Button>
-            <Button className="whitespace-nowrap bg-grey-200" size="sm" variant="ghost">
-              Movies
-            </Button>
-            <Button className="whitespace-nowrap bg-grey-200" size="sm" variant="ghost">
-              Live
-            </Button>
-            <Button className="whitespace-nowrap bg-grey-200" size="sm" variant="ghost">
-              Sports
-            </Button>
-            <Button className="whitespace-nowrap bg-grey-200" size="sm" variant="ghost">
-              Learning
-            </Button>
-          </div>
+          <YouTubeChips />
           <div
             className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
@@ -115,9 +89,13 @@ export function YoutubeFeed() {
             </div>
           </div>
           <hr />
+          <h2 className="text-xl font-bold mb-4">Latest Videos</h2>
           <div
             className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-10">
             
+            <LatestVideos/>
+
+            {/* <VideoComponent/>
             <VideoComponent/>
             <VideoComponent/>
             <VideoComponent/>
@@ -128,8 +106,7 @@ export function YoutubeFeed() {
             <VideoComponent/>
             <VideoComponent/>
             <VideoComponent/>
-            <VideoComponent/>
-            <VideoComponent/>
+            <VideoComponent/> */}
             
           </div>
         </div>
