@@ -32,7 +32,7 @@ export default function VideoTable() {
   );
 }
 
-export async function UserVideos({ video }) {
+export async function UserVideos() {
   var videos = await fetchUserVideos();
 
   return (
