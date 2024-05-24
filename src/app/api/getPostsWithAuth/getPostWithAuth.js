@@ -1,9 +1,9 @@
+import { getUserSession } from "@/lib/sessions";
 import prisma from "../../../../prisma";
-import { getuser } from "@/lib/user";
 
 export async function getPostsWithAuth(id) {
-let user = await getuser();
-console.log(user.id);
+  let user = await getUserSession()
+  console.log(user.id);
 
 let type = "video";
 
