@@ -7,8 +7,7 @@ import {
   TableBody,
   Table,
 } from "@/components/ui/table";
-import fetchUserVideos from "./funcs/fetchUserVideos";
-import Link from "next/link";
+import { UserVideos } from "./getVideo";
 
 export default function VideoTable() {
   return (
@@ -32,48 +31,3 @@ export default function VideoTable() {
   );
 }
 
-export async function UserVideos() {
-  var videos = await fetchUserVideos();
-
-  return (
-    <>
-      {videos.map((video) => (
-        <UserVideo key={video.id} video={video} />
-      ))}
-    </>
-  );
-}
-
-export function UserVideo({ video }) {
-  return (
-    <>
-      <TableRow>
-          <TableCell>
-        <Link href={"/watch/" + video.id}>
-            <img
-              alt="Video Thumbnail"
-              className="aspect-square rounded-md object-cover"
-              height="64"
-              src={video.image || "/placeholder.svg"}
-              width="84"
-            />
-        </Link>
-          </TableCell>
-        <TableCell className="font-medium">
-        <Link href={"/watch/" + video.id}>{video.title}</Link></TableCell>
-        <TableCell className="hidden md:table-cell">{video.status}</TableCell>
-        <TableCell className="hidden md:table-cell">
-          {video.tempViews}
-        </TableCell>
-        <TableCell className="hidden md:table-cell">2.1K</TableCell>
-        <TableCell>
-          <Link href={"/studio/edit/" + video?.id}>
-            <Button size="sm" variant="outline">
-              Edit
-            </Button>
-          </Link>
-        </TableCell>
-      </TableRow>
-    </>
-  );
-}
