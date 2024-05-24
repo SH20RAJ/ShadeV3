@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -88,13 +88,14 @@ export default function EditNewVideo({id}) {
       setUploading(true);
 
       // Send video data to backend for processing
-      const response = await axios.post("/api/uploadVideo", {
+      const response = await axios.post("/api/updateVideo", {
         videoUrl,
         title,
         description,
         privacy,
         tags,
         thumbnailURL,
+        id
       });
 
       setUploading(false);
@@ -129,16 +130,24 @@ export default function EditNewVideo({id}) {
       setDescription(video.content);
       setThumbnailURL(video.image);
       setVideoUrl(video.contentURL);
+      setPrivacy(video.status);
     } catch (error) {
       console.error("Error fetching video details:", error);
       // alert("Error fetching video details. Please try again.");
     }
   }
-getVideoDetails()
+
+  useEffect(() => {
+    
+    return () => {
+      getVideoDetails()
+      
+    };
+  }, []);
   return (
     <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto py-8 px-4">
       <div className="space-y-6">
-        <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-6 flex flex-col items-center justify-center h-80">
+        {/* <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-6 flex flex-col items-center justify-center h-80">
           <Label htmlFor="videourl">
             <div
               className="cursor-pointer inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 rounded-md px-8"
@@ -160,7 +169,7 @@ getVideoDetails()
           </p>
 
           
-        </div>
+        </div> */}
         <div className="space-y-4">
           {remoteuploadmode && (
             <>
@@ -257,7 +266,7 @@ getVideoDetails()
               onClick={uploadVideo}
               disabled={uploading}
             >
-              UPLOAD
+              UPDATE
             </Button>
           </CardFooter>
         </Card>
