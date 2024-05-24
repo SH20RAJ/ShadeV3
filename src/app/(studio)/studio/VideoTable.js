@@ -59,7 +59,8 @@ export function UserVideo({ video }) {
             />
         </Link>
           </TableCell>
-        <TableCell className="font-medium">{video.title}</TableCell>
+        <TableCell className="font-medium">
+        <Link href={"/watch/" + video.id}>{video.title}</Link></TableCell>
         <TableCell className="hidden md:table-cell">{video.status}</TableCell>
         <TableCell className="hidden md:table-cell">
           {video.tempViews}
