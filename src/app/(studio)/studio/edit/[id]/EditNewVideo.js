@@ -107,7 +107,7 @@ export default function EditNewVideo({id}) {
       setTimeout(() => {
         (() => {
           
-          location.href = "/watch/" + response.data.post.id;
+          location.href = "/studio/?id="+response.data.post.id;
         })();
         
       }, 2000);

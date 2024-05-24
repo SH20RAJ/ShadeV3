@@ -114,10 +114,11 @@ export default function UploadNewVideo() {
     }
   };
 
+  
   return (
     <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto py-8 px-4">
       <div className="space-y-6">
-        <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-6 flex flex-col items-center justify-center h-80">
+        {/* <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-6 flex flex-col items-center justify-center h-80">
           <Label htmlFor="videourl">
             <div
               className="cursor-pointer inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 rounded-md px-8"
@@ -137,7 +138,7 @@ export default function UploadNewVideo() {
               Remote Upload
             </Button>
           </p>
-        </div>
+        </div> */}
         <div className="space-y-4">
           {remoteuploadmode && (
             <>
