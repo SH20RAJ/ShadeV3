@@ -85,6 +85,11 @@ export default function EditNewVideo({id}) {
         return;
       }
 
+      if (!thumbnailURL) {
+        toast.warn(`Please provide a thumbnail`);
+        return;
+      }
+
       setUploading(true);
 
       // Send video data to backend for processing
@@ -214,12 +219,15 @@ export default function EditNewVideo({id}) {
           </div>
           <div>
             <Label htmlFor="thumbnail">Thumbnail</Label>
-            <input
+            <Input
               type="text"
               value={thumbnailURL}
               onChange={(e) => setThumbnailURL(e.target.value)}
               placeholder="Enter a thumbnail URL"
+              className="mb-4"
             />
+
+
             <Input id="thumbnail" type="file" onChange={getThumbnail} />
           </div>
         </div>

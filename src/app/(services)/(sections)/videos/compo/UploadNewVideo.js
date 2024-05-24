@@ -82,6 +82,14 @@ export default function UploadNewVideo() {
         return;
       }
 
+      // Validate if thumbnail is provided
+      if (!thumbnail) {
+        toast.warn(`Please provide a thumbnail`);
+        return;
+      }
+
+      
+
       setUploading(true);
 
       // Send video data to backend for processing
