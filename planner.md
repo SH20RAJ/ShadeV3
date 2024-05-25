@@ -28,6 +28,11 @@ Dashboard {
         components : {
             studioedit: true,
         }
+    },
+    UserDashboard : {
+        editoptions: {
+            username, name, image, email
+        }
     }
 }
 
