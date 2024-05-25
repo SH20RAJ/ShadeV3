@@ -35,6 +35,7 @@ export default function EditNewVideo({id}) {
   const [uploading, setUploading] = useState(false);
   const [privacy, setPrivacy] = useState("public");
 
+  const [loading, setLoading] = useState(' ');
   const [videoUrl, setVideoUrl] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -131,6 +132,7 @@ export default function EditNewVideo({id}) {
 
       console.log(response);
       const video = response.data;
+      setLoading(false);
       setTitle(video.title);
       setDescription(video.content);
       setThumbnailURL(video.image);
@@ -151,7 +153,7 @@ export default function EditNewVideo({id}) {
   }, []);
   return (
     <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto py-8 px-4">
-      <div className="space-y-6">
+      {!loading && <> <div className="space-y-6">
         {/* <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-6 flex flex-col items-center justify-center h-80">
           <Label htmlFor="videourl">
             <div
@@ -175,6 +177,7 @@ export default function EditNewVideo({id}) {
 
           
         </div> */}
+       
         <div className="space-y-4">
           {remoteuploadmode && (
             <>
@@ -238,7 +241,7 @@ export default function EditNewVideo({id}) {
           <CardContent>
             <div className="aspect-video rounded-lg overflow-hidden">
               {
-                videoUrl && <video controls src={videoUrl} poster={thumbnailURL}></video>
+                videoUrl && <video controls src={videoUrl} width={640} height={360} poster={thumbnailURL}></video>
               }
               <img
                 alt="Video thumbnail"
@@ -279,6 +282,7 @@ export default function EditNewVideo({id}) {
           </CardFooter>
         </Card>
       </div>
+      </>}
       <ToastContainer />
     </div>
   );
