@@ -3,14 +3,16 @@ import prisma from "../../../../prisma";
 
 export async function getPostsWithAuth() {
   let user = await getUserSession()
-  // console.log(user.id);
+  console.log(user.id);
+  if (!user || !user.id) {
+    throw new Error("User is not authenticated or user ID is missing.");
+  }
 
 let type = "video";
 
 
   let post = await prisma.post.findMany({
     where: {
-      // id: parseInt(id),
       authorId: parseInt(user.id),
       type,
     },

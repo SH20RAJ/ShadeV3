@@ -9,9 +9,6 @@ let Page = async ({params}) => {
     return (
     <>
 
-
-
-
     <div className="wrapper w-full flex justify-center">
 
     
