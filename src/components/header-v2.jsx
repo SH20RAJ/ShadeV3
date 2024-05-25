@@ -201,8 +201,10 @@ export function HeaderV2() {
               </DropdownMenuItem>
                 </Link>
               <DropdownMenuItem>
+                <Link href={"/settings/"}>
                 <SettingsIcon className="mr-2 h-4 w-4" />
                 Settings
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <Link href={"/logout"}>
