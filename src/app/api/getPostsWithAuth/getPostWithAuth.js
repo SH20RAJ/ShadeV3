@@ -3,7 +3,7 @@ import prisma from "../../../../prisma";
 
 export async function getPostsWithAuth(id) {
   let user = await getUserSession()
-  console.log(user.id);
+  // console.log(user.id);
 
 let type = "video";
 

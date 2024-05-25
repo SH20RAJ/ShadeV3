@@ -4,7 +4,7 @@ import prisma from "../../../../prisma";
 
 export async function getPostWithAuth( id) {
     let user = await getUserSession()
-    console.log(user.id);
+    // console.log(user.id);
 
     let post = await prisma.post.findUnique({
         where: {
