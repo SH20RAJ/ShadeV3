@@ -1,13 +1,12 @@
 
-import { getUserSession } from "@/lib/sessions";
-export async function getuser() {
-  return await getUserSession();
-}
+import getUserDetails from "@/app/(root)/settings/funcs/getUserDetails";
 
-let user = await getuser();
 // console.log(user);
 export const GET = async () => {
-    
+  
+  let user = await getUserDetails(2); 
+  
+  
 return Response.json({ status:200, user: user})
 
 }

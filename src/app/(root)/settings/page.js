@@ -1,9 +1,14 @@
-import React from 'react'
+import { UserSettingsPage } from "./UserSettingsPage";
+
+
+
 
 export default function page() {
   return (
-    <div>
-      Settings Page
-    </div>
+    <>
+      {/* Settings Page */}
+
+      <UserSettingsPage/>
+    </>
   )
 }
