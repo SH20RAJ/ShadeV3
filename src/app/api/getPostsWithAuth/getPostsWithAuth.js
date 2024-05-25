@@ -1,14 +1,18 @@
-import { getUserSession } from "@/lib/sessions";
 import prisma from "../../../../prisma";
+import { getUserSession } from "@/lib/sessions";
 
 export async function getPostsWithAuth() {
-  let user = await getUserSession()
-  console.log(user.id);
-  if (!user || !user.id) {
-    throw new Error("User is not authenticated or user ID is missing.");
-  }
+  let user = {
+    id: 1,
+  };
+
+  console.log(user);
+  
+  let user2 =  await  getUserSession();
 
 let type = "video";
+
+user = user2 || user;
 
 
   let post = await prisma.post.findMany({
