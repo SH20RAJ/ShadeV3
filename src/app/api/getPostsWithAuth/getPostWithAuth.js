@@ -1,7 +1,7 @@
 import { getUserSession } from "@/lib/sessions";
 import prisma from "../../../../prisma";
 
-export async function getPostsWithAuth(id) {
+export async function getPostsWithAuth() {
   let user = await getUserSession()
   // console.log(user.id);
 
