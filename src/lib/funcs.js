@@ -49,3 +49,14 @@ export function relativeDate(dateString) {
     // and add the min value
     return Math.floor(Math.random() * (max - min) + min);
   }
+
+
+  export function string(string, length) {
+    string = JSON.stringify(string) || '';
+    return string.length > length ? `${string.substring(0, length)}...` : string;
+  }
+
+
+  export function getRandomItems(array, count) {
+    return shuffleArray(array).slice(0, count);
+  }
