@@ -2,7 +2,7 @@ import { getUserSession } from "@/lib/sessions";
 import prisma from "../../../../../prisma"
 
 
-export default async function getUserDetails(id) {
+export default async function getUserDetails(id = 1) {
     let id2 = await getUserSession();
     !id ? id = id2.id : id = id;
 
